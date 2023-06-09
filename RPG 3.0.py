@@ -2,7 +2,7 @@ print('The beginning, press enter always to continue')
 import random
 import time
 
-#functions
+#####################functions#####################
 
 def advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp):
     print('+',xpgain,'xp (',xp,')')
@@ -67,7 +67,7 @@ def weaponequip(woodendaggeramount, woodenswordamount, catswordamount, copperswo
                 if block3w==1:
                     block3w=block3w-1
 
-#stats
+#####################stats#####################
 
 xp=0
 treasury=0
@@ -85,27 +85,27 @@ equippedarmor=''
 
 skillpoint=0
 
-#potions
+#####################potions####################
 
 revivepotionamount=0
 healthpotionamount=0
 resistancepotionamount=0
 strengthpotionamount=0
 
-#armors
+#####################armors####################
 
 leatherarmoramount=0
 copperarmoramount=0
 catarmoramount=0
 
-#weapons
+#####################weapons####################
 
 woodendaggeramount=0
 woodenswordamount=0
 catswordamount=0
 copperswordamount=0
 
-#enchants
+#####################enchants####################
 
 loot1=0
 loot2=0
@@ -125,11 +125,11 @@ curse3=0
 
 enchantmentscroll=0
 
-#special
+#####################special####################
 
 point=300
 
-#skills
+#####################skills####################
 
 focus=0
 vampire=0
@@ -138,7 +138,7 @@ laststand=0
 learning=0
 shield=0
 
-#classes
+#####################classes####################
 
 while True:
     type=input('Choose a class: \n 1=Healer: +5 Health potion; -20% power \n 2=Swordsman: +Wooden sword; -15% maxHP \n 3=Trader: +10 gold; -30% maxHP \n 4=Wizard: Enchanting only costs 15 XP; -30% maxHP \n 5=Warrior: +Copper sword; +leather armor; +25% maxHP; -50% gold gain')
@@ -149,6 +149,7 @@ while True:
         type='Healer'
         print('Class selected: Healer')
         break
+
     if type=='2':
         equippedweapon='Wooden sword'
         maxhp=maxhp*0.85
@@ -156,6 +157,7 @@ while True:
         type='Swordsman'
         print('Class selected: Swordsman')
         break
+
     if type=='3':
         treasury=10
         maxhp=maxhp*0.7
@@ -163,12 +165,14 @@ while True:
         type='Trader'
         print('Class selected: Trader')
         break
+
     if type=='4':
         maxhp=maxhp*0.7
         hp=7
         type='Wizard'
         print('Class selected: Wizard')
         break
+
     if type=='5':
         maxhp=maxhp*1.25
         hp=12.5
@@ -177,11 +181,12 @@ while True:
         type='Warrior'
         print('Class selected: Warrior')
         break
+    
     else:
         print('I said choose a class')
         continue
 
-#game
+#####################game####################
 
 while True:
 
@@ -4635,6 +4640,3 @@ while True:
     else:
         print('There is no such command as [',choice,']')
         continue
-        
-        
-                    
