@@ -1027,13 +1027,14 @@ while True:
 
 while True:
 
-    if stamina<101 and stamina>79:
+    if stamina<101 and stamina>79: #--Stamina--#
         staminatype='High'
     if stamina<80 and stamina>39:
         staminatype='Medium'
     if stamina<40:
         staminatype='Low'
-    if block<101 and block>79:
+
+    if block<101 and block>79: #--Block--#
         blocktype='High'
     if block<80 and block>39:
         blocktype='Medium'
@@ -1090,7 +1091,7 @@ while True:
             print('Resistance potion active')
             print('')
 
-    print('Options: 1 - Adventure | 2 - Profile | 3 - Inventory | 4 - Shop | 5 - Help | 6 - Item list | 7 - Gamble | 8 - Enchanting | 9 - Skills')
+    print('Options: 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
     choice=input('')
 
     if choice=='1':
@@ -3052,6 +3053,9 @@ while True:
         xp=101
         skillpoint=1000
         continue
+
+    if choice == 'stop':
+        break
 
     else:
         print('There is no such command as [',choice,']')
