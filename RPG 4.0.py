@@ -990,13 +990,14 @@ while True:
 
 while True:
 
-    if stamina<101 and stamina>79:
+    if stamina<101 and stamina>79: #--Stamina--#
         staminatype='High'
     if stamina<80 and stamina>39:
         staminatype='Medium'
     if stamina<40:
         staminatype='Low'
-    if block<101 and block>79:
+
+    if block<101 and block>79: #--Block--#
         blocktype='High'
     if block<80 and block>39:
         blocktype='Medium'
@@ -3008,6 +3009,9 @@ while True:
         xp=101
         skillpoint=1000
         continue
+
+    if choice == 'stop'
+        break
 
     else:
         print('There is no such command as [',choice,']')
