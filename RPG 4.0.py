@@ -1,4 +1,3 @@
-
 print('The beginning, press enter always to continue')
 import random
 import time
