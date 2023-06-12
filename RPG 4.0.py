@@ -1033,7 +1033,6 @@ while True:
         staminatype='Medium'
     if stamina<40:
         staminatype='Low'
-
     if block<101 and block>79: #--Block--#
         blocktype='High'
     if block<80 and block>39:
