@@ -478,6 +478,7 @@ def bear_loot():
                         global healthpotionamount
                         global resistancepotionamount
                         global strengthpotionamount
+                        global staminapotion
                         if 0<loot and loot<20:
                             leatherarmoramount=leatherarmoramount+1
                             print('+ Leather armor (',leatherarmoramount,')')
