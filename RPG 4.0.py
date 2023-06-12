@@ -1054,7 +1054,7 @@ while True:
             print('Resistance potion active')
             print('')
 
-    print('Options: 1 - Adventure | 2 - Profile | 3 - Inventory | 4 - Shop | 5 - Help | 6 - Item list | 7 - Gamble | 8 - Enchanting | 9 - Skills')
+    print('Options: 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
     choice=input('')
 
     if choice=='1':
@@ -3010,7 +3010,7 @@ while True:
         skillpoint=1000
         continue
 
-    if choice == 'stop'
+    if choice == 'stop':
         break
 
     else:
