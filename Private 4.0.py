@@ -178,7 +178,6 @@ def fight():
                         global enemyblockloss
                         global enemystaminaplus
                         global enemyblockplus
-                        global armorresistance
                         enemyhploss=random.randint(0,2)
                         if tearing==1:
                             crit=random.randint(1,80)
@@ -253,10 +252,6 @@ def fight():
                             if vam<corrvam:
                                 enemyhploss=enemyhploss+(enemymaxhp*0.3)
                                 hp=hp+(enemymaxhp*0.3)
-                                if maxhp<hp:
-                                    hp=maxhp
-                                else:
-                                    hp=hp
                             else:
                                 treasury=treasury
                         protection=random.randint(1,100)
@@ -382,35 +377,6 @@ def fight():
                                 print('')
                                 print('ENEMY STUNNED')
                                 stun=3
-                        if armorresistance==1:
-                            hploss=hploss-1
-                        if armorresistance==2:
-                            hploss=hploss-2
-                        if armorresistance==3:
-                            hploss=hploss-3
-                        else:
-                            hploss=hploss
-                        if hploss<0:
-                            hploss=0
-                        if vampire>0:
-                            vam=random.randint(1,100)
-                            if vampire==1:
-                                corrvam=16
-                            if vampire==2:
-                                corrvam=31
-                            if vampire==3:
-                                corrvam=51
-                            else:
-                                treasury=treasury
-                            if vam<corrvam:
-                                enemyhploss=enemyhploss+(enemymaxhp*0.3)
-                                hp=hp+(enemymaxhp*0.3)
-                                if maxhp<hp:
-                                    hp=maxhp
-                                else:
-                                    hp=hp
-                            else:
-                                treasury=treasury
                         if blockchance==1 or hploss==0:
                             print('')
                             print('HIT BLOCKED')
@@ -480,7 +446,6 @@ def wolf_loot():
                         global healthpotionamount
                         global resistancepotionamount
                         global strengthpotionamount
-                        global staminapotionamount
                         if 0<loot and loot<20:
                             woodendaggeramount=woodendaggeramount+1
                             print('+ Wooden dagger (',woodendaggeramount,')')
@@ -513,7 +478,7 @@ def bear_loot():
                         global healthpotionamount
                         global resistancepotionamount
                         global strengthpotionamount
-                        global staminapotionamount
+                        global staminapotion
                         if 0<loot and loot<20:
                             leatherarmoramount=leatherarmoramount+1
                             print('+ Leather armor (',leatherarmoramount,')')
@@ -551,7 +516,6 @@ def rare_loot():
                         global copperswordamount
                         global leatherarmoramount
                         global copperarmoramount
-                        global staminapotionamount
                         if 0<loot and loot<20:
                             prize=random.randint(1,8)
                             if prize==1:
@@ -878,7 +842,6 @@ hp=15
 power=1
 hploss=0
 strength=hp*power
-armorresistance=0
 
 stamina=100
 block=100
@@ -1942,7 +1905,6 @@ while True:
                 armor_equip()
                 equippedarmor='Leather armor'
                 leatherarmoramount=leatherarmoramount-1
-                armorresistance=1
                 maxhp_modifier()
                 continue
             else:
@@ -1966,7 +1928,6 @@ while True:
             if catarmoramount>0:
                 print('Maxwell armor equipped')
                 maxhp=35
-                armorresistance=3
                 armor_equip
                 equippedarmor='Maxwell armor'
                 catarmoramount=catarmoramount-1
@@ -1980,7 +1941,6 @@ while True:
             if copperarmoramount>0:
                 print('Copper armor equipped')
                 maxhp=25
-                armorresistance=2
                 armor_equip()
                 equippedarmor='Copper armor'
                 copperarmoramount=copperarmoramount-1
@@ -2238,11 +2198,7 @@ while True:
         print('')
         print('In adventure, you can fight and get xp and gold but it comes with a price: HPloss')
         print('The more xp you have, the harder the fights get')
-        print('Here you can decide to run or fight: if you run, then you get some XP and lose some HP, if you fight, you will deal damage to the enemy according to your weapon, you will also lose HP, if your HP gets below 0 or is 0, then you die and if the enemys HP is down then you win, in fights you get more XP than running and also get gold. \nStamina and block also determines how you fight: If your stamina is high, then you have increased critical hit chance. If it is medium, you do not get any boosts, but if it gets to low, then your attacks damage half the amount. Same applies to block: If it is high, then you have an increased chance to block hits. If it is medium, then everything is normal and if it is low then you will lose 1.5X more HP during enemy attacks.\nDuring fights you are given the choice to attack or defend, if you attack, you lose stamina but gain block and you will damage 1.5X more, but lose 1.5X more HP. If you defend you get block and lose stamina, your enemy deals half the amount of damage but your attacks deal half the amount of damage. At the start of a fight i recommend blocking since your enemy always starts with high stamina and block so they can block your attacks easily.')
-        print('')
-        print('Items:')
-        print('')
-        print('On your journey you can get different types of items. You can open the item lis menu (6) to see their attributes.')
+        print('Here you can decide to run or fight: if you run, then you get some XP and lose some HP, if you fight, you will deal damage to the enemy according to your weapon, you will also lose HP, if your HP gets below 0 or is 0, then you die and if the enemys HP is down then you win, in fights you get more XP than running and also get gold')
         print('')
         print('Shop:')
         print('')
@@ -2285,9 +2241,9 @@ while True:
         print('')
         print('Armors:')
         print('')
-        print('Leather armor - Common (20 HP - 1 Armor Resistance) - Source: Adventure loot, Common lootbox, Shop')
-        print('Copper armor - Rare! (25 HP - 2 Armor Resistance) - Source: Adventure loot, Rare lootbox')
-        print('Maxwell armor - Epic!! (35 HP - 3 Armor Resistance) - Source: Maxwell event')
+        print('Leather armor - Common (20 HP) - Source: Adventure loot, Common lootbox, Shop')
+        print('Copper armor - Rare! (25 HP) - Source: Adventure loot, Rare lootbox')
+        print('Maxwell armor - Epic!! (35 HP) - Source: Maxwell event')
         print('')
         print('Weapons:')
         print('')
