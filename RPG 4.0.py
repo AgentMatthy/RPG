@@ -836,8 +836,8 @@ def sell(price,item,itemid):
 
 xp=0
 treasury=0
-maxhp=10
-hp=10
+maxhp=15
+hp=15
 power=1
 hploss=0
 strength=hp*power
@@ -955,27 +955,27 @@ while True:
     if type=='2':
         equippedweapon='Wooden sword'
         maxhp=maxhp*0.85
-        hp=8.5
+        hp=maxhp
         type='Swordsman'
         print('Class selected: Swordsman')
         break
     if type=='3':
         treasury=10
         maxhp=maxhp*0.7
-        hp=7
+        hp=maxhp
         type='Trader'
         print('Class selected: Trader')
         break
     if type=='4':
         maxhp=maxhp*0.8
-        hp=8
+        hp=maxhp
         type='Wizard'
         equippedweapon='Wooden dagger'
         print('Class selected: Wizard')
         break
     if type=='5':
         maxhp=maxhp*1.25
-        hp=12.5
+        hp=maxhp
         equippedarmor='Leather armor'
         equippedweapon='Copper sword'
         type='Warrior'
@@ -1900,7 +1900,7 @@ while True:
             print('')
             if leatherarmoramount>0:
                 print('Leather armor equipped')
-                maxhp=15
+                maxhp=20
                 armor_equip()
                 equippedarmor='Leather armor'
                 leatherarmoramount=leatherarmoramount-1
@@ -1926,7 +1926,7 @@ while True:
             print('')
             if catarmoramount>0:
                 print('Maxwell armor equipped')
-                maxhp=30
+                maxhp=35
                 armor_equip
                 equippedarmor='Maxwell armor'
                 catarmoramount=catarmoramount-1
@@ -1939,7 +1939,7 @@ while True:
             print('')
             if copperarmoramount>0:
                 print('Copper armor equipped')
-                maxhp=20
+                maxhp=25
                 armor_equip()
                 equippedarmor='Copper armor'
                 copperarmoramount=copperarmoramount-1
@@ -2240,9 +2240,9 @@ while True:
         print('')
         print('Armors:')
         print('')
-        print('Leather armor - Common (15 HP) - Source: Adventure loot, Common lootbox, Shop')
-        print('Copper armor - Rare! (20 HP) - Source: Adventure loot, Rare lootbox')
-        print('Maxwell armor - Epic!! (30 HP) - Source: Maxwell event')
+        print('Leather armor - Common (20 HP) - Source: Adventure loot, Common lootbox, Shop')
+        print('Copper armor - Rare! (25 HP) - Source: Adventure loot, Rare lootbox')
+        print('Maxwell armor - Epic!! (35 HP) - Source: Maxwell event')
         print('')
         print('Weapons:')
         print('')
