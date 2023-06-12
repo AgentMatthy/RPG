@@ -2,7 +2,7 @@ print('The beginning, press enter always to continue')
 import random
 import time
 
-#functions
+#-----------------------Functions-----------------------#
 
 def advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp):
     time.sleep(3)
@@ -833,7 +833,7 @@ def sell(price,item,itemid):
                 print('You do not have a',itemid,'')
                 print('')
 
-#stats
+#-----------------------Stats-----------------------#
 
 xp=0
 treasury=0
@@ -871,7 +871,7 @@ equippedarmor=''
 
 skillpoint=0
 
-#potions
+#-----------------------potions-----------------------#
 
 revivepotionamount=0
 healthpotionamount=0
@@ -879,20 +879,20 @@ resistancepotionamount=0
 strengthpotionamount=0
 staminapotionamount=0
 
-#armors
+#-----------------------Armors-----------------------#
 
 leatherarmoramount=0
 copperarmoramount=0
 catarmoramount=0
 
-#weapons
+#-----------------------Weapons-----------------------#
 
 woodendaggeramount=0
 woodenswordamount=0
 catswordamount=0
 copperswordamount=0
 
-#enchants
+#-----------------------Enchants-----------------------#
 
 loot1=0
 loot2=0
@@ -912,12 +912,12 @@ curse3=0
 
 enchantmentscroll=0
 
-#special
+#-----------------------Special-----------------------#
 
 point=300
 x=0
 
-#skills
+#-----------------------Skills-----------------------#
 
 focus=0
 vampire=0
@@ -942,7 +942,7 @@ downfall=0
 finish=0
 finishchance=0
 
-#classes
+#-----------------------Classes-----------------------#
 
 while True:
     type=input('Choose a class: \n 1=Healer: +5 Health potion; -20% power \n 2=Swordsman: +Wooden sword; -15% maxHP \n 3=Trader: +10 gold; -30% maxHP \n 4=Wizard:  +Wooden dagger; enchanting only costs 15 XP; -20% maxHP \n 5=Warrior: +Copper sword; +leather armor; +25% maxHP; -50% gold gain')
@@ -986,7 +986,7 @@ while True:
         print('I said choose a class')
         continue
 
-#game
+#-----------------------Game-----------------------#
 
 while True:
 
