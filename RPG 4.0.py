@@ -1,4 +1,4 @@
-print('The beginning, press enter always to continue')
+print('The beginning, always press enter to continue.')
 import random
 import time
 
@@ -871,7 +871,7 @@ equippedarmor=''
 
 skillpoint=0
 
-#-----------------------potions-----------------------#
+#-----------------------Potions-----------------------#
 
 revivepotionamount=0
 healthpotionamount=0
@@ -1053,7 +1053,7 @@ while True:
             print('Resistance potion active')
             print('')
 
-    print('Options: 1=Adventure, 2=Profile, 3=Inventory, 4=Shop, 5=Help, 6=Item list, 7=Gamble, 8=Enchanting, 9=Skills')
+    print('Options: 1 - Adventure | 2 - Profile | 3 - Inventory | 4 - Shop | 5 - Help | 6 - Item list | 7 - Gamble | 8 - Enchanting | 9 - Skills')
     choice=input('')
 
     if choice=='1':
@@ -1073,7 +1073,7 @@ while True:
             print('What is ',num1,'+',num2,'?')
             answer=int(input(''))
             if answer==num1+num2:
-                print('That is correct, the scientist gives you a enchantment scroll, with which it is free to enchant items')
+                print('That is correct, the scientist gives you a enchantment scroll, with which it is free to enchant an item')
                 print('')
                 enchantmentscroll=enchantmentscroll+1
             else:
