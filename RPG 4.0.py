@@ -2736,7 +2736,7 @@ while True:
                 if laststand==0:
                     if skillpoint>0:
                         print('')
-                        print('Last stand looting skill learned')
+                        print('Last stand skill learned')
                         print('')
                         laststand=1
                         skillpoint=skillpoint-3
