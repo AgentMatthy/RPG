@@ -179,6 +179,8 @@ def fight():
                         global enemystaminaplus
                         global enemyblockplus
                         global armorresistance
+                        global enemylvl
+                        hploss=((enemylvl/10)*hploss)+hploss
                         enemyhploss=random.randint(0,2)
                         if tearing==1:
                             crit=random.randint(1,80)
@@ -869,6 +871,24 @@ def sell(price,item,itemid):
                 print('You do not have a',itemid,'')
                 print('')
 
+def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
+    global enemylvl
+    global enemymaxhp
+    global enemyhp
+    global battle
+    global xp
+    print('')
+    enemymaxhp=emaxhp
+    if xp<lowxp:
+        enemylvl=random.randint(a,b)
+    else:
+        enemylvl=random.randint(c,d)
+    enemymaxhp=((enemylvl/10)*enemymaxhp)+enemymaxhp
+    enemyhp=enemymaxhp
+    print('LVL',enemylvl,enemyname,'encounter:')
+    print('Enemy HP:',enemyhp,'')
+    battle=input('1=Run, 2=Fight')
+
 #-----------------------Stats-----------------------#
 
 xp=0
@@ -879,29 +899,6 @@ power=1
 hploss=0
 strength=hp*power
 armorresistance=0
-
-stamina=100
-block=100
-blocktype='High'
-staminatype='High'
-blockchance=100
-movement='1'
-staminaloss=0
-staminaplus=0
-blockloss=0
-blockplus=0
-
-enemystamina=100
-enemyblock=100
-enemyblockchance=100
-enemymovement=1
-enemystaminaloss=0
-enemystaminaplus=0
-enemyblockloss=0
-enemyblockplus=0
-
-strengthuse=0
-resistanceuse=0
 
 equippedweapon=''
 equippedarmor=''
@@ -952,7 +949,35 @@ enchantmentscroll=0
 #-----------------------Special-----------------------#
 
 point=300
+
 x=0
+
+stamina=100
+block=100
+blocktype='High'
+staminatype='High'
+blockchance=100
+movement='1'
+staminaloss=0
+staminaplus=0
+blockloss=0
+blockplus=0
+
+enemystamina=100
+enemyblock=100
+enemyblockchance=100
+enemymovement=1
+enemystaminaloss=0
+enemystaminaplus=0
+enemyblockloss=0
+enemyblockplus=0
+
+strengthuse=0
+resistanceuse=0
+
+enemylvl=0
+a=0
+b=0
 
 #-----------------------Skills-----------------------#
 
@@ -1119,12 +1144,7 @@ while True:
 
         if xp<50 or xp==50:
             if 0<chance and chance<50:
-                print('')
-                enemymaxhp=3
-                enemyhp=3
-                print('Wolf encounter:')
-                print('Enemy HP:',enemyhp,'')
-                battle=input('1=Run, 2=Fight')
+                enemyencounter('Wolf',3,3,25,1,10,10,20)
                 if battle=='1':
                     hploss=random.randint(0,1)
                     xpgain=random.randint(1,5)
@@ -1202,12 +1222,7 @@ while True:
                 else:
                     continue
             if 50<chance:
-                print('')
-                enemymaxhp=5
-                enemyhp=5
-                print('Bear encounter:')
-                print('Enemy HP:',enemyhp,'')
-                battle=input('1=Run, 2=Fight')
+                enemyencounter('Bear',5,5,25,1,10,10,25)  
                 if battle=='1':
                     hploss=random.randint(0,2)
                     xpgain=random.randint(1,7)
@@ -1374,12 +1389,7 @@ while True:
                 print('')
                 continue
             if 5<chance and chance<50:
-                print('')
-                enemymaxhp=7
-                enemyhp=7
-                print('Bandit encounter:')
-                print('Enemy HP:',enemyhp,'')
-                battle=input('1=Run, 2=Fight')
+                enemyencounter('Bandit',7,7,75,1,10,10,20)
                 if battle=='1':
                     hploss=random.randint(0,3)
                     xpgain=random.randint(1,7)
@@ -1519,12 +1529,7 @@ while True:
                     print('')
                     continue
             if 80<chance and chance<90:
-                print('')
-                enemymaxhp=3
-                enemyhp=3
-                print('Wolf encounter:')
-                print('Enemy HP:',enemyhp,'')
-                battle=input('1=Run, 2=Fight')
+                enemyencounter('Wolf',3,3,75,10,20,20,30)  
                 if battle=='1':
                     hploss=random.randint(0,1)
                     xpgain=random.randint(1,5)
@@ -1602,12 +1607,7 @@ while True:
                 else:
                     continue
             if 90<chance and chance<100:
-                print('')
-                enemymaxhp=5
-                enemyhp=5
-                print('Bear encounter:')
-                print('Enemy HP:',enemyhp,'')
-                battle=input('1=Run, 2=Fight')
+                enemyencounter('Bear',5,5,75,10,20,20,30)  
                 if battle=='1':
                     hploss=random.randint(0,2)
                     xpgain=random.randint(1,7)
@@ -1685,12 +1685,7 @@ while True:
                 else:
                     continue
             else:
-                print('')
-                enemymaxhp=10
-                enemyhp=10
-                print('Slime encounter:')
-                print('Enemy HP:',enemyhp,'')
-                battle=input('1=Run, 2=Fight')
+                enemyencounter('Slime',10,10,75,1,10,10,20)
                 if battle=='1':
                     hploss=random.randint(0,4)
                     xpgain=random.randint(1,8)
