@@ -81,6 +81,8 @@ def run_modifiers():
                     global xpgain
                     global protection
                     global shield
+                    global enemylvl
+                    hploss=((enemylvl/10)*hploss)+hploss
                     if block1a==1:
                         hploss=hploss*0.85
                     if block2a==1:
