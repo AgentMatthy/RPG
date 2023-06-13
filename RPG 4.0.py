@@ -1146,7 +1146,7 @@ while True:
 
         if xp<50 or xp==50:
             if 0<chance and chance<50:
-                enemyencounter('Wolf',3,3,25,1,10,10,20)
+                enemyencounter('Wolf',3,3,25,1,5,5,20)
                 if battle=='1':
                     hploss=random.randint(0,1)
                     xpgain=random.randint(1,5)
@@ -1224,7 +1224,7 @@ while True:
                 else:
                     continue
             if 50<chance:
-                enemyencounter('Bear',5,5,25,1,10,10,25)  
+                enemyencounter('Bear',5,5,25,1,5,5,10)  
                 if battle=='1':
                     hploss=random.randint(0,2)
                     xpgain=random.randint(1,7)
@@ -1391,7 +1391,7 @@ while True:
                 print('')
                 continue
             if 5<chance and chance<50:
-                enemyencounter('Bandit',7,7,75,1,10,10,20)
+                enemyencounter('Bandit',7,7,75,1,5,5,10)
                 if battle=='1':
                     hploss=random.randint(0,3)
                     xpgain=random.randint(1,7)
@@ -1531,7 +1531,7 @@ while True:
                     print('')
                     continue
             if 80<chance and chance<90:
-                enemyencounter('Wolf',3,3,75,10,20,20,30)  
+                enemyencounter('Wolf',3,3,75,10,15,15,20)  
                 if battle=='1':
                     hploss=random.randint(0,1)
                     xpgain=random.randint(1,5)
@@ -1609,7 +1609,7 @@ while True:
                 else:
                     continue
             if 90<chance and chance<100:
-                enemyencounter('Bear',5,5,75,10,20,20,30)  
+                enemyencounter('Bear',5,5,75,10,15,15,20)  
                 if battle=='1':
                     hploss=random.randint(0,2)
                     xpgain=random.randint(1,7)
@@ -1687,7 +1687,7 @@ while True:
                 else:
                     continue
             else:
-                enemyencounter('Slime',10,10,75,1,10,10,20)
+                enemyencounter('Slime',10,10,75,1,5,5,10)
                 if battle=='1':
                     hploss=random.randint(0,4)
                     xpgain=random.randint(1,8)
