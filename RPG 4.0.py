@@ -1090,7 +1090,7 @@ while True:
             print('Resistance potion active')
             print('')
 
-    print('Options: 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
+    print('Options:\n 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
     choice=input('')
 
     if choice=='1':
