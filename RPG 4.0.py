@@ -182,6 +182,27 @@ def fight():
                         global enemyblockplus
                         global armorresistance
                         global enemylvl
+                        global healing
+                        global turncount
+                        global tearingdive
+                        global tearingdiveskill
+                        turncount=turncount+1
+                        if turncount>3 and healing==1:
+                            print('type heal to heal')
+                            heal=input('')
+                            if heal=='heal':
+                                hp=hp+(0.2*maxhp)
+                                if hp>maxhp:
+                                    hp=maxhp
+                                print('')
+                                print('Healing: +',maxhp*0.2,'HP (',hp,'/',maxhp,')')
+                                print('')
+                                turncount=turncount-4
+                        if turncount>3 and tearingdive==1:
+                            print('type tearing dive to active the skill')
+                            dive=input('')
+                            if dive=='tearing dive':
+                                tearingdiveskill=1
                         hploss=((enemylvl/10)*hploss)+hploss
                         enemyhploss=random.randint(0,2)
                         if tearing==1:
@@ -222,12 +243,20 @@ def fight():
                             hploss=hploss
                         if equippedweapon=='Wooden dagger':
                             enemyhploss=random.randint(0,3)
+                            if tearingdiveskill==1:
+                                enemyhploss=random.randint(1,3)
                         if equippedweapon=='Wooden sword':
                             enemyhploss=random.randint(0,5)
+                            if tearingdiveskill==1:
+                                enemyhploss=random.randint(1,5)
                         if equippedweapon=='Copper sword':
                             enemyhploss=random.randint(0,7)
+                            if tearingdiveskill==1:
+                                enemyhploss=random.randint(1,7)
                         if equippedweapon=='Maxwell sword':
                             enemyhploss=random.randint(0,10)
+                            if tearingdiveskill==1:
+                                enemyhploss=random.randint(1,10)
                         if strengthuse>0:
                             enemyhploss=enemyhploss*1.5
                         if type=='Healer':
@@ -372,6 +401,8 @@ def fight():
                                 print('SHIELD ACTIVE')
                             else:
                                 hploss=hploss
+                        if tearingdiveskill==1:
+                            crit=10
                         if crit<21:
                             if downfall==1:
                                 enemyhploss=enemyhploss*1.65
@@ -423,14 +454,18 @@ def fight():
                         else:
                             hploss=hploss
                         if enemyblockchance==1 or enemyhploss==0:
-                            print('')
-                            print('ENEMY BLOCKED HIT')
-                            print('')
-                            enemyhploss=0
+                            if tearingdiveskill==1:
+                                enemyhploss=enemyhploss
+                            else:
+                                enemyhploss=0
+                                print('')
+                                print('ENEMY BLOCKED HIT')
+                                print('')
                         else:
                             enemyhploss=enemyhploss
                         hp=hp-hploss
                         enemyhp=enemyhp-enemyhploss
+                        tearingdiveskill=0
                         print('')
                         if crit<21 and enemyhploss>0:
                             print('Enemy HP: -',round(enemyhploss,2),' Critical hit! (',round(enemyhp,2),'/',enemymaxhp,')')
@@ -630,6 +665,8 @@ def profile():
             global focus
             global learning
             global advancedlooting
+            global healing
+            global tearingdive
             print('Class:',type,'')
             print('Treasury:',treasury,'')
             print('HP:',round(hp,2),'/',maxhp, equippedarmor,'')
@@ -660,6 +697,9 @@ def profile():
             if advancedlooting==1:
                 print('Advanced looting I')
                 print('')
+            if healing==1:
+                print('Healing I')
+                print('')
             if learning==1:
                 print('Improved learning I')
                 print('')
@@ -680,6 +720,9 @@ def profile():
                 print('')
             if laststand==1:
                 print('Last stand I')
+                print('')
+            if tearingdive==1:
+                print('Tearing dive I')
                 print('')
             if fastlearner==1:
                 print('Fast learner I')
@@ -891,6 +934,45 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     print('Enemy HP:',enemyhp,'')
     battle=input('1=Run, 2=Fight')
 
+def skilllearn(learnedlevel,skillname,learnedlevelname,skillpointcost):
+    global skillpoint
+
+    global l
+
+    global focus
+    global vampire
+    global advancedlooting
+    global healing
+
+    global laststand
+    global learning
+    global shield
+    global tearingdive
+
+    global stealing
+    global moneyrain
+    global fastlearner
+
+    global stunning
+    global weaken
+    global sabotage
+
+    global tearing
+    global downfall
+    global finish
+    global finishchance
+
+    if skillpoint>skillpointcost-1:
+        print('')
+        print('',skillname,learnedlevelname,'skill learned')
+        print('')
+        l=learnedlevel
+        skillpoint=skillpoint-skillpointcost
+    else:
+        print('')
+        print('Not enough skill points :c')
+        print('')
+
 #-----------------------Stats-----------------------#
 
 xp=0
@@ -905,7 +987,7 @@ armorresistance=0
 equippedweapon=''
 equippedarmor=''
 
-skillpoint=0
+skillpoint=3
 
 #-----------------------Potions-----------------------#
 
@@ -981,15 +1063,21 @@ enemylvl=0
 a=0
 b=0
 
+l=0
+
 #-----------------------Skills-----------------------#
 
 focus=0
 vampire=0
 advancedlooting=0
+healing=0
+turncount=0
 
 laststand=0
 learning=0
 shield=0
+tearingdive=0
+tearingdiveskill=0
 
 stealing=0
 moneyrain=0
@@ -1124,6 +1212,7 @@ while True:
         enemystamina=100
         enemyblock=100
         critcount=0
+        turncount=0
         strengthuse=strengthuse-1
         resistanceuse=resistanceuse-1
         point=random.randint(1,100)
@@ -2496,7 +2585,9 @@ while True:
     if choice=='9':
         print('')
         print('Skill points:',skillpoint,'')
+        print('')
         if type=='Healer':
+            print('Passive skills:')
             if vampire==0:
                 print('1 = Vampire I: 15% chance to damage 30% of your enemys max HP and heal by that amount - 2 skill points required')
             if vampire==1:
@@ -2511,47 +2602,23 @@ while True:
                 print('2 = Focus III: Decrease enemy critical hit chance by 15% - 1 skill point required')
             if advancedlooting==0:
                 print('3 = Advanced looting: Extra health potion in adventures if you get one - 1 skill point required')
+            print('Active skills:')
+            if healing==0:
+                print('4 = Healing: You can heal by 20% of your max HP every 4 turns - 3 skill points required')
             skillchoice=input('')
             if skillchoice=='1':
                 if vampire==0:
-                    if skillpoint>1:
-                        print('')
-                        print('Vampire I skill learned')
-                        print('')
-                        vampire=1
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Vampire','I',3)
+                    vampire=l
+                    continue
                 if vampire==1:
-                    if skillpoint>1:
-                        print('')
-                        print('Vampire II skill learned')
-                        print('')
-                        vampire=2
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Vampire','II',3)
+                    vampire=l
+                    continue
                 if vampire==2:
-                    if skillpoint>1:
-                        print('')
-                        print('Vampire III skill learned')
-                        print('')
-                        vampire=3
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Vampire','III',3)
+                    vampire=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2559,44 +2626,17 @@ while True:
                     continue
             if skillchoice=='2':
                 if focus==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Focus I skill learned')
-                        print('')
-                        focus=1
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Focus','I',1)
+                    focus=l
+                    continue
                 if focus==1:
-                    if skillpoint>0:
-                        print('')
-                        print('Focus II skill learned')
-                        print('')
-                        focus=2
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Focus','II',1)
+                    focus=l
+                    continue
                 if focus==2:
-                    if skillpoint>0:
-                        print('')
-                        print('Focus III skill learned')
-                        print('')
-                        focus=3
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Focus','III',1)
+                    focus=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2604,18 +2644,19 @@ while True:
                     continue
             if skillchoice=='3':
                 if advancedlooting==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Advanced looting skill learned')
-                        print('')
-                        advancedlooting=1
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Advanced looting','I',1)
+                    advancedlooting=l
+                    continue
+                else:
+                    print('')
+                    print('This skill is already on max level')
+                    print('')
+                    continue
+            if skillchoice=='4':
+                if healing==0:
+                    skilllearn(1,'Healing','I',3)
+                    healing=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2624,6 +2665,7 @@ while True:
             else:
                 continue
         if type=='Swordsman':
+            print('Passive skills:')
             if learning==0:
                 print('1 = Improved learning I: Increase XP gain by 20% - 2 skill points required')
             if learning==1:
@@ -2638,47 +2680,23 @@ while True:
                 print('2 = Shield III: 15% to not lose HP during a turn of a fight - 1 skill point required')
             if laststand==0:
                 print('3 = Last stand: If you die, you return back with 20% HP - 3 skill points required')
+            print('Active skills:')
+            if tearingdive==0:
+                print('4 = Tearing dive: Every 4 turn you can make an attack which penetrates block and becomes critical - 5 skill points required')
             skillchoice=input('')
             if skillchoice=='1':
                 if learning==0:
-                    if skillpoint>1:
-                        print('')
-                        print('Improved learning I skill learned')
-                        print('')
-                        learning=1
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Improved learning','I',2)
+                    learning=l
+                    continue
                 if learning==1:
-                    if skillpoint>1:
-                        print('')
-                        print('Improved learning II skill learned')
-                        print('')
-                        learning=2
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Improved learning','II',2)
+                    learning=l
+                    continue
                 if learning==2:
-                    if skillpoint>1:
-                        print('')
-                        print('Learning III skill learned')
-                        print('')
-                        learning=3
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Improved learning','III',2)
+                    learning=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2686,44 +2704,17 @@ while True:
                     continue
             if skillchoice=='2':
                 if shield==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Shield I skill learned')
-                        print('')
-                        shield=1
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Shield','I',1)
+                    shield=l
+                    continue
                 if shield==1:
-                    if skillpoint>0:
-                        print('')
-                        print('Shield II skill learned')
-                        print('')
-                        shield=2
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Shield','II',1)
+                    shield=l
+                    continue
                 if shield==2:
-                    if skillpoint>0:
-                        print('')
-                        print('Shield III skill learned')
-                        print('')
-                        shield=3
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Shield','III',1)
+                    shield=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2731,18 +2722,19 @@ while True:
                     continue
             if skillchoice=='3':
                 if laststand==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Last stand skill learned')
-                        print('')
-                        laststand=1
-                        skillpoint=skillpoint-3
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Last stand','I',3)
+                    laststand=l
+                    continue
+                else:
+                    print('')
+                    print('This skill is already on max level')
+                    print('')
+                    continue
+            if skillchoice=='4':
+                if tearingdive==0:
+                    skilllearn(1,'Tearing dive','I',5)
+                    tearingdive=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2761,17 +2753,9 @@ while True:
             if skillchoice=='1':
                 if fastlearner==0:
                     if skillpoint>1:
-                        print('')
-                        print('Fast learner skill learned')
-                        print('')
-                        fastlearner=1
-                        skillpoint=skillpoint-2
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Fast learner','I',2)
+                    fastlearner=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2779,18 +2763,9 @@ while True:
                     continue
             if skillchoice=='2':
                 if stealing==0:
-                    if skillpoint>2:
-                        print('')
-                        print('Stealing skill learned')
-                        print('')
-                        stealing=1
-                        skillpoint=skillpoint-3
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Stealing','I',3)
+                    stealing=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2798,18 +2773,9 @@ while True:
                     continue
             if skillchoice=='3':
                 if moneyrain==0:
-                    if skillpoint>3:
-                        print('')
-                        print('Money rain skill learned')
-                        print('')
-                        moneyrain=1
-                        skillpoint=skillpoint-4
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Money rain','I',4)
+                    moneyrain=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2831,44 +2797,17 @@ while True:
             skillchoice=input('')
             if skillchoice=='1':
                 if weaken==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Weaken I skill learned')
-                        print('')
-                        weaken=1
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Weaken','I',1)
+                    weaken=l
+                    continue
                 if weaken==1:
-                    if skillpoint>0:
-                        print('')
-                        print('Weaken II skill learned')
-                        print('')
-                        weaken=2
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Weaken','II',1)
+                    weaken=l
+                    continue
                 if weaken==2:
-                    if skillpoint>0:
-                        print('')
-                        print('Weaken III skill learned')
-                        print('')
-                        weaken=3
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Weaken','III',1)
+                    weaken=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2876,18 +2815,9 @@ while True:
                     continue
             if skillchoice=='2':
                 if stunning==0:
-                    if skillpoint>2:
-                        print('')
-                        print('Stunning skill learned')
-                        print('')
-                        stunning=1
-                        skillpoint=skillpoint-3
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Stunning','I',3)
+                    stunning=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2895,18 +2825,9 @@ while True:
                     continue
             if skillchoice=='3':
                 if sabotage==0:
-                    if skillpoint>2:
-                        print('')
-                        print('Sabotage skill learned')
-                        print('')
-                        sabotage=1
-                        skillpoint=skillpoint-3
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Sabotage','I',3)
+                    sabotage=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2933,44 +2854,17 @@ while True:
             skillchoice=input('')
             if skillchoice=='1':
                 if tearing==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Tearing I skill learned')
-                        print('')
-                        tearing=1
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Tearing','I',1)
+                    tearing=l
+                    continue
                 if tearing==1:
-                    if skillpoint>0:
-                        print('')
-                        print('Tearing II skill learned')
-                        print('')
-                        tearing=2
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Tearing','II',1)
+                    tearing=l
+                    continue
                 if tearing==2:
-                    if skillpoint>0:
-                        print('')
-                        print('Tearing III skill learned')
-                        print('')
-                        tearing=3
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Tearing','III',1)
+                    tearing=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -2978,44 +2872,17 @@ while True:
                     continue
             if skillchoice=='2':
                 if downfall==0:
-                    if skillpoint>0:
-                        print('')
-                        print('Downfall I I skill learned')
-                        print('')
-                        downfall=1
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Downfall','I',1)
+                    downfall=l
+                    continue
                 if downfall==1:
-                    if skillpoint>0:
-                        print('')
-                        print('Downfall II skill learned')
-                        print('')
-                        downfall=2
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(2,'Downfall','II',1)
+                    downfall=l
+                    continue
                 if downfall==2:
-                    if skillpoint>0:
-                        print('')
-                        print('Downfall III skill learned')
-                        print('')
-                        downfall=3
-                        skillpoint=skillpoint-1
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(3,'Downfall','III',1)
+                    downfall=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -3023,18 +2890,9 @@ while True:
                     continue
             if skillchoice=='3':
                 if finish==0:
-                    if skillpoint>2:
-                        print('')
-                        print('Finish skill learned')
-                        print('')
-                        finish=1
-                        skillpoint=skillpoint-3
-                        continue
-                    else:
-                        print('')
-                        print('Not enough skill points :c')
-                        print('')
-                        continue
+                    skilllearn(1,'Finish','I',3)
+                    finish=l
+                    continue
                 else:
                     print('')
                     print('This skill is already on max level')
@@ -3043,6 +2901,7 @@ while True:
             else:
                 print('')
                 continue
+        continue
 
     if choice=='cheat':
         treasury=10000
