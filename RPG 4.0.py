@@ -2650,11 +2650,11 @@ while True:
         if type=='Healer':
             print('Passive skills:')
             if vampire==0:
-                print('1 = Vampire I: 15% chance to damage 30% of your enemys max HP and heal by that amount - 2 skill points required')
+                print('1 = Vampire I: 15% chance to damage 30% of your enemys max HP and heal by that amount - 3 skill points required')
             if vampire==1:
-                print('1 = Vampire II: 30% chance to damage 30% of your enemys max HP and heal by that amount - 2 skill points required')
+                print('1 = Vampire II: 30% chance to damage 30% of your enemys max HP and heal by that amount - 3 skill points required')
             if vampire==2:
-                print('1 = Vampire III: 50% chance to damage 30% of your enemys max HP and heal by that amount - 2 skill points required')
+                print('1 = Vampire III: 50% chance to damage 30% of your enemys max HP and heal by that amount - 3 skill points required')
             if focus==0:
                 print('2 = Focus I: Decrease enemy critical hit chance by 5% - 1 skill point required')
             if focus==1:
