@@ -186,7 +186,9 @@ def fight():
                         global turncount
                         global tearingdive
                         global tearingdiveskill
+                        global fireauracrit
                         turncount=turncount+1
+                        fireauracrit=fireauracrit-1
                         if turncount>3 and healing==1:
                             print('type heal to heal')
                             heal=input('')
@@ -417,6 +419,10 @@ def fight():
                                 print('')
                                 print('ENEMY STUNNED')
                                 stun=3
+                            if fireaura==1:
+                                print('')
+                                print('FIRE AURA triggered for 3 turns')
+                                fireauracrit=3
                         if armorresistance==1:
                             hploss=hploss-1
                         if armorresistance==2:
@@ -463,6 +469,8 @@ def fight():
                                 print('')
                         else:
                             enemyhploss=enemyhploss
+                        if fireauracrit>0:
+                            enemyhploss=enemyhploss+(enemymaxhp*0.1)
                         hp=hp-hploss
                         enemyhp=enemyhp-enemyhploss
                         tearingdiveskill=0
@@ -667,6 +675,9 @@ def profile():
             global advancedlooting
             global healing
             global tearingdive
+            global business
+            global fireaura
+            global perfecthealth
             print('Class:',type,'')
             print('Treasury:',treasury,'')
             print('HP:',round(hp,2),'/',maxhp, equippedarmor,'')
@@ -733,6 +744,9 @@ def profile():
             if moneyrain==1:
                 print('Money rain I')
                 print('')
+            if business==1:
+                print('Smart business I')
+                print('')
             if weaken==1:
                 print('Weaken I')
                 print('')
@@ -747,6 +761,9 @@ def profile():
                 print('')
             if sabotage==1:
                 print('Sabotage I')
+                print('')
+            if fireaura==1:
+                print('Fire aura I')
                 print('')
             if tearing==1:
                 print('Tearing I')
@@ -768,6 +785,15 @@ def profile():
                 print('')
             if finish==1:
                 print('Finish I')
+                print('')
+            if perfecthealth==1:
+                print('Perfect health I')
+                print('')
+            if perfecthealth==2:
+                print('Perfect health II')
+                print('')
+            if perfecthealth==3:
+                print('Perfect health III')
                 print('')
             if skillpoint>0:
                 print('Skill points:',skillpoint,'')
@@ -866,12 +892,19 @@ def armor_equip():
 def maxhp_modifier():
                 global type
                 global maxhp
+                global perfecthealth
                 if type=='Swordsman':
                     maxhp=maxhp*0.85
                 if type=='Trader' or type=='Wizard':
                     maxhp=maxhp*0.7
                 if type=='Warrior':
                     maxhp=maxhp*1.25
+                if perfecthealth==1:
+                    maxhp=maxhp*1.1
+                if perfecthealth==2:
+                    maxhp=maxhp*1.2
+                if perfecthealth==3:
+                    maxhp=maxhp*1.3
 
 def power_modifier():
                 global type
@@ -1083,16 +1116,20 @@ stealing=0
 moneyrain=0
 fastlearner=0
 critcount=0
+business=0
 
 stunning=0
 stun=0
 weaken=0
 sabotage=0
+fireaura=0
+fireauracrit=0
 
 tearing=0
 downfall=0
 finish=0
 finishchance=0
+perfecthealth=0
 
 #-----------------------Classes-----------------------#
 
@@ -2181,7 +2218,10 @@ while True:
             healthpotionamount=x
             
         if purchase=='sell 1':
-            sell(2,healthpotionamount,'health potion')
+            if business==1:
+                sell(3,healthpotionamount,'health potion')
+            else:
+                sell(2,healthpotionamount,'health potion')
             healthpotionamount=x
 
         if purchase=='2':
@@ -2189,7 +2229,10 @@ while True:
             revivepotionamount=x
 
         if purchase=='sell 2':
-            sell(7,revivepotionamount,'revive potion')
+            if business==1:
+                sell(10,revivepotionamount,'revive potion')
+            else:
+                sell(7,revivepotionamount,'revive potion')
             revivepotionamount=x
 
         if purchase=='3':
@@ -2197,7 +2240,10 @@ while True:
             leatherarmoramount=x
 
         if purchase=='sell 3':
-            sell(4,leatherarmoramount,'leather armor')
+            if business==1:
+                sell(5,leatherarmoramount,'leather armor')
+            else:
+                sell(4,leatherarmoramount,'leather armor')
             leatherarmoramount=x
 
         if purchase=='4':
@@ -2205,7 +2251,10 @@ while True:
             woodendaggeramount=x
 
         if purchase=='sell 4':
-            sell(3,woodendaggeramount,'wooden dagger')
+            if business==1:
+                sell(5,woodendaggeramount,'wooden dagger')
+            else:
+                sell(3,woodendaggeramount,'wooden dagger')
             woodendaggeramount=x
 
         if purchase=='5':
@@ -2213,7 +2262,10 @@ while True:
             woodenswordamount=x
 
         if purchase=='sell 5':
-            sell(5,woodenswordamount,'wooden sword')
+            if business==1:
+                sell(7,woodenswordamount,'wooden sword')
+            else:
+                sell(5,woodenswordamount,'wooden sword')
             woodenswordamount=x
 
         if purchase=='6':
@@ -2297,7 +2349,10 @@ while True:
             resistancepotionamount=x
             
         if purchase=='sell 10':
-            sell(4,resistancepotionamount,'resistance potion')
+            if business==1:
+                sell(6,resistancepotionamount,'resistance potion') 
+            else:
+                sell(4,resistancepotionamount,'resistance potion')
             resistancepotionamount=x
 
         if purchase=='11':
@@ -2305,7 +2360,10 @@ while True:
             strengthpotionamount=x
             
         if purchase=='sell 11':
-            sell(4,strengthpotionamount,'strength potion')
+            if business==1:
+                sell(6,strengthpotionamount,'strength potion')
+            else:
+                sell(4,strengthpotionamount,'strength potion')
             strengthpotionamount=x
 
         if purchase=='12':
@@ -2313,7 +2371,10 @@ while True:
             staminapotionamount=x
             
         if purchase=='sell 12':
-            sell(2,staminapotionamount,'stamina potion')
+            if business==1:
+                sell(3,staminapotionamount,'stamina potion')
+            else:
+                sell(2,staminapotionamount,'stamina potion')
             staminapotionamount=x
 
         continue
@@ -2749,6 +2810,8 @@ while True:
                 print('2 = Stealing: Critical hits get you 3 gold - 3 skill points required')
             if moneyrain==0:
                 print('3 = Money rain: 50% chance to double gained gold - 4 skill points required')
+            if business==0:
+                print('4 = Smart business: You can sell items for the purchase price - 2 skill points required')
             skillchoice=input('')
             if skillchoice=='1':
                 if fastlearner==0:
@@ -2781,6 +2844,16 @@ while True:
                     print('This skill is already on max level')
                     print('')
                     continue
+            if skillchoice=='4':
+                if business==0:
+                    skilllearn(1,'Smart business','I',2)
+                    business=l
+                    continue
+                else:
+                    print('')
+                    print('This skill is already on max level')
+                    print('')
+                    continue
             else:
                 continue
         if type=='Wizard':
@@ -2791,9 +2864,11 @@ while True:
             if weaken==2:
                 print('1 = Weaken III: Decrease enemy damage by 20% - 1 skill point required')
             if stunning==0:
-                print('2 = Stunning: Critical hits stun the enemy for 3 turns - 3 skill points required')
+                print('2 = Stunning: Critical hits stun the enemy for 3 turns - 5 skill points required')
             if sabotage==0:
                 print('3 = Sabotage: Enemy cannot do critical hits - 3 skill points required')
+            if fireaura==0:
+                print(' 4 = Fire aura: Critical hits trigger a fire aura which does damage for 3 turns - 3 skill points required')
             skillchoice=input('')
             if skillchoice=='1':
                 if weaken==0:
@@ -2833,6 +2908,16 @@ while True:
                     print('This skill is already on max level')
                     print('')
                     continue
+            if skillchoice=='4':
+                if fireaura==0:
+                    skilllearn(1,'Fire aura','I',3)
+                    fireaura=l
+                    continue
+                else:
+                    print('')
+                    print('This skill is already on max level')
+                    print('')
+                    continue
             else:
                 print('')
                 continue
@@ -2851,6 +2936,12 @@ while True:
                 print('2 = Downfall III: +50% critical hit damage - 1 skill point required')
             if finish==0:
                 print('3 = Finish: 10% chance to damage +500% of original damage - 3 skill points required')
+            if perfecthealth==0:
+                print('4 = Perfect health I: +10% max HP - 1 skill point required')
+            if perfecthealth==1:
+                print('4 = Perfect health II: +20% max HP - 1 skill point required')
+            if perfecthealth==3:
+                print('4 = Perfect health III: +30% max HP - 1 skill point required')
             skillchoice=input('')
             if skillchoice=='1':
                 if tearing==0:
@@ -2898,6 +2989,24 @@ while True:
                     print('This skill is already on max level')
                     print('')
                     continue
+            if skillchoice=='4':
+                if perfecthealth==0:
+                    skilllearn(1,'Perfect health','I',1)
+                    perfecthealth=l
+                    continue
+                if perfecthealth==1:
+                    skilllearn(2,'Perfect health','II',1)
+                    perfecthealth=l
+                    continue
+                if perfecthealth==2:
+                    skilllearn(3,'Perfect health','III',1)
+                    perfecthealth=l
+                    continue
+                else:
+                    print('')
+                    print('This skill is already on max level')
+                    print('')
+                    continue           
             else:
                 print('')
                 continue
