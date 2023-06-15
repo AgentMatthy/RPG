@@ -2815,7 +2815,6 @@ while True:
             skillchoice=input('')
             if skillchoice=='1':
                 if fastlearner==0:
-                    if skillpoint>1:
                     skilllearn(1,'Fast learner','I',2)
                     fastlearner=l
                     continue
