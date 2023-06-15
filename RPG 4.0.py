@@ -197,7 +197,7 @@ def fight():
                                 if hp>maxhp:
                                     hp=maxhp
                                 print('')
-                                print('Healing: +',maxhp*0.2,'HP (',hp,'/',maxhp,')')
+                                print('Healing: +',round((maxhp*0.2),3),'HP (',round(hp,3),'/',round(maxhp,3),')')
                                 print('')
                                 turncount=turncount-4
                         if turncount>3 and tearingdive==1:
@@ -2665,7 +2665,7 @@ while True:
                 print('3 = Advanced looting: Extra health potion in adventures if you get one - 1 skill point required')
             print('Active skills:')
             if healing==0:
-                print('4 = Healing: You can heal by 20% of your max HP every 4 turns - 3 skill points required')
+                print('4 = Healing: You can heal by 20% of your max HP every 4 turns - 5 skill points required')
             skillchoice=input('')
             if skillchoice=='1':
                 if vampire==0:
@@ -2715,7 +2715,7 @@ while True:
                     continue
             if skillchoice=='4':
                 if healing==0:
-                    skilllearn(1,'Healing','I',3)
+                    skilllearn(1,'Healing','I',5)
                     healing=l
                     continue
                 else:
