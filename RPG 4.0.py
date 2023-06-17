@@ -205,6 +205,7 @@ def fight():
                             dive=input('')
                             if dive=='tearing dive':
                                 tearingdiveskill=1
+                                turncount=turncount-4
                         hploss=((enemylvl/10)*hploss)+hploss
                         enemyhploss=random.randint(0,2)
                         if tearing==1:
@@ -1272,7 +1273,7 @@ while True:
 
         if xp<50 or xp==50:
             if 0<chance and chance<50:
-                enemyencounter('Wolf',3,3,25,1,5,5,20)
+                enemyencounter('Wolf',3,3,25,1,5,5,10)
                 if battle=='1':
                     hploss=random.randint(0,1)
                     xpgain=random.randint(1,5)
