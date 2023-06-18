@@ -1,6 +1,8 @@
-print('The beginning, always press enter to continue.')
+import colorama
 import random
 import time
+
+printY('The beginning, always press enter to continue.')
 
 #-----------------------Functions-----------------------#
 
@@ -1005,6 +1007,17 @@ def skilllearn(learnedlevel,skillname,learnedlevelname,skillpointcost):
         print('')
         print('Not enough skill points :c')
         print('')
+
+#-----------------------Print-----------------------#
+
+def printR(skk): print("\033[91m {}\033[00m" .format(skk))
+def printG(skk): print("\033[92m {}\033[00m" .format(skk))
+def printB(skk): print("\033[96m {}\033[00m" .format(skk))
+def printY(skk): print("\033[93m {}\033[00m" .format(skk))
+def printP(skk): print("\033[95m {}\033[00m" .format(skk))
+
+def printBLACK(skk): print("\033[98m {}\033[00m" .format(skk))
+def printGRAY(skk): print("\033[97m {}\033[00m" .format(skk))
 
 #-----------------------Stats-----------------------#
 
