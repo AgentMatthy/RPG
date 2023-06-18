@@ -1,8 +1,6 @@
 import random
 import time
 
-printY('The beginning, always press enter to continue.')
-
 #-----------------------Functions-----------------------#
 
 def advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp):
@@ -1018,6 +1016,7 @@ def printP(skk): print("\033[95m {}\033[00m" .format(skk))
 def printBLACK(skk): print("\033[98m {}\033[00m" .format(skk))
 def printGRAY(skk): print("\033[97m {}\033[00m" .format(skk))
 
+printY('The beginning, always press enter to continue.')
 #-----------------------Stats-----------------------#
 
 xp=0
