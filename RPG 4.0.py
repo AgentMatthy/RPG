@@ -1,4 +1,3 @@
-import colorama
 import random
 import time
 
