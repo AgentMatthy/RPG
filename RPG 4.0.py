@@ -187,6 +187,10 @@ def fight():
                         global tearingdive
                         global tearingdiveskill
                         global fireauracrit
+                        global healthpotionamount
+                        global staminapotionamount
+                        global strengthpotionamount
+                        global resistancepotionamount
                         turncount=turncount+1
                         fireauracrit=fireauracrit-1
                         if turncount>3 and healing==1:
@@ -344,6 +348,37 @@ def fight():
                         print('')
                         print('Stamina:',staminatype,'')
                         print('Block:',blocktype,'')
+                        print('')
+                        print('Potions:')
+                        print('')
+                        if healthpotionamount>0:
+                            print('(1) Health potion:',healthpotionamount,'')
+                        if staminapotionamount>0:
+                            print('(2) Stamina potion:',staminapotionamount,'')
+                        print('')
+                        use=input('What do you want to do?')
+                        if use=='1':
+                            print('')
+                            if healthpotionamount>0:
+                                healthpotionamount=healthpotionamount-1
+                                hp=hp+(0.3*maxhp)
+                                if hp>maxhp:
+                                    hp=hp-(hp-maxhp)
+                                    print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
+                                else:
+                                    print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
+                            else:
+                                print('You do not have a health potion :c')
+                        if use=='2':
+                            print('')
+                            if staminapotionamount>0:
+                                staminapotionamount=staminapotionamount-1
+                                print('Stamina and block replenished')
+                                stamina=100
+                                block=100
+                            else:
+                                print('You do not have a stamina potion :c')
+                                used=0
                         print('1=Defend, 2=Attack')
                         movement=input('')
                         if movement=='1':
