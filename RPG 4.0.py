@@ -1,4 +1,3 @@
-print('The beginning, always press enter to continue.')
 import random
 import time
 
@@ -1042,6 +1041,19 @@ def skilllearn(learnedlevel,skillname,learnedlevelname,skillpointcost):
         print('Not enough skill points :c')
         print('')
 
+#-----------------------Print-----------------------#
+
+def printR(skk): print("\033[91m {}\033[00m" .format(skk))
+def printG(skk): print("\033[92m {}\033[00m" .format(skk))
+def printB(skk): print("\033[96m {}\033[00m" .format(skk))
+def printY(skk): print("\033[93m {}\033[00m" .format(skk))
+def printP(skk): print("\033[95m {}\033[00m" .format(skk))
+
+def printBLACK(skk): print("\033[98m {}\033[00m" .format(skk))
+def printGRAY(skk): print("\033[97m {}\033[00m" .format(skk))
+
+printY('The beginning, always press enter to continue.\n')
+time.sleep(1)
 #-----------------------Stats-----------------------#
 
 xp=0
@@ -1170,34 +1182,36 @@ perfecthealth=0
 #-----------------------Classes-----------------------#
 
 while True:
-    type=input('Choose a class: \n 1=Healer: +5 Health potion; -20% power \n 2=Swordsman: +Wooden sword; -15% maxHP \n 3=Trader: +10 gold; -30% maxHP \n 4=Wizard:  +Wooden dagger; enchanting only costs 15 XP; -20% maxHP \n 5=Warrior: +Copper sword; +leather armor; +25% maxHP; -50% gold gain')
+    printB('\nChoose a class:')
+    print(' 1=Healer: +5 Health potion; -20% power \n 2=Swordsman: +Wooden sword; -15% maxHP \n 3=Trader: +10 gold; -30% maxHP \n 4=Wizard:  +Wooden dagger; enchanting only costs 15 XP; -20% maxHP \n 5=Warrior: +Copper sword; +leather armor; +25% maxHP; -50% gold gain')
+    type=input('')
     print('')
     if type=='1':
         healthpotionamount=5
         power=power*0.8
         type='Healer'
-        print('Class selected: Healer')
+        printG('Class selected: Healer')
         break
     if type=='2':
         equippedweapon='Wooden sword'
         maxhp=maxhp*0.85
         hp=maxhp
         type='Swordsman'
-        print('Class selected: Swordsman')
+        printG('Class selected: Swordsman')
         break
     if type=='3':
         treasury=10
         maxhp=maxhp*0.7
         hp=maxhp
         type='Trader'
-        print('Class selected: Trader')
+        printG('Class selected: Trader')
         break
     if type=='4':
         maxhp=maxhp*0.8
         hp=maxhp
         type='Wizard'
         equippedweapon='Wooden dagger'
-        print('Class selected: Wizard')
+        printG('Class selected: Wizard')
         break
     if type=='5':
         maxhp=maxhp*1.25
@@ -1205,11 +1219,13 @@ while True:
         equippedarmor='Leather armor'
         equippedweapon='Copper sword'
         type='Warrior'
-        print('Class selected: Warrior')
+        printG('Class selected: Warrior')
         break
     else:
-        print('I said choose a class')
+        printG('I said choose a class')
         continue
+
+time.sleep(1)
 
 #-----------------------Game-----------------------#
 
@@ -1278,7 +1294,8 @@ while True:
             print('Resistance potion active')
             print('')
 
-    print('Options:\n 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
+    printB('\nOptions:')
+    print(' 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
     choice=input('')
 
     if choice=='1':
@@ -1317,7 +1334,7 @@ while True:
                     hp=hp-hploss
                     if hp<0 or hp==0:
                         print('')
-                        print('You died')
+                        printR('You died')
                         if laststand==1:
                             if laststandskill=='In use':
                                 laststand=laststand
@@ -1332,7 +1349,7 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            print('You do not have a revive potion, the game is over :c')
+                            printR('You do not have a revive potion, the game is over :c')
                             break
                     print('+',xpgain,'xp (',xp,')')
                     print('-',hploss,'HP (',hp,'/',maxhp,')')
@@ -1341,14 +1358,14 @@ while True:
                 if battle=='2':
                     while True:
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         hploss=random.randint(0,2)
                         fight()
                         if hp<0 or hp==0:
                             print('')
-                            print('You died')
+                            printR('You died')
                             if laststand==1:
                                 if laststandskill=='In use':
                                     laststand=laststand
@@ -1363,14 +1380,14 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                print('You do not have a revive potion, the game is over :c')
+                                printR('You do not have a revive potion, the game is over :c')
                                 break
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         else:
-                            time.sleep(3)
+                            time.sleep(2)
                             continue
                     if hp<0 or hp==0:
                         break
@@ -1382,6 +1399,7 @@ while True:
                         treasury=treasury+goldgain
                         advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
                         wolf_loot()
+                        time.sleep(3)
                         continue
                 else:
                     continue
@@ -1395,7 +1413,7 @@ while True:
                     hp=hp-hploss
                     if hp<0 or hp==0:
                         print('')
-                        print('You died')
+                        printR('You died')
                         if laststand==1:
                             if laststandskill=='In use':
                                 laststand=laststand
@@ -1410,7 +1428,7 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            print('You do not have a revive potion, the game is over :c')
+                            printR('You do not have a revive potion, the game is over :c')
                             break
                     print('+',xpgain,'xp (',xp,')')
                     print('-',hploss,'HP (',hp,'/',maxhp,')')
@@ -1419,14 +1437,14 @@ while True:
                 if battle=='2':
                     while True:
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         hploss=random.randint(0,2)
                         fight()
                         if hp<0 or hp==0:
                             print('')
-                            print('You died')
+                            printR('You died')
                             if laststand==1:
                                 if laststandskill=='In use':
                                     laststand=laststand
@@ -1441,10 +1459,10 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                print('You do not have a revive potion, the game is over :c')
+                                printR('You do not have a revive potion, the game is over :c')
                                 break
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         else:
@@ -1498,6 +1516,7 @@ while True:
                     print('Item box:')
                     print('+ 1 Strength potion (',strengthpotionamount,')')
                 print('')
+                time.sleep(3)
                 continue
 
             else:
