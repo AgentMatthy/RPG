@@ -690,7 +690,7 @@ def gold_box():
                 global treasury
                 prize=random.randint(4,10)
                 treasury=treasury+prize
-                print('Gold box:')
+                printY('Gold box:')
                 print('+',prize,'gold (',treasury,')')
                 print('')
 
@@ -720,7 +720,7 @@ def profile():
             print('Stamina:',staminatype,'')
             print('Block:',blocktype,'')
             print('')
-            print('Skills:')
+            printB('Skills:')
             print('')
             if vampire==1:
                 print('Vampire I')
@@ -2046,7 +2046,7 @@ while True:
 
     if choice=='3':
         print('')
-        print('Potions:')
+        printB('Potions:')
         print('')
         if healthpotionamount>0:
             print('(1) Health potion:',healthpotionamount,'')
@@ -2061,7 +2061,7 @@ while True:
         else:
             treasury=treasury
         print('')
-        print('Armors:')
+        printB('Armors:')
         print('')
         if leatherarmoramount>0:
             print('(3) Leather armor:',leatherarmoramount,'')
@@ -2072,7 +2072,7 @@ while True:
         else:
             treasury=treasury
         print('')
-        print('Weapons:')
+        printB('Weapons:')
         print('')
         if woodendaggeramount>0:
             print('(4) Wooden dagger:',woodendaggeramount,'')
@@ -2085,7 +2085,7 @@ while True:
         else:
             treasury=treasury
         print('')
-        print('Items')
+        printB('Items')
         if enchantmentscroll>0:
             print('Enchantment scroll:',enchantmentscroll,'')
         else:
@@ -2242,7 +2242,7 @@ while True:
     
     if choice=='4':
         print('')
-        print('Potions:')
+        printB('Potions:')
         print('')
         print('(1) Health potion = 3 gold (2 gold for sell)')
         print('(2) Revive potion = 10 gold (7 gold for sell)')
@@ -2250,17 +2250,17 @@ while True:
         print('(11) Strength potion = 6 gold (4 gold for sell)')
         print('(12) Stamina potion = 3 gold (2 gold for sell)')        
         print('')
-        print('Armors:')
+        printB('Armors:')
         print('')
         print('(3) Leather armor (15 HP) = 6 gold (4 gold for sell)')
         print('(9) Copper armor (20 HP) = 8 gold (Only for sell)')
-        print('Weapons:')
+        printB('Weapons:')
         print('')
         print('(4) Wooden dagger (1.3 Power) = 5 gold (3 gold for sell)')
         print('(5) Wooden sword (1.5 Power) = 7 gold (5 gold for sell)')
         print('(8) Copper sword (1.7 Power) = 9 gold (Only for sell)')
         print('')
-        print('Lootboxes:')
+        printB('Lootboxes:')
         print('')
         print('(6) Common lootbox = 5 gold')
         print('(7) Rare lootbox = 12 gold')
@@ -2436,39 +2436,39 @@ while True:
     
     if choice=='5':
         print('')
-        print('Adventure:')
+        printB('Adventure:')
         print('')
         print('In adventure, you can fight and get xp and gold but it comes with a price: HPloss')
         print('The more xp you have, the harder the fights get')
         print('Here you can decide to run or fight: if you run, then you get some XP and lose some HP, if you fight, you will deal damage to the enemy according to your weapon, you will also lose HP, if your HP gets below 0 or is 0, then you die and if the enemys HP is down then you win, in fights you get more XP than running and also get gold. \nStamina and block also determines how you fight: If your stamina is high, then you have increased critical hit chance. If it is medium, you do not get any boosts, but if it gets to low, then your attacks damage half the amount. Same applies to block: If it is high, then you have an increased chance to block hits. If it is medium, then everything is normal and if it is low then you will lose 1.5X more HP during enemy attacks.\nDuring fights you are given the choice to attack or defend, if you attack, you lose stamina but gain block and you will damage 1.5X more, but lose 1.5X more HP. If you defend you get block and lose stamina, your enemy deals half the amount of damage but your attacks deal half the amount of damage. At the start of a fight i recommend blocking since your enemy always starts with high stamina and block so they can block your attacks easily.')
         print('')
-        print('Items:')
+        printB('Items:')
         print('')
         print('On your journey you can get different types of items. You can open the item lis menu (6) to see their attributes.')
         print('')
-        print('Shop:')
+        printB('Shop:')
         print('')
         print('In the shop, enter the number of the item to buy it, if you want to sell something, just put sell before it like sell 1 ')
         print('')
-        print('Profile & Inventory:')
+        printB('Profile & Inventory:')
         print('')
         print('In the inventory you can view your items and in the profile you can check your stats')
         print('In the inventory, write the number of the item to use it or equip it')
         print('When you equip something, you cannot sell it anymore, so equip them wisely! (You can unequip them by equipping another stuff)')
         print('')
-        print('Gamble:')
+        printB('Gamble:')
         print('')
         print('Here you can bet an amount of gold and maybe lose the half it or win +50% DO NOT WRITE A LETTER HERE, JUST NUMBERS OR ELSE THE GAME WILL BREAK')
         print('')
-        print('Enchanting:')
+        printB('Enchanting:')
         print('')
         print('Here you can get enchantments to your weapons or to your armors. Unequipping an enchanted armor will result in losing the enchantment, enchanting costs 30xp, use it wisely!')
         print('')
-        print('Classes - Skills:')
+        printB('Classes - Skills:')
         print('')
         print('There are five classes in the game: Healer, Swordsman, Trader, Wizard and Warrior. Each class has its own advantages and disadvantages. Each class also has unique skills which you can learn in the skills menu (9) with skill points')
         print('')
-        print('Gameplay:')
+        printB('Gameplay:')
         print('')
         print('The goal of the game is to reach 100 xp and to survive, there are many rare events to help your journey')
         print('The game is made up of two section, one is before reaching 50 xp and the other is after 50 xp, this section is harder')
@@ -2477,30 +2477,30 @@ while True:
 
     if choice=='6':
         print('')
-        print('Potions:')
+        printG('Potions:')
         print('')
         print('Health potion - Common (+30% HP) - Source: Adventure loot, Common lootbox, Shop')
-        print('Revive potion - Rare! (Allows to continue the game with full HP after dying) - Source: Adventure loot, Rare lootbox, Shop')
+        printB('Revive potion - Rare! (Allows to continue the game with full HP after dying) - Source: Adventure loot, Rare lootbox, Shop')
         print('Resistance potion - Common (-50% HP loss for 3 adventures) - Source: Adventure loot, Common lootbox, Shop')
         print('Strength potion - Common (+50% Strength for 3 adventures) - Source: Adventure loot, Common lootbox, Shop')
         print('Stamina potion - Common (Replenishes stamina and block) - Source: Adventure loot, Common lootbox, Shop')
         print('')
-        print('Armors:')
+        printG('Armors:')
         print('')
         print('Leather armor - Common (20 HP - 1 Armor Resistance) - Source: Adventure loot, Common lootbox, Shop')
-        print('Copper armor - Rare! (25 HP - 2 Armor Resistance) - Source: Adventure loot, Rare lootbox')
-        print('Maxwell armor - Epic!! (35 HP - 3 Armor Resistance) - Source: Maxwell event')
+        printB('Copper armor - Rare! (25 HP - 2 Armor Resistance) - Source: Adventure loot, Rare lootbox')
+        printP('Maxwell armor - Epic!! (35 HP - 3 Armor Resistance) - Source: Maxwell event')
         print('')
-        print('Weapons:')
+        printG('Weapons:')
         print('')
         print('Wooden dagger - Common (1.3 Power) - Source: Adventure loot, Common lootbox, Shop')
         print('Wooden sword - Common (1.5 Power) - Source: Adventure loot, Common lootbox, Shop')
-        print('Copper sword - Rare! (1.7 Power) - Source: Adventure loot, Rare lootbox')
-        print('Maxwell sword - Epic!! (2 Power) - Source: Maxwell event')
+        printB('Copper sword - Rare! (1.7 Power) - Source: Adventure loot, Rare lootbox')
+        printP('Maxwell sword - Epic!! (2 Power) - Source: Maxwell event')
         print('')
-        print('Other:')
+        printG('Other:')
         print('')
-        print('Enchantment scroll - Rare! (Used to enchant without XP loss) - Source: Strange Scientist event')
+        printB('Enchantment scroll - Rare! (Used to enchant without XP loss) - Source: Strange Scientist event')
 
     if choice=='7':
         odd=random.randint(1,2)
