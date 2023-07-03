@@ -28,12 +28,7 @@ def armorequip(leatherarmoramount, catarmoramount, copperarmoramount, maxhp, typ
                     print('')
                 else:
                     print('')
-                if block1a==1:
-                    block1a=block1a-1
-                if block2a==1:
-                    block2a=block2a-1
-                if block3a==1:
-                    block3a=block3a-1
+                enchantcheckarmor()
 
 def weaponequip(woodendaggeramount, woodenswordamount, catswordamount, copperswordamount, power, equippedweapon):
                 if equippedweapon=='Wooden dagger':
@@ -54,18 +49,7 @@ def weaponequip(woodendaggeramount, woodenswordamount, catswordamount, copperswo
                     print('')
                 else:
                     print('')
-                if loot1==1:
-                    loot1=loot1-1
-                if loot2==1:
-                    loot2=loot2-1
-                if loot3==1:
-                    loot3=loot3-1
-                if block1w==1:
-                    block1w=block1w-1
-                if block2w==1:
-                    block2w=block2w-1
-                if block3w==1:
-                    block3w=block3w-1
+                enchantcheckweapon()
 
 def run_modifiers():
                     global block1a
@@ -715,8 +699,8 @@ def profile():
             global perfecthealth
             print('Class:',type,'')
             print('Treasury:',treasury,'')
-            print('HP:',round(hp,2),'/',maxhp, equippedarmor,'')
-            print('Strength:',round(power,2), equippedweapon,'')
+            print('HP:',round(hp,2),'/',maxhp, equippedarmor,'-',armorenchant,'')
+            print('Strength:',round(power,2), equippedweapon,'-',weaponenchant,'')
             print('Stamina:',staminatype,'')
             print('Block:',blocktype,'')
             print('')
@@ -852,48 +836,223 @@ def weapon_equip():
                 global curse1
                 global curse2
                 global curse3
+                global looting1catsword
+                global looting1coppersword
+                global looting1woodensword
+                global looting1woodendagger
+                global looting2catsword
+                global looting2coppersword
+                global looting2woodensword
+                global looting2woodendagger
+                global looting3catsword
+                global looting3coppersword
+                global looting3woodensword
+                global looting3woodendagger
+                global blocking1catsword
+                global blocking1coppersword
+                global blocking1woodensword
+                global blocking1woodendagger
+                global blocking2catsword
+                global blocking2coppersword
+                global blocking2woodensword
+                global blocking2woodendagger
+                global blocking3catsword
+                global blocking3coppersword
+                global blocking3woodensword
+                global blocking3woodendagger
+                global curse1catsword
+                global curse1coppersword
+                global curse1woodensword
+                global curse1woodendagger
+                global curse2catsword
+                global curse2coppersword
+                global curse2woodensword
+                global curse2woodendagger
+                global curse3catsword
+                global curse3coppersword
+                global curse3woodensword
+                global curse3woodendagger
+                global sharpness1catsword
+                global sharpness1coppersword
+                global sharpness1woodensword
+                global sharpness1woodendagger
+                global sharpness2catsword
+                global sharpness2coppersword
+                global sharpness2woodensword
+                global sharpness2woodendagger
+                global sharpness3catsword
+                global sharpness3coppersword
+                global sharpness3woodensword
+                global sharpness3woodendagger
+                global isenchanted
+                isenchanted='No'
                 if equippedweapon=='Wooden dagger':
-                    woodendaggeramount=woodendaggeramount+1
-                    print('Wooden dagger unequipped')
+                    if sharp1==1:
+                        sharpness1woodendagger=sharpness1woodendagger+1
+                        isenchanted='Yes'
+                    if sharp2==1:
+                        sharpness2woodendagger=sharpness2woodendagger+1
+                        isenchanted='Yes'
+                    if sharp3==1:
+                        sharpness3woodendagger=sharpness3woodendagger+1
+                        isenchanted='Yes'
+                    if block1w==1:
+                        blocking1woodendagger=blocking1woodendagger+1
+                        isenchanted='Yes'
+                    if block2w==1:
+                        blocking2woodendagger=blocking2woodendagger+1
+                        isenchanted='Yes'
+                    if block3w==1:
+                        blocking3woodendagger=blocking3woodendagger+1
+                        isenchanted='Yes'
+                    if loot1==1:
+                        looting1woodendagger=looting1woodendagger+1
+                        isenchanted='Yes'
+                    if loot2==1:
+                        looting2woodendagger=looting2woodendagger+1
+                        isenchanted='Yes'
+                    if loot3==1:
+                        looting3woodendagger=looting3woodendagger+1
+                        isenchanted='Yes'
+                    if curse1==1:
+                        curse1woodendagger=curse1woodendagger+1
+                        isenchanted='Yes'
+                    if curse2==1:
+                        curse2woodendagger=curse2woodendagger+1
+                        isenchanted='Yes'
+                    if curse3==1:
+                        curse3woodendagger=curse3woodendagger+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        woodendaggeramount=woodendaggeramount+1
+                    printR('Wooden dagger unequipped')
                     print("")
                 if equippedweapon=='Wooden sword':
-                    woodenswordamount=woodenswordamount+1
-                    print('Wooden sword unequipped')
+                    if sharp1==1:
+                        sharpness1woodensword=sharpness1woodensword+1
+                        isenchanted='Yes'
+                    if sharp2==1:
+                        sharpness2woodensword=sharpness2woodensword+1
+                        isenchanted='Yes'
+                    if sharp3==1:
+                        sharpness3woodensword=sharpness3woodensword+1
+                        isenchanted='Yes'
+                    if block1w==1:
+                        blocking1woodensword=blocking1woodensword+1
+                        isenchanted='Yes'
+                    if block2w==1:
+                        blocking2woodensword=blocking2woodensword+1
+                        isenchanted='Yes'
+                    if block3w==1:
+                        blocking3woodensword=blocking3woodensword+1
+                        isenchanted='Yes'
+                    if loot1==1:
+                        looting1woodensword=looting1woodensword+1
+                        isenchanted='Yes'
+                    if loot2==1:
+                        looting2woodensword=looting2woodensword+1
+                        isenchanted='Yes'
+                    if loot3==1:
+                        looting3woodensword=looting3woodensword+1
+                        isenchanted='Yes'
+                    if curse1==1:
+                        curse1woodensword=curse1woodensword+1
+                        isenchanted='Yes'
+                    if curse2==1:
+                        curse2woodensword=curse2woodensword+1
+                        isenchanted='Yes'
+                    if curse3==1:
+                        curse3woodensword=curse3woodensword+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        woodenswordamount=woodenswordamount+1
+                    printR('Wooden sword unequipped')
                     print('')
                 if equippedweapon=='Copper sword':
-                    copperswordamount=copperswordamount+1
-                    print('Copper sword unequipped')
+                    if sharp1==1:
+                        sharpness1coppersword=sharpness1coppersword+1
+                        isenchanted='Yes'
+                    if sharp2==1:
+                        sharpness2coppersword=sharpness2coppersword+1
+                        isenchanted='Yes'
+                    if sharp3==1:
+                        sharpness3coppersword=sharpness3coppersword+1
+                        isenchanted='Yes'
+                    if block1w==1:
+                        blocking1coppersword=blocking1coppersword+1
+                        isenchanted='Yes'
+                    if block2w==1:
+                        blocking2coppersword=blocking2coppersword+1
+                        isenchanted='Yes'
+                    if block3w==1:
+                        blocking3coppersword=blocking3coppersword+1
+                        isenchanted='Yes'
+                    if loot1==1:
+                        looting1coppersword=looting1coppersword+1
+                        isenchanted='Yes'
+                    if loot2==1:
+                        looting2coppersword=looting2coppersword+1
+                        isenchanted='Yes'
+                    if loot3==1:
+                        looting3coppersword=looting3coppersword+1
+                        isenchanted='Yes'
+                    if curse1==1:
+                        curse1coppersword=curse1coppersword+1
+                        isenchanted='Yes'
+                    if curse2==1:
+                        curse2coppersword=curse2coppersword+1
+                        isenchanted='Yes'
+                    if curse3==1:
+                        curse3coppersword=curse3coppersword+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        copperswordamount=copperswordamount+1
+                    printR('Copper sword unequipped')
                     print('')
                 if equippedweapon=='Maxwell sword':
-                    catswordamount=catswordamount+1
-                    print('Maxwell sword unequipped')
+                    if sharp1==1:
+                        sharpness1catsword=sharpness1catsword+1
+                        isenchanted='Yes'
+                    if sharp2==1:
+                        sharpness2catsword=sharpness2catsword+1
+                        isenchanted='Yes'
+                    if sharp3==1:
+                        sharpness3catsword=sharpness3catsword+1
+                        isenchanted='Yes'
+                    if block1w==1:
+                        blocking1catsword=blocking1catsword+1
+                        isenchanted='Yes'
+                    if block2w==1:
+                        blocking2catsword=blocking2catsword+1
+                        isenchanted='Yes'
+                    if block3w==1:
+                        blocking3catsword=blocking3catsword+1
+                        isenchanted='Yes'
+                    if loot1==1:
+                        looting1catsword=looting1catsword+1
+                        isenchanted='Yes'
+                    if loot2==1:
+                        looting2catsword=looting2catsword+1
+                        isenchanted='Yes'
+                    if loot3==1:
+                        looting3catsword=looting3catsword+1
+                        isenchanted='Yes'
+                    if curse1==1:
+                        curse1catsword=curse1catsword+1
+                        isenchanted='Yes'
+                    if curse2==1:
+                        curse2catsword=curse2catsword+1
+                        isenchanted='Yes'
+                    if curse3==1:
+                        curse3catsword=curse3catsword+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        catswordamount=catswordamount+1
+                    printR('Maxwell sword unequipped')
                     print('')
                 else:
                     print('')
-                if loot1==1:
-                    loot1=loot1-1
-                if loot2==1:
-                    loot2=loot2-1
-                if loot3==1:
-                    loot3=loot3-1
-                if block1w==1:
-                    block1w=block1w-1
-                if block2w==1:
-                    block2w=block2w-1
-                if block3w==1:
-                    block3w=block3w-1
-                if sharp1==1:
-                    sharp1=sharp1-1
-                if sharp2==1:
-                    sharp2=sharp2-1
-                if sharp3==1:
-                    sharp3=sharp3-1
-                if curse1==1:
-                    curse1=curse1-1
-                if curse2==1:
-                    curse2=curse2-1
-                if curse3==1:
-                    curse3=curse3-1
+                enchantcheckweapon()
 
 def armor_equip():
                 global equippedarmor
@@ -903,26 +1062,140 @@ def armor_equip():
                 global block1a
                 global block2a
                 global block3a
+                global res1
+                global res2
+                global res3
+                global curse1a
+                global curse2a
+                global curse3a
+                global blocking1catarmor
+                global blocking1leatherarmor
+                global blocking1copperarmor
+                global blocking2copperarmor
+                global blocking2catarmor
+                global blocking2leatherarmor
+                global blocking3copperarmor
+                global blocking3catarmor
+                global blocking3leatherarmor
+                global resistance1catarmor
+                global resistance1leatherarmor
+                global resistance1copperarmor
+                global resistance2catarmor
+                global resistance2leatherarmor
+                global resistance2copperarmor
+                global resistance3catarmor
+                global resistance3leatherarmor
+                global resistance3copperarmor
+                global curse1leatherarmor
+                global curse1copperarmor
+                global curse1catarmor
+                global curse2leatherarmor
+                global curse2copperarmor
+                global curse2catarmor
+                global curse3leatherarmor
+                global curse3copperarmor
+                global curse3catarmor
+                global isenchanted
+                isenchanted='No'
                 if equippedarmor=='Leather armor':
-                    leatherarmoramount=leatherarmoramount+1
-                    print('Leather armor unequipped')
+                    if block1a==1:
+                        blocking1leatherarmor=blocking1leatherarmor+1
+                        isenchanted='Yes'
+                    if block2a==1:
+                        blocking2leatherarmor=blocking2leatherarmor+1    
+                        isenchanted='Yes'
+                    if block3a==1:
+                        blocking3leatherarmor=blocking3leatherarmor+1
+                        isenchanted='Yes'
+                    if curse1a==1:
+                        curse1leatherarmor=curse1leatherarmor+1
+                        isenchanted='Yes'
+                    if curse2a==1:
+                        curse2leatherarmor=curse2leatherarmor+1
+                        isenchanted='Yes'
+                    if curse3a==1:
+                        curse3leatherarmor=curse3leatherarmor+1
+                        isenchanted='Yes'
+                    if res1==1:
+                        resistance1leatherarmor=resistance1leatherarmor+1
+                        isenchanted='Yes'
+                    if res2==1:
+                        resistance2leatherarmor=resistance2leatherarmor+1
+                        isenchanted='Yes'
+                    if res3==1:
+                        resistance3leatherarmor=resistance3leatherarmor+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        leatherarmoramount=leatherarmoramount+1
+                    printR('Leather armor unequipped')
                     print("")
                 if equippedarmor=='Copper armor':
-                    copperarmoramount=copperarmoramount+1
-                    print('Copper armor unequipped')
+                    if block1a==1:
+                        blocking1copperarmor=blocking1copperarmor+1
+                        isenchanted='Yes'
+                    if block2a==1:
+                        blocking2copperarmor=blocking2copperarmor+1   
+                        isenchanted='Yes' 
+                    if block3a==1:
+                        blocking3copperarmor=blocking3copperarmor+1
+                        isenchanted='Yes'
+                    if curse1a==1:
+                        curse1copperarmor=curse1copperarmor+1
+                        isenchanted='Yes'
+                    if curse2a==1:
+                        curse2copperarmor=curse2copperarmor+1
+                        isenchanted='Yes'
+                    if curse3a==1:
+                        curse3copperarmor=curse3copperarmor+1
+                        isenchanted='Yes'
+                    if res1==1:
+                        resistance1copperarmor=resistance1copperarmor+1
+                        isenchanted='Yes'
+                    if res2==1:
+                        resistance2copperarmor=resistance2copperarmor+1
+                        isenchanted='Yes'
+                    if res3==1:
+                        resistance3copperarmor=resistance3copperarmor+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        copperarmoramount=copperarmoramount+1
+                    printR('Copper armor unequipped')
                     print('')
                 if equippedarmor=='Maxwell armor':
-                    catarmoramount=catarmoramount+1
-                    print('Maxwell armor unequipped')
+                    if block1a==1:
+                        blocking1catarmor=blocking1catarmor+1
+                        isenchanted='Yes'
+                    if block2a==1:
+                        blocking2catarmor=blocking2catarmor+1    
+                        isenchanted='Yes'
+                    if block3a==1:
+                        blocking3catarmor=blocking3catarmor+1
+                        isenchanted='Yes'
+                    if curse1a==1:
+                        curse1catarmor=curse1catarmor+1
+                        isenchanted='Yes'
+                    if curse2a==1:
+                        curse2catarmor=curse2catarmor+1
+                        isenchanted='Yes'
+                    if curse3a==1:
+                        curse3catarmor=curse3catarmor+1
+                        isenchanted='Yes'
+                    if res1==1:
+                        resistance1catarmor=resistance1catarmor+1
+                        isenchanted='Yes'
+                    if res2==1:
+                        resistance2catarmor=resistance2catarmor+1
+                        isenchanted='Yes'
+                    if res3==1:
+                        resistance3catarmor=resistance3catarmor+1
+                        isenchanted='Yes'
+                    if isenchanted=='No':
+                        catarmoramount=catarmoramount+1
+                    printR('Maxwell armor unequipped')
                     print('')
                 else:
                     print('')
-                if block1a==1:
-                    block1a=block1a-1
-                if block2a==1:
-                    block2a=block2a-1
-                if block3a==1:
-                    block3a=block3a-1
+                enchantcheckarmor()
 
 def maxhp_modifier():
                 global type
@@ -953,7 +1226,7 @@ def buy(price,item,itemid):
             if treasury>price:
                 price=price+0.01
                 print('')
-                print('Purchase succesfull')
+                printG('Purchase succesfull')
                 print('+ 1',itemid,'(',item+1,')')
                 print('-',price,'gold (',treasury-price,')')
                 treasury=treasury-price
@@ -962,7 +1235,7 @@ def buy(price,item,itemid):
                 print('')
             else:
                 print('')
-                print('Purchase insuccesfull')
+                printR('Purchase insuccesfull')
                 print('Not enough gold for purchase')
                 print('')
 
@@ -971,7 +1244,7 @@ def sell(price,item,itemid):
             global x
             if item>0:
                 print('')
-                print('Sell succesfull')
+                printG('Sell succesfull')
                 print('- 1',itemid,'(',item-1,')')
                 print('+',price,'gold (',treasury+price,')')
                 treasury=treasury+price
@@ -980,7 +1253,7 @@ def sell(price,item,itemid):
                 print('')
             else:
                 print('')
-                print('Sell insuccesfull')
+                printR('Sell insuccesfull')
                 print('You do not have a',itemid,'')
                 print('')
 
@@ -1041,6 +1314,167 @@ def skilllearn(learnedlevel,skillname,learnedlevelname,skillpointcost):
         print('Not enough skill points :c')
         print('')
 
+def enchantxp():
+                global enchantmentscroll
+                global type
+                global xp
+                global xpgain
+                if enchantmentscroll>0:
+                    print('Enchantment scroll used')
+                    enchantmentscroll=enchantmentscroll-1
+                else:
+                    if type=='Wizard':
+                        xpgain=15
+                        xp=xp-xpgain
+                        print('- 15 XP (',xp,')')
+                    else:
+                        xpgain=30
+                        xp=xp-xpgain
+                        print('- 30 XP (',xp,')')
+
+def enchantcheckweapon():
+    global sharp1
+    global sharp2
+    global sharp3
+    global curse1
+    global curse2
+    global curse3
+    global loot1
+    global loot2
+    global loot3
+    global block1w
+    global block2w
+    global block3w
+    if sharp1==1:
+        sharp1=0
+    if sharp2==1:
+        sharp2=0
+    if sharp3==1:
+        sharp3=0
+    if curse1==1:
+        curse1=0
+    if curse2==1:
+        curse2=0
+    if curse3==1:
+        curse3=0
+    if loot1==1:
+        loot1=0
+    if loot2==1:
+        loot2=0
+    if loot3==1:
+        loot3=0
+    if block1w==1:
+        block1w=0
+    if block2w==1:
+        block2w=0
+    if block3w==1:
+        block3w=0
+
+def enchantcheckarmor():
+    global block1a
+    global block2a
+    global block3a
+    global curse1a
+    global curse2a
+    global curse3a
+    global res1
+    global res2
+    global res3
+    if block1a==1:
+        block1a=0
+    if block2a==1:
+        block2a=0
+    if block3a==1:
+        block3a=0
+    if curse1a==1:
+        curse1a=0
+    if curse2a==1:
+        curse2a=0
+    if curse3a==1:
+        curse3a=0
+    if res1==1:
+        res1=0
+    if res2==1:
+        res2=0
+    if res3==1:
+        res3=0
+
+def leatherarmorequip():
+                global maxhp
+                global equippedarmor
+                global leatherarmoramount
+                global armorresistance
+                printG('Leather armor equipped')
+                maxhp=20
+                armor_equip()
+                equippedarmor='Leather armor'
+                armorresistance=1
+                maxhp_modifier()
+
+def woodendaggerequip():
+                global power
+                global equippedweapon
+                global woodendaggeramount
+                printG('Wooden dagger equipped')
+                power=1.3
+                weapon_equip()
+                equippedweapon='Wooden dagger'
+                power_modifier()
+
+def catarmorequip():
+                global maxhp
+                global equippedarmor
+                global leatherarmoramount
+                global armorresistance
+                printG('Maxwell armor equipped')
+                maxhp=35
+                armorresistance=3
+                armor_equip()
+                equippedarmor='Maxwell armor'
+                maxhp_modifier()
+
+def copperarmorequip():
+                global maxhp
+                global equippedarmor
+                global leatherarmoramount
+                global armorresistance
+                printG('Copper armor equipped')
+                maxhp=25
+                armorresistance=2
+                armor_equip()
+                equippedarmor='Copper armor'
+                maxhp_modifier()
+
+def woodenswordequip():
+                global power
+                global equippedweapon
+                global woodenswordamount
+                printG('Wooden sword equipped')
+                power=1.5
+                weapon_equip()
+                equippedweapon='Wooden sword'
+                power_modifier()
+
+def copperswordequip():
+                global power
+                global equippedweapon
+                global woodendaggeramount
+                printG('Copper sword equipped')
+                power=1.7
+                weapon_equip()
+                equippedweapon='Copper sword'
+                power_modifier()
+
+def catswordequip():
+                global power
+                global equippedweapon
+                global woodendaggeramount
+                printG('Maxwell sword equipped')
+                power=2
+                weapon_equip()
+                equippedweapon='Maxwell sword'
+                power_modifier()
+
 #-----------------------Print-----------------------#
 
 def printR(skk): print("\033[91m {}\033[00m" .format(skk))
@@ -1093,6 +1527,9 @@ copperswordamount=0
 
 #-----------------------Enchants-----------------------#
 
+weaponenchant=''
+armorenchant=''
+
 loot1=0
 loot2=0
 loot3=0
@@ -1108,8 +1545,97 @@ sharp3=0
 curse1=0
 curse2=0
 curse3=0
+curse1a=0
+curse2a=0
+curse3a=0
+res1=0
+res2=0
+res3=0
+
+sharpness1woodendagger=0
+sharpness2woodendagger=0
+sharpness3woodendagger=0
+looting1woodendagger=0
+looting2woodendagger=0
+looting3woodendagger=0
+curse1woodendagger=0
+curse2woodendagger=0
+curse3woodendagger=0
+blocking1woodendagger=0
+blocking2woodendagger=0
+blocking3woodendagger=0
+
+sharpness1woodensword=0
+sharpness2woodensword=0
+sharpness3woodensword=0
+looting1woodensword=0
+looting2woodensword=0
+looting3woodensword=0
+curse1woodensword=0
+curse2woodensword=0
+curse3woodensword=0
+blocking1woodensword=0
+blocking2woodensword=0
+blocking3woodensword=0
+
+sharpness1coppersword=0
+sharpness2coppersword=0
+sharpness3coppersword=0
+looting1coppersword=0
+looting2coppersword=0
+looting3coppersword=0
+curse1coppersword=0
+curse2coppersword=0
+curse3coppersword=0
+blocking1coppersword=0
+blocking2coppersword=0
+blocking3coppersword=0
+
+sharpness1catsword=0
+sharpness2catsword=0
+sharpness3catsword=0
+looting1catsword=0
+looting2catsword=0
+looting3catsword=0
+curse1catsword=0
+curse2catsword=0
+curse3catsword=0
+blocking1catsword=0
+blocking2catsword=0
+blocking3catsword=0
+
+resistance1leatherarmor=0
+resistance2leatherarmor=0
+resistance3leatherarmor=0
+blocking1leatherarmor=0
+blocking2leatherarmor=0
+blocking3leatherarmor=0
+curse1leatherarmor=0
+curse2leatherarmor=0
+curse3leatherarmor=0
+
+resistance1copperarmor=0
+resistance2copperarmor=0
+resistance3copperarmor=0
+blocking1copperarmor=0
+blocking2copperarmor=0
+blocking3copperarmor=0
+curse1copperarmor=0
+curse2copperarmor=0
+curse3copperarmor=0
+
+resistance1catarmor=0
+resistance2catarmor=0
+resistance3catarmor=0
+blocking1catarmor=0
+blocking2catarmor=0
+blocking3catarmor=0
+curse1catarmor=0
+curse2catarmor=0
+curse3catarmor=0
 
 enchantmentscroll=0
+magneticstone=0
 
 #-----------------------Special-----------------------#
 
@@ -1145,6 +1671,10 @@ a=0
 b=0
 
 l=0
+
+isenchanted=''
+
+weaponvarmor=0
 
 #-----------------------Skills-----------------------#
 
@@ -1230,6 +1760,52 @@ time.sleep(1)
 #-----------------------Game-----------------------#
 
 while True:
+
+    weaponenchant=''
+    armorenchant=''
+
+    if res1==1:
+        armorenchant='Resistance I'
+    if res2==1:
+        armorenchant='Resistance II'
+    if res3==1:
+        armorenchant='Resistance III'
+    if block1a==1:
+        armorenchant='Blocking I'
+    if block2a==1:
+        armorenchant='Blocking II'
+    if block3a==1:
+        armorenchant='Blocking III'
+    if curse1a==1:
+        armorenchant='Curse I'
+    if curse2a==1:
+        armorenchant='Curse II'
+    if curse3a==1:
+        armorenchant='Curse III'
+    if sharp1==1:
+        weaponenchant='Sharpness I'
+    if sharp2==1:
+        weaponenchant='Sharpness II'
+    if sharp3==1:
+        weaponenchant='Sharpness III'
+    if loot1==1:
+        weaponenchant='Looting I'
+    if loot2==1:
+        weaponenchant='Looting II'
+    if loot3==1:
+        weaponenchant='Looting III'
+    if curse1==1:
+        weaponenchant='Curse I'
+    if curse2==1:
+        weaponenchant='Curse II'
+    if curse3==1:
+        weaponenchant='Curse III'
+    if block1w==1:
+        weaponenchant='Blocking I'
+    if block2w==1:
+        weaponenchant='Blocking II'
+    if block3w==1:
+        weaponenchant='Blocking III'
 
     if stamina<101 and stamina>79: #--Stamina--#
         staminatype='High'
@@ -2049,49 +2625,210 @@ while True:
         printB('Potions:')
         print('')
         if healthpotionamount>0:
-            print('(1) Health potion:',healthpotionamount,'')
+            print('(1)',healthpotionamount,'× Health potion')
         if revivepotionamount>0:
-            print('(2) Revive potion:',revivepotionamount,'')
+            print('(2)',revivepotionamount,'× Revive potion')
         if resistancepotionamount>0:
-            print('(10) Resistance potion:',resistancepotionamount,'')
+            print('(10)',resistancepotionamount,'× Resistance potion')
         if strengthpotionamount>0:
-            print('(11) Strength potion:',strengthpotionamount,'')
+            print('(11)',strengthpotionamount,'× Strength potion')
         if staminapotionamount>0:
-            print('(12) Stamina potion:',staminapotionamount,'')
+            print('(12)',staminapotionamount,'× Stamina potion')
         else:
             treasury=treasury
         print('')
         printB('Armors:')
         print('')
         if leatherarmoramount>0:
-            print('(3) Leather armor:',leatherarmoramount,'')
+            print('(3)',leatherarmoramount,'× Leather armor')
+        if resistance1leatherarmor>0:
+            print('(3a1)',resistance1leatherarmor,'× Leather armor - Resistance I')
+        if resistance2leatherarmor>0:
+            print('(3a2)',resistance2leatherarmor,'× Leather armor - Resistance II')
+        if resistance3leatherarmor>0:
+            print('(3a3)',resistance3leatherarmor,'× Leather armor - Resistance III')
+        if blocking1leatherarmor>0:
+            print('(3b1)',blocking1leatherarmor,'× Leather armor - Blocking I')
+        if blocking2leatherarmor>0:
+            print('(3b2)',blocking2leatherarmor,'× Leather armor - Blocking II')
+        if blocking3leatherarmor>0:
+            print('(3b3)',blocking3leatherarmor,'× Leather armor - Blocking III')
+        if curse1leatherarmor>0:
+            print('(3c1)',curse1leatherarmor,'× Leather armor - Curse I')
+        if curse2leatherarmor>0:
+            print('(3c2)',curse2leatherarmor,'× Leather armor - Curse II')
+        if curse3leatherarmor>0:
+            print('(3c3)',curse3leatherarmor,'× Leather armor - Curse III')
+
         if copperarmoramount>0:
-            print('(6) Copper armor:',copperarmoramount,'')
+            print('(6)',copperarmoramount,'× Copper armor')
+        if resistance1copperarmor>0:
+            print('(6a1)',resistance1copperarmor,'× Copper armor - Resistance I')
+        if resistance2copperarmor>0:
+            print('(6a2)',resistance2copperarmor,'× Copper armor - Resistance II')
+        if resistance3copperarmor>0:
+            print('(6a3)',resistance3copperarmor,'× Copper armor - Resistance III')
+        if blocking1copperarmor>0:
+            print('(6b1)',blocking1copperarmor,'× Copper armor - Blocking I')
+        if blocking2copperarmor>0:
+            print('(6b2)',blocking2copperarmor,'× Copper armor - Blocking II')
+        if blocking3copperarmor>0:
+            print('(6b3)',blocking3copperarmor,'× Copper armor - Blocking III')
+        if curse1copperarmor>0:
+            print('(6c1)',curse1copperarmor,'× Copper armor - Curse I')
+        if curse2copperarmor>0:
+            print('(6c2)',curse2copperarmor,'× Copper armor - Curse II')
+        if curse3copperarmor>0:
+            print('(6c3)',curse3copperarmor,'× Copper armor - Curse III')
+
         if catarmoramount>0:
-            print('(5) Maxwell armor:',catarmoramount,'')
+            print('(5)',catarmoramount,'× Maxwell armor')
+        if resistance1catarmor>0:
+            print('(5a1)',resistance1catarmor,'× Maxwell armor - Resistance I')
+        if resistance2catarmor>0:
+            print('(5a2)',resistance2catarmor,'× Maxwell armor - Resistance II')
+        if resistance3catarmor>0:
+            print('(5a3)',resistance3catarmor,'× Maxwell armor - Resistance III')
+        if blocking1catarmor>0:
+            print('(5b1)',blocking1catarmor,'× Maxwell armor - Blocking I')
+        if blocking2catarmor>0:
+            print('(5b2)',blocking2catarmor,'× Maxwell armor - Blocking II')
+        if blocking3catarmor>0:
+            print('(5b3)',blocking3catarmor,'× Maxwell armor - Blocking III')
+        if curse1catarmor>0:
+            print('(5c1)',curse1catarmor,'× Maxwell armor - Curse I')
+        if curse2catarmor>0:
+            print('(5c2)',curse2catarmor,'× Maxwell armor - Curse II')
+        if curse3catarmor>0:
+            print('(5c3)',curse3catarmor,'× Maxwell armor - Curse III')
+
         else:
             treasury=treasury
         print('')
         printB('Weapons:')
         print('')
         if woodendaggeramount>0:
-            print('(4) Wooden dagger:',woodendaggeramount,'')
+            print('(4)',woodendaggeramount,'× Wooden dagger')
+        if sharpness1woodendagger>0:
+            print('(4a1)',sharpness1woodendagger,'× Wooden dagger - Sharpness I')
+        if sharpness2woodendagger>0:
+            print('(4a2)',sharpness2woodendagger,'× Wooden dagger - Sharpness II')
+        if sharpness3woodendagger>0:
+            print('(4a3)',sharpness3woodendagger,'× Wooden dagger - Sharpness III')
+        if looting1woodendagger>0:
+            print('(4b1)',looting1woodendagger,'× Wooden dagger - Looting I')
+        if looting2woodendagger>0:
+            print('(4b2)',looting2woodendagger,'× Wooden dagger - Looting II')
+        if looting3woodendagger>0:
+            print('(4b3)',looting3woodendagger,'× Wooden dagger - Looting III')
+        if curse1woodendagger>0:
+            print('(4c1)',curse1woodendagger,'× Wooden dagger - Curse I')
+        if curse2woodendagger>0:
+            print('(4c2)',curse2woodendagger,'× Wooden dagger - Curse II')
+        if curse3woodendagger>0:
+            print('(4c3)',curse3woodendagger,'× Wooden dagger - Curse III')
+        if blocking1woodendagger>0:
+            print('(4d1)',blocking1woodendagger,'× Wooden dagger - Blocking I')
+        if blocking2woodendagger>0:
+            print('(4d2)',blocking2woodendagger,'× Wooden dagger - Blocking II')
+        if blocking3woodendagger>0:
+            print('(4d3)',blocking3woodendagger,'× Wooden dagger - Blocking III')
+
         if woodenswordamount>0:
-            print('(7) Wooden sword:',woodenswordamount,'')
+            print('(7)',woodenswordamount,'× Wooden sword')
+        if sharpness1woodensword>0:
+            print('(7a1)',sharpness1woodensword,'× Wooden sword - Sharpness I')
+        if sharpness2woodensword>0:
+            print('(7a2)',sharpness2woodensword,'× Wooden sword - Sharpness II')
+        if sharpness3woodensword>0:
+            print('(7a3)',sharpness3woodensword,'× Wooden sword - Sharpness III')
+        if looting1woodensword>0:
+            print('(7b1)',looting1woodensword,'× Wooden sword - Looting I')
+        if looting2woodensword>0:
+            print('(7b2)',looting2woodensword,'× Wooden sword - Looting II')
+        if looting3woodensword>0:
+            print('(7b3)',looting3woodensword,'× Wooden sword - Looting III')
+        if curse1woodensword>0:
+            print('(7c1)',curse1woodensword,'× Wooden sword - Curse I')
+        if curse2woodensword>0:
+            print('(7c2)',curse2woodensword,'× Wooden sword - Curse II')
+        if curse3woodensword>0:
+            print('(7c3)',curse3woodensword,'× Wooden sword - Curse III')
+        if blocking1woodensword>0:
+            print('(7d1)',blocking1woodensword,'× Wooden sword - Blocking I')
+        if blocking2woodensword>0:
+            print('(7d2)',blocking2woodensword,'× Wooden sword - Blocking II')
+        if blocking3woodensword>0:
+            print('(7d3)',blocking3woodensword,'× Wooden sword - Blocking III')
+
         if copperswordamount>0:
-            print('(8) Copper sword:',copperswordamount,'')
+            print('(8)',copperswordamount,'× Copper sword')
+        if sharpness1coppersword>0:
+            print('(8a1)',sharpness1coppersword,'× Copper sword - Sharpness I')
+        if sharpness2coppersword>0:
+            print('(8a2)',sharpness2coppersword,'× Copper sword - Sharpness II')
+        if sharpness3coppersword>0:
+            print('(8a3)',sharpness3coppersword,'× Copper sword - Sharpness III')
+        if looting1coppersword>0:
+            print('(8b1)',looting1coppersword,'× Copper sword - Looting I')
+        if looting2coppersword>0:
+            print('(8b2)',looting2coppersword,'× Copper sword - Looting II')
+        if looting3coppersword>0:
+            print('(8b3)',looting3coppersword,'× Copper sword - Looting III')
+        if curse1coppersword>0:
+            print('(8c1)',curse1coppersword,'× Copper sword - Curse I')
+        if curse2coppersword>0:
+            print('(8c2)',curse2coppersword,'× Copper sword - Curse II')
+        if curse3coppersword>0:
+            print('(8c3)',curse3coppersword,'× Copper sword - Curse III')
+        if blocking1coppersword>0:
+            print('(8d1)',blocking1coppersword,'× Copper sword - Blocking I')
+        if blocking2coppersword>0:
+            print('(8d2)',blocking2coppersword,'× Copper sword - Blocking II')
+        if blocking3coppersword>0:
+            print('(8d3)',blocking3coppersword,'× Copper sword - Blocking III')
+        
         if catswordamount>0:
-            print('(9) Maxwell sword:',catswordamount,'')
+            print('(9)',catswordamount,'× Maxwell sword')
+        if sharpness1catsword>0:
+            print('(9a1)',sharpness1catsword,'× Maxwell sword - Sharpness I')
+        if sharpness2catsword>0:
+            print('(9a2)',sharpness2catsword,'× Maxwell sword - Sharpness II')
+        if sharpness3catsword>0:
+            print('(9a3)',sharpness3catsword,'× Maxwell sword - Sharpness III')
+        if looting1catsword>0:
+            print('(9b1)',looting1catsword,'× Maxwell sword - Looting I')
+        if looting2catsword>0:
+            print('(9b2)',looting2catsword,'× Maxwell sword - Looting II')
+        if looting3catsword>0:
+            print('(9b3)',looting3catsword,'× Maxwell sword - Looting III')
+        if curse1catsword>0:
+            print('(9c1)',curse1catsword,'× Maxwell sword - Curse I')
+        if curse2catsword>0:
+            print('(9c2)',curse2catsword,'× Maxwell sword - Curse II')
+        if curse3catsword>0:
+            print('(9c3)',curse3catsword,'× Maxwell sword - Curse III')
+        if blocking1catsword>0:
+            print('(9d1)',blocking1catsword,'× Maxwell sword - Blocking I')
+        if blocking2catsword>0:
+            print('(9d2)',blocking2catsword,'× Maxwell sword - Blocking II')
+        if blocking3catsword>0:
+            print('(9d3)',blocking3catsword,'× Maxwell sword - Blocking III')
+
         else:
             treasury=treasury
         print('')
-        printB('Items')
+        printB('Other:')
+        print('')
         if enchantmentscroll>0:
-            print('Enchantment scroll:',enchantmentscroll,'')
+            print(enchantmentscroll,'× Enchantment scroll')
+        if magneticstone>0:
+            print('(13)',magneticstone,'× Magnetic stone')
         else:
             treasury=treasury
         print('')
         use=input('What do you want to do?')
+
         if use=='1':
             print('')
             if healthpotionamount>0:
@@ -2102,142 +2839,657 @@ while True:
                     print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
                 else:
                     print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
-            else:
-                print('You do not have a health potion :c')
-                continue
+
         if use=='2':
             print('')
             if revivepotionamount>0:
-                print('You can only use a revive potion when you die during an adventure')
-            else:
-                print('You do not have a revive potion :c')
-                continue
+                printR('You can only use a revive potion when you die during an adventure')
+
         if use=='3':
             print('')
             if leatherarmoramount>0:
-                print('Leather armor equipped')
+                printG('Leather armor equipped')
                 maxhp=20
                 armor_equip()
                 equippedarmor='Leather armor'
                 leatherarmoramount=leatherarmoramount-1
                 armorresistance=1
                 maxhp_modifier()
-                continue
-            else:
-                print('You do not have a leather armor :c')
-                continue
+        if use=='3a1':
+            print('')
+            if resistance1leatherarmor>0:
+                leatherarmorequip()
+                maxhp=maxhp*1.15
+                res1=1
+                resistance1leatherarmor=resistance1leatherarmor-1
+        if use=='3a2':
+            print('')
+            if resistance2leatherarmor>0:
+                leatherarmorequip()
+                maxhp=maxhp*1.3
+                res2=1
+                resistance2leatherarmor=resistance2leatherarmor-1
+        if use=='3a3':
+            print('')
+            if resistance3leatherarmor>0:
+                leatherarmorequip()
+                maxhp=maxhp*1.5
+                res3=1
+                resistance3leatherarmor=resistance3leatherarmor-1
+        if use=='3b1':
+            print('')
+            if blocking1leatherarmor>0:
+                leatherarmorequip()
+                block1a=1
+                blocking1leatherarmor=blocking1leatherarmor-1
+        if use=='3b2':
+            print('')
+            if blocking3leatherarmor>0:
+                leatherarmorequip()
+                block2a=1
+                blocking2leatherarmor=blocking2leatherarmor-1
+        if use=='3b3':
+            print('')
+            if blocking3leatherarmor>0:
+                leatherarmorequip()
+                block3a=1
+                blocking3leatherarmor=blocking3leatherarmor-1
+        if use=='3c1':
+            print('')
+            if curse1leatherarmor>0:
+                leatherarmorequip()
+                maxhp=maxhp*0.85
+                curse1a=1
+                curse1leatherarmor=curse1leatherarmor-1
+        if use=='3c2':
+            print('')
+            if curse2leatherarmor>0:
+                leatherarmorequip()
+                maxhp=maxhp*0.7
+                curse2a=1
+                curse2leatherarmor=curse2leatherarmor-1
+        if use=='3c3':
+            print('')
+            if curse3leatherarmor>0:
+                leatherarmorequip()
+                maxhp=maxhp*0.5
+                curse3a=1
+                curse1leatherarmor=curse1leatherarmor-1
+
         if use=='4':
             print('')
             if woodendaggeramount>0:
-                print('Wooden dagger equipped')
+                printG('Wooden dagger equipped')
                 power=1.3
                 weapon_equip()
                 equippedweapon='Wooden dagger'
                 woodendaggeramount=woodendaggeramount-1
                 power_modifier()
-                continue
-            else:
-                print('You do not have a woodendagger :c')
-                continue
+        if use=='4a1':
+            print('')
+            if sharpness1woodendagger>0:
+                woodendaggerequip()
+                sharp1=1
+                sharpness1woodendagger=sharpness1woodendagger-1
+        if use=='4a2':
+            print('')
+            if sharpness2woodendagger>0:
+                woodendaggerequip()
+                sharp2=1
+                sharpness2woodendagger=sharpness2woodendagger-1
+        if use=='4a3':
+            print('')
+            if sharpness3woodendagger>0:
+                woodendaggerequip()
+                sharp3=1
+                sharpness3woodendagger=sharpness3woodendagger-1
+        if use=='4b1':
+            print('')
+            if looting1woodendagger>0:
+                woodendaggerequip()
+                loot1=1
+                looting1woodendagger=looting1woodendagger-1
+        if use=='4b2':
+            print('')
+            if looting2woodendagger>0:
+                woodendaggerequip()
+                loot2=1
+                looting2woodendagger=looting2woodendagger-1
+        if use=='4b3':
+            print('')
+            if looting2woodendagger>0:
+                woodendaggerequip()
+                loot3=1
+                looting3woodendagger=looting3woodendagger-1
+        if use=='4c1':
+            print('')
+            if curse1woodendagger>0:
+                woodendaggerequip()
+                curse1=1
+                curse1woodendagger=curse1woodendagger-1
+        if use=='4c2':
+            print('')
+            if curse2woodendagger>0:
+                woodendaggerequip()
+                curse2=1
+                curse2woodendagger=curse2woodendagger-1
+        if use=='4c3':
+            print('')
+            if curse3woodendagger>0:
+                woodendaggerequip()
+                curse3=1
+                curse3woodendagger=curse3woodendagger-1
+        if use=='4d1':
+            print('')
+            if blocking1woodendagger>0:
+                woodendaggerequip()
+                block1w=1
+                blocking1woodendagger=blocking1woodendagger-1
+        if use=='4d2':
+            print('')
+            if blocking2woodendagger>0:
+                woodendaggerequip()
+                block2w=1
+                blocking2woodendagger=blocking2woodendagger-1
+        if use=='4d3':
+            print('')
+            if blocking3woodendagger>0:
+                woodendaggerequip()
+                block3w=1
+                blocking3woodendagger=blocking3woodendagger-1
+
         if use=='5':
             print('')
             if catarmoramount>0:
-                print('Maxwell armor equipped')
+                printG('Maxwell armor equipped')
                 maxhp=35
                 armorresistance=3
                 armor_equip
                 equippedarmor='Maxwell armor'
                 catarmoramount=catarmoramount-1
                 maxhp_modifier()
-                continue
-            else:
-                print('You do not have a Maxwell armor :c')
-                continue
+        if use=='5a1':
+            print('')
+            if resistance1catarmor>0:
+                catarmorequip()
+                maxhp=maxhp*1.15
+                res1=1
+                resistance1catarmor=resistance1catarmor-1
+        if use=='5a2':
+            print('')
+            if resistance2catarmor>0:
+                catarmorequip()
+                maxhp=maxhp*1.3
+                res2=1
+                resistance2catarmor=resistance2catarmor-1
+        if use=='5a3':
+            print('')
+            if resistance3catarmor>0:
+                catarmorequip()
+                maxhp=maxhp*1.5
+                res3=1
+                resistance3catarmor=resistance3catarmor-1
+        if use=='5b1':
+            print('')
+            if blocking1catarmor>0:
+                catarmorequip()
+                block1a=1
+                blocking1catarmor=blocking1catarmor-1
+        if use=='5b2':
+            print('')
+            if blocking3catarmor>0:
+                catarmorequip()
+                block2a=1
+                blocking2catarmor=blocking2catarmor-1
+        if use=='5b3':
+            print('')
+            if blocking3catarmor>0:
+                catarmorequip()
+                block3a=1
+                blocking3catarmor=blocking3catarmor-1
+        if use=='5c1':
+            print('')
+            if curse1catarmor>0:
+                catarmorequip()
+                maxhp=maxhp*0.85
+                curse1a=1
+                curse1catarmor=curse1catarmor-1
+        if use=='5c2':
+            print('')
+            if curse2catarmor>0:
+                catarmorequip()
+                maxhp=maxhp*0.7
+                curse2a=1
+                curse2catarmor=curse2catarmor-1
+        if use=='5c3':
+            print('')
+            if curse3catarmor>0:
+                catarmorequip()
+                maxhp=maxhp*0.5
+                curse3a=1
+                curse3catarmor=curse3catarmor-1
+
         if use=='6':
             print('')
             if copperarmoramount>0:
-                print('Copper armor equipped')
+                printG('Copper armor equipped')
                 maxhp=25
                 armorresistance=2
                 armor_equip()
                 equippedarmor='Copper armor'
                 copperarmoramount=copperarmoramount-1
                 maxhp_modifier()
-                continue
-            else:
-                print('You do not have a copper armor :c')
-                continue
+        if use=='6a1':
+            print('')
+            if resistance1copperarmor>0:
+                copperarmorequip()
+                maxhp=maxhp*1.15
+                res1=1
+                resistance1copperarmor=resistance1copperarmor-1
+        if use=='6a2':
+            print('')
+            if resistance2copperarmor>0:
+                copperrarmorequip()
+                maxhp=maxhp*1.3
+                res2=1
+                resistance2copperarmor=resistance2copperarmor-1
+        if use=='6a3':
+            print('')
+            if resistance3copperarmor>0:
+                lcopperarmorequip()
+                maxhp=maxhp*1.5
+                res3=1
+                resistance3copperarmor=resistance3copperarmor-1
+        if use=='6b1':
+            print('')
+            if blocking1copperarmor>0:
+                copperarmorequip()
+                block1a=1
+                blocking1copperarmor=blocking1copperarmor-1
+        if use=='6b2':
+            print('')
+            if blocking2copperarmor>0:
+                copperarmorequip()
+                block2a=1
+                blocking2copperarmor=blocking2copperarmor-1
+        if use=='6b3':
+            print('')
+            if blocking3copperarmor>0:
+                copperarmorequip()
+                block3a=1
+                blocking3copperarmor=blocking3copperarmor-1
+        if use=='6c1':
+            print('')
+            if curse1copperarmor>0:
+                copperarmorequip()
+                maxhp=maxhp*0.85
+                curse1a=1
+                curse1copperarmor=curse1copperarmor-1
+        if use=='6c2':
+            print('')
+            if curse2copperarmor>0:
+                copperarmorequip()
+                maxhp=maxhp*0.7
+                curse2a=1
+                curse2copperarmor=curse2copperarmor-1
+        if use=='6c3':
+            print('')
+            if curse3copperarmor>0:
+                copperarmorequip()
+                maxhp=maxhp*0.5
+                curse3a=1
+                curse3copperarmor=curse3copperarmor-1
+
         if use=='7':
             print('')
             if woodenswordamount>0:
-                print('Wooden sword equipped')
+                printG('Wooden sword equipped')
                 power=1.5
                 weapon_equip()
                 equippedweapon='Wooden sword'
                 woodenswordamount=woodenswordamount-1
                 power_modifier()
-                continue
-            else:
-                print('You do not have a wooden sword :c')
-                continue
+        if use=='7a1':
+            print('')
+            if sharpness1woodensword>0:
+                woodenswordequip()
+                sharp1=1
+                sharpness1woodensword=sharpness1woodensword-1
+        if use=='7a2':
+            print('')
+            if sharpness2woodensword>0:
+                woodenswordequip()
+                sharp2=1
+                sharpness2woodensword=sharpness2woodensword-1
+        if use=='7a3':
+            print('')
+            if sharpness3woodensword>0:
+                woodenswordequip()
+                sharp3=1
+                sharpness3woodensword=sharpness3woodensword-1
+        if use=='7b1':
+            print('')
+            if looting1woodensword>0:
+                woodenswordequip()
+                loot1=1
+                looting1woodensword=looting1woodensword-1
+        if use=='7b2':
+            print('')
+            if looting2woodensword>0:
+                woodenswordequip()
+                loot2=1
+                looting2woodensword=looting2woodensword-1
+        if use=='7b3':
+            print('')
+            if looting2woodensword>0:
+                woodenswordequip()
+                loot3=1
+                looting3woodensword=looting3woodensword-1
+        if use=='7c1':
+            print('')
+            if curse1woodensword>0:
+                woodenswordequip()
+                curse1=1
+                curse1woodensword=curse1woodensword-1
+        if use=='7c2':
+            print('')
+            if curse2woodensword>0:
+                woodenswordequip()
+                curse2=1
+                curse2woodensword=curse2woodensword-1
+        if use=='7c3':
+            print('')
+            if curse3woodensword>0:
+                woodenswordequip()
+                curse3=1
+                curse3woodensword=curse3woodensword-1
+        if use=='7d1':
+            print('')
+            if blocking1woodensword>0:
+                woodenswordequip()
+                block1w=1
+                blocking1woodensword=blocking1woodensword-1
+        if use=='7d2':
+            print('')
+            if blocking2woodensword>0:
+                woodenswordequip()
+                block2w=1
+                blocking2woodensword=blocking2woodensword-1
+        if use=='7d3':
+            print('')
+            if blocking3woodensword>0:
+                woodenswordequip()
+                block3w=1
+                blocking3woodensword=blocking3woodensword-1
+
         if use=='8':
             print('')
             if copperswordamount>0:
-                print('Copper sword equipped')
+                printG('Copper sword equipped')
                 power=1.7
                 weapon_equip()
                 equippedweapon='Copper sword'
                 copperswordamount=copperswordamount-1
                 power_modifier()
-                continue
-            else:
-                print('You do not have a copper sword :c')
-                continue
+        if use=='8a1':
+            print('')
+            if sharpness1coppersword>0:
+                copperswordequip()
+                sharp1=1
+                sharpness1coppersword=sharpness1coppersword-1
+        if use=='8a2':
+            print('')
+            if sharpness2coppersword>0:
+                copperswordequip()
+                sharp2=1
+                sharpness2coppersword=sharpness2coppersword-1
+        if use=='8a3':
+            print('')
+            if sharpness3coppersword>0:
+                copperswordequip()
+                sharp3=1
+                sharpness3coppersword=sharpness3coppersword-1
+        if use=='8b1':
+            print('')
+            if looting1coppersword>0:
+                copperswordequip()
+                loot1=1
+                looting1coppersword=looting1coppersword-1
+        if use=='8b2':
+            print('')
+            if looting2coppersword>0:
+                copperswordequip()
+                loot2=1
+                looting2coppersword=looting2coppersword-1
+        if use=='8b3':
+            print('')
+            if looting3coppersword>0:
+                copperswordequip()
+                loot3=1
+                looting3coppersword=looting3coppersword-1
+        if use=='8c1':
+            print('')
+            if curse1coppersword>0:
+                copperswordequip()
+                curse1=1
+                curse1coppersword=curse1coppersword-1
+        if use=='8c2':
+            print('')
+            if curse2coppersword>0:
+                copperswordequip()
+                curse2=1
+                curse2coppersword=curse2coppersword-1
+        if use=='8c3':
+            print('')
+            if curse3coppersword>0:
+                copperswordequip()
+                curse3=1
+                curse3coppersword=curse3coppersword-1
+        if use=='8d1':
+            print('')
+            if blocking1coppersword>0:
+                copperswordequip()
+                block1w=1
+                blocking1coppersword=blocking1coppersword-1
+        if use=='8d2':
+            print('')
+            if blocking2coppersword>0:
+                copperswordequip()
+                block2w=1
+                blocking2coppersword=blocking2coppersword-1
+        if use=='8d3':
+            print('')
+            if blocking3coppersword>0:
+                woodenswordequip()
+                block3w=1
+                blocking3coppersword=blocking3coppersword-1
+
         if use=='9':
             print('')
             if catswordamount>0:
-                print('Maxwell sword equipped')
+                printG('Maxwell sword equipped')
                 power=2
                 weapon_equip
                 equippedweapon='Maxwell sword'
                 catswordamount=catswordamount-1
                 power_modifier()
-                continue
-            else:
-                print('You do not have a Maxwell sword :c')
-                continue
+        if use=='9a1':
+            print('')
+            if sharpness1catsword>0:
+                catswordequip()
+                sharp1=1
+                sharpness1catsword=sharpness1catsword-1
+        if use=='9a2':
+            print('')
+            if sharpness2catsword>0:
+                catswordequip()
+                sharp2=1
+                sharpness2catsword=sharpness2catsword-1
+        if use=='9a3':
+            print('')
+            if sharpness3catsword>0:
+                catswordequip()
+                sharp3=1
+                sharpness3catsword=sharpness3catsword-1
+        if use=='9b1':
+            print('')
+            if looting1catsword>0:
+                catswordequip()
+                loot1=1
+                looting1catsword=looting1catsword-1
+        if use=='9b2':
+            print('')
+            if looting2catsword>0:
+                catswordequip()
+                loot2=1
+                looting2catsword=looting2catsword-1
+        if use=='9b3':
+            print('')
+            if looting2catsword>0:
+                catwordequip()
+                loot3=1
+                looting3catsword=looting3catsword-1
+        if use=='9c1':
+            print('')
+            if curse1catsword>0:
+                catswordequip()
+                curse1=1
+                curse1catsword=curse1catsword
+        if use=='9c2':
+            print('')
+            if curse2catsword>0:
+                catswordequip()
+                curse2=1
+                curse2catsword=curse2catsword
+        if use=='9c3':
+            print('')
+            if curse3catsword>0:
+                catswordequip()
+                curse3=1
+                curse3catsword=curse3catsword
+        if use=='9d1':
+            print('')
+            if blocking1catsword>0:
+                catswordequip()
+                block1w=1
+                blocking1catsword=blocking1catsword
+        if use=='9d2':
+            print('')
+            if blocking2catsword>0:
+                catswordequip()
+                block2w=1
+                blocking2catsword=blocking2catsword
+        if use=='9d3':
+            print('')
+            if blocking3catsword>0:
+                catswordequip()
+                block3w=1
+                blocking3catsword=blocking3catsword
+
         if use=='10':
             print('')
             if resistancepotionamount>0:
-                print('Resistance potion activated for 3 adventures')
+                printG('Resistance potion activated for 3 adventures')
                 resistancepotionamount=resistancepotionamount-1
                 resistanceuse=4
-            else:
-                print('You do not have a resistance potion :c')
-                continue
+
         if use=='11':
             print('')
             if strengthpotionamount>0:
                 strengthpotionamount=strengthpotionamount-1
-                print('Strength potion activated for 3 adventures')
+                printG('Strength potion activated for 3 adventures')
                 strengthuse=4
-                continue
-            else:
-                print('You do not have a strength potion :c')
-                used=0
-                continue
+
         if use=='12':
             print('')
             if staminapotionamount>0:
                 staminapotionamount=staminapotionamount-1
-                print('Stamina and block replenished')
+                printG('Stamina and block replenished')
                 stamina=100
                 block=100
-                continue
+        
+        if use=='13':
+            print('')
+            print('From which one do you want to remove the enchant? 1 = Equipped weapon, 2 = Equipped armor')
+            weaponvarmor=input()
+            isenchanted='No'
+            if weaponvarmor=='1':
+                if equippedweapon=='Wooden dagger' or equippedweapon=='Wooden sword' or equippedweapon=='Copper sword' or equippedweapon=='Maxwell sword':
+                    if sharp1==1:
+                        isenchanted='Yes'
+                    if sharp2==1:
+                        isenchanted='Yes'
+                    if sharp3==1:
+                        isenchanted='Yes'
+                    if block1w==1:
+                        isenchanted='Yes'
+                    if block2w==1:
+                        isenchanted='Yes'
+                    if block3w==1:
+                        isenchanted='Yes'
+                    if loot1==1:
+                        isenchanted='Yes'
+                    if loot2==1:
+                        isenchanted='Yes'
+                    if loot3==1:
+                        isenchanted='Yes'
+                    if curse1==1:
+                        isenchanted='Yes'
+                    if curse2==1:
+                        isenchanted='Yes'
+                    if curse3==1:
+                        isenchanted='Yes'
+                    if isenchanted=='Yes':
+                        enchantcheckweapon()
+                        printG('Enchant succesfully removed!')
+                        magneticstone=magneticstone-1
+                    else:
+                        printR('Your weapon is not enchanted!')
+                else:
+                    printR('You need to equip your weapon to remove the enchant!')
+            if weaponvarmor=='2':
+                if equippedarmor=='Leather armor' or equippedarmor=='Copper armor' or equippedarmor=='Maxwell armor':
+                    if block1a==1:
+                        blocking1leatherarmor=blocking1leatherarmor+1
+                        isenchanted='Yes'
+                    if block2a==1:
+                        blocking2leatherarmor=blocking2leatherarmor+1    
+                        isenchanted='Yes'
+                    if block3a==1:
+                        blocking3leatherarmor=blocking3leatherarmor+1
+                        isenchanted='Yes'
+                    if curse1a==1:
+                        curse1leatherarmor=curse1leatherarmor+1
+                        isenchanted='Yes'
+                    if curse2a==1:
+                        curse2leatherarmor=curse2leatherarmor+1
+                        isenchanted='Yes'
+                    if curse3a==1:
+                        curse3leatherarmor=curse3leatherarmor+1
+                        isenchanted='Yes'
+                    if res1==1:
+                        resistance1leatherarmor=resistance1leatherarmor+1
+                        isenchanted='Yes'
+                    if res2==1:
+                        resistance2leatherarmor=resistance2leatherarmor+1
+                        isenchanted='Yes'
+                    if res3==1:
+                        resistance3leatherarmor=resistance3leatherarmor+1
+                        isenchanted='Yes'
+                    if isenchanted=='Yes':
+                        enchantcheckarmor()
+                        printG('Enchant succesfully removed!')
+                        magneticstone=magneticstone-1
+                    else:
+                        printR('Your armor is not enchanted!')
+
+                else:
+                    printR('You need to equip your armor to remove the enchant!')
             else:
-                print('You do not have a stamina potion :c')
-                used=0
-                continue
+                print('')
+                continue             
+
+        print('')
         continue
     
     if choice=='4':
@@ -2265,6 +3517,10 @@ while True:
         print('(6) Common lootbox = 5 gold')
         print('(7) Rare lootbox = 12 gold')
         print('')
+        print('Other:')
+        print('')
+        print('(13) Magnetic stone = 2 gold (1 gold for sell)')
+        print('')
         print('Treasury:',treasury,'')
         print('')
         purchase=input('')
@@ -2274,9 +3530,9 @@ while True:
             
         if purchase=='sell 1':
             if business==1:
-                sell(3,healthpotionamount,'health potion')
+                sell(3,healthpotionamount,'Health potion')
             else:
-                sell(2,healthpotionamount,'health potion')
+                sell(2,healthpotionamount,'Health potion')
             healthpotionamount=x
 
         if purchase=='2':
@@ -2285,9 +3541,9 @@ while True:
 
         if purchase=='sell 2':
             if business==1:
-                sell(10,revivepotionamount,'revive potion')
+                sell(10,revivepotionamount,'Revive potion')
             else:
-                sell(7,revivepotionamount,'revive potion')
+                sell(7,revivepotionamount,'Revive potion')
             revivepotionamount=x
 
         if purchase=='3':
@@ -2296,9 +3552,9 @@ while True:
 
         if purchase=='sell 3':
             if business==1:
-                sell(5,leatherarmoramount,'leather armor')
+                sell(5,leatherarmoramount,'Leather armor')
             else:
-                sell(4,leatherarmoramount,'leather armor')
+                sell(4,leatherarmoramount,'Leather armor')
             leatherarmoramount=x
 
         if purchase=='4':
@@ -2307,9 +3563,9 @@ while True:
 
         if purchase=='sell 4':
             if business==1:
-                sell(5,woodendaggeramount,'wooden dagger')
+                sell(5,woodendaggeramount,'Wooden dagger')
             else:
-                sell(3,woodendaggeramount,'wooden dagger')
+                sell(3,woodendaggeramount,'Wooden dagger')
             woodendaggeramount=x
 
         if purchase=='5':
@@ -2318,9 +3574,9 @@ while True:
 
         if purchase=='sell 5':
             if business==1:
-                sell(7,woodenswordamount,'wooden sword')
+                sell(7,woodenswordamount,'Wooden sword')
             else:
-                sell(5,woodenswordamount,'wooden sword')
+                sell(5,woodenswordamount,'Wooden sword')
             woodenswordamount=x
 
         if purchase=='6':
@@ -2392,11 +3648,11 @@ while True:
             continue
 
         if purchase=='sell 8':
-            sell(9,copperswordamount,'copper sword')
+            sell(9,copperswordamount,'Copper sword')
             copperswordamount=x
 
         if purchase=='sell 9':
-            sell(8,copperarmoramount,'copper armor')
+            sell(8,copperarmoramount,'Copper armor')
             copperarmoramount=x
 
         if purchase=='10':
@@ -2405,9 +3661,9 @@ while True:
             
         if purchase=='sell 10':
             if business==1:
-                sell(6,resistancepotionamount,'resistance potion') 
+                sell(6,resistancepotionamount,'Resistance potion') 
             else:
-                sell(4,resistancepotionamount,'resistance potion')
+                sell(4,resistancepotionamount,'Resistance potion')
             resistancepotionamount=x
 
         if purchase=='11':
@@ -2416,9 +3672,9 @@ while True:
             
         if purchase=='sell 11':
             if business==1:
-                sell(6,strengthpotionamount,'strength potion')
+                sell(6,strengthpotionamount,'Strength potion')
             else:
-                sell(4,strengthpotionamount,'strength potion')
+                sell(4,strengthpotionamount,'Strength potion')
             strengthpotionamount=x
 
         if purchase=='12':
@@ -2427,10 +3683,21 @@ while True:
             
         if purchase=='sell 12':
             if business==1:
-                sell(3,staminapotionamount,'stamina potion')
+                sell(3,staminapotionamount,'Stamina potion')
             else:
-                sell(2,staminapotionamount,'stamina potion')
+                sell(2,staminapotionamount,'Stamina potion')
             staminapotionamount=x
+
+        if purchase=='13':
+            buy(1.99,magneticstone,'Magnetic stone')
+            magneticstone=x
+
+        if purchase=='sell 13':
+            if business==1:
+                sell(2,magneticstone,'Magnetic stone')
+            else:
+                sell(1,magneticstone,'Magnetic stone')
+            magneticstone=x
 
         continue
     
@@ -2462,7 +3729,7 @@ while True:
         print('')
         printB('Enchanting:')
         print('')
-        print('Here you can get enchantments to your weapons or to your armors. Unequipping an enchanted armor will result in losing the enchantment, enchanting costs 30xp, use it wisely!')
+        print('Here you can get enchantments to your weapons or to your armors. You can only enchant when your XP is above 30 and enchanting costs 30 XP. You can only have one enchant on an item at the same time. Enchanted items cannot be sold, you need to remove the enchant with a magnetic stone if you want to sell it.')
         print('')
         printB('Classes - Skills:')
         print('')
@@ -2501,6 +3768,7 @@ while True:
         printG('Other:')
         print('')
         printB('Enchantment scroll - Rare! (Used to enchant without XP loss) - Source: Strange Scientist event')
+        print('Magnetic stone -  Common (Used to remove an enchant from an item) - Source: Shop')
 
     if choice=='7':
         odd=random.randint(1,2)
@@ -2538,157 +3806,179 @@ while True:
             entype=input('What would you like to enchant? 1=Equipped weapon, 2=Equipped armor')
             enchant=random.randint(1,100)
             if entype=='1':
-                if enchantmentscroll>0:
-                    print('Enchantment scroll used')
-                    enchantmentscroll=enchantmentscroll-1
-                else:
-                    if type=='Wizard':
-                        xpgain=15
-                        xp=xp-xpgain
-                        print('- 15 XP (',xp,')')
+                if equippedweapon=='Wooden dagger' or equippedweapon=='Wooden sword' or equippedweapon=='Copper sword' or equippedweapon=='Maxwell sword':
+                    enchantxp()
+                    if enchant>0 and enchant<16:
+                        weaponenchant='Sharpness I'
+                        printG('Your weapon got enchanted with: Sharpness I\n+15% Power')
+                        print('')
+                        power=power*1.15
+                        enchantcheckweapon()
+                        sharp1=1
+                        continue
+                    if enchant>15 and enchant<23:
+                        weaponenchant='Sharpness II'
+                        printB('Your weapon got enchanted with: Sharpness II\n+30% Power')
+                        print('')
+                        power=power*1.3
+                        enchantcheckweapon()
+                        sharp2=1
+                        continue
+                    if enchant>22 and enchant<26:
+                        weaponenchant='Sharpness III'
+                        printP('Your weapon got enchanted with: Sharpness III\n+50% Power')
+                        print('')
+                        power=power*1.5
+                        enchantcheckweapon()
+                        sharp3=1
+                        continue
+                    if enchant>25 and enchant<41:
+                        weaponenchant='Curse I'
+                        printR('Your weapon got enchanted with: Curse I\n-15% Power')
+                        print('')
+                        power=power*0.85
+                        enchantcheckweapon()
+                        curse1=1
+                        continue
+                    if enchant>40 and enchant<48:
+                        weaponenchant='Curse II'
+                        printR('Your weapon got enchanted with: Curse II\n-30% Power')
+                        print('')
+                        power=power*0.7
+                        enchantcheckweapon()
+                        curse2=1
+                        continue
+                    if enchant>47 and enchant<51:
+                        weaponenchant='Curse III'
+                        printR('Your weapon got enchanted with: Curse III\n-50% Power')
+                        print('')
+                        power=power*0.5
+                        enchantcheckweapon()
+                        curse3=1
+                        continue
+                    if enchant>50 and enchant<66:
+                        weaponenchant='Looting I'
+                        printG('Your weapon got enchanted with: Looting I\n+25% Goldgain')
+                        print('')
+                        enchantcheckweapon()
+                        loot1=1
+                        continue
+                    if enchant>65 and enchant<73:
+                        weaponenchant='Looting II'
+                        printB('Your weapon got enchanted with: Looting II\n+50% Goldgain')
+                        print('')
+                        enchantcheckweapon()
+                        loot2=1
+                        continue
+                    if enchant>72 and enchant<76:
+                        weaponenchant='Looting III'
+                        printP('Your weapon got enchanted with: Looting III\n+75% Goldgain')
+                        print('')
+                        enchantcheckweapon()
+                        loot3=1
+                        continue
+                    if enchant>75 and enchant<91:
+                        weaponenchant='Blocking I'
+                        printG('Your weapon got enchanted with: Blocking I\n-15% HPloss')
+                        print('')
+                        enchantcheckweapon()
+                        block1w=1
+                        continue
+                    if enchant>90 and enchant<98:
+                        weaponenchant='Blocking II'
+                        printB('Your weapon got enchanted with: Blocking II\n-30% HPloss')
+                        print('')
+                        enchantcheckweapon()
+                        block2w=1
+                        continue
                     else:
-                        xpgain=30
-                        xp=xp-xpgain
-                        print('- 30 XP (',xp,')')
-                if enchant>0 and enchant<16:
-                    enchant='Sharpness I'
-                    print('Your weapon got enchanted with:',enchant,'\n+15% Power')
-                    print('')
-                    power=power*1.15
-                    sharp1=1
-                    continue
-                if enchant>15 and enchant<23:
-                    enchant='Sharpness II'
-                    print('Your weapon got enchanted with:',enchant,'\n+30% Power')
-                    print('')
-                    power=power*1.3
-                    sharp2=1
-                    continue
-                if enchant>22 and enchant<26:
-                    enchant='Sharpness III'
-                    print('Your weapon got enchanted with:',enchant,'\n+50% Power')
-                    print('')
-                    power=power*1.5
-                    sharp3=1
-                    continue
-                if enchant>25 and enchant<41:
-                    enchant='Curse I'
-                    print('Your weapon got enchanted with:',enchant,'\n-15% Power')
-                    print('')
-                    power=power*0.85
-                    curse1=1
-                    continue
-                if enchant>40 and enchant<48:
-                    enchant='Curse II'
-                    print('Your weapon got enchanted with:',enchant,'\n-30% Power')
-                    print('')
-                    power=power*0.7
-                    curse2=1
-                    continue
-                if enchant>47 and enchant<51:
-                    enchant='Curse III'
-                    print('Your weapon got enchanted with:',enchant,'\n-50% Power')
-                    print('')
-                    power=power*0.5
-                    curse3=1
-                    continue
-                if enchant>50 and enchant<66:
-                    enchant='Looting I'
-                    print('Your weapon got enchanted with:',enchant,'\n+25% Goldgain')
-                    print('')
-                    loot1=1
-                    continue
-                if enchant>65 and enchant<73:
-                    enchant='Looting II'
-                    print('Your weapon got enchanted with:',enchant,'\n+50% Goldgain')
-                    print('')
-                    loot2=1
-                    continue
-                if enchant>72 and enchant<76:
-                    enchant='Looting III'
-                    print('Your weapon got enchanted with:',enchant,'\n+75% Goldgain')
-                    print('')
-                    loot3=1
-                    continue
-                if enchant>75 and enchant<91:
-                    enchant='Blocking I'
-                    print('Your weapon got enchanted with:',enchant,'\n-15% HPloss')
-                    print('')
-                    block1w=1
-                    continue
-                if enchant>90 and enchant<98:
-                    enchant='Blocking II'
-                    print('Your weapon got enchanted with:',enchant,'\n-30% HPloss')
-                    print('')
-                    block2w=1
-                    continue
+                        weaponenchant='Blocking III'
+                        printP('Your weapon got enchanted with: Blocking III\n-50% HPloss')
+                        print('')
+                        enchantcheckweapon()
+                        block3w=1
+                        continue
                 else:
-                    enchant='Blocking III'
-                    print('Your weapon got enchanted with:',enchant,'\n-50% HPloss')
                     print('')
-                    block3w=1
+                    print('You need to equip the weapon to enchant it!')
+                    print('')
                     continue
             if entype=='2':
-                if enchantmentscroll>0:
-                    print('Enchantmentscroll used')
-                    enchantmentscroll=enchantmentscroll-1
+                if equippedarmor=='Leather armor' or equippedarmor=='Copper armor' or equippedarmor=='Maxwell armor':
+                    enchantxp()
+                    if enchant>0 and enchant<16:
+                        armorenchant='Resistance I'
+                        printG('Your armor got enchanted with: Resistance I\n+15% MaxHP')
+                        print('')
+                        enchantcheckarmor()
+                        maxhp=maxhp*1.15
+                        res=1
+                        continue
+                    if enchant>15 and enchant<23:
+                        armorenchant='Resistance II'
+                        printB('Your armor got enchanted with: Resistance II\n+30% MaxHP')
+                        print('')
+                        enchantcheckarmor()
+                        maxhp=maxhp*1.3
+                        res2=1
+                        continue
+                    if enchant>22 and enchant<26:
+                        armorenchant='Resistance III'
+                        printP('Your armor got enchanted with: Resistance III\n+50% MaxHP')
+                        print('')
+                        enchantcheckarmor()
+                        maxhp=maxhp*1.5
+                        res3=1
+                        continue
+                    if enchant>25 and enchant<41:
+                        armorenchant='Curse I'
+                        printR('Your armor got enchanted with: Curse I\n-15% MaxHP')
+                        print('')
+                        enchantcheckarmor()
+                        maxhp=maxhp*0.85
+                        curse1=1
+                        continue
+                    if enchant>40 and enchant<48:
+                        armorenchant='Curse II'
+                        printR('Your armor got enchanted with: Curse II\n-30% MaxHP')
+                        print('')
+                        enchantcheckarmor()
+                        maxhp=maxhp*0.7
+                        curse2a=1
+                        continue
+                    if enchant>47 and enchant<51:
+                        armorenchant='Curse III'
+                        printR('Your armor got enchanted with: Curse III\n-50% MaxHP')
+                        print('')
+                        enchantcheckarmor()
+                        maxhpx=maxhp*0.5
+                        curse3=1
+                        continue
+                    if enchant>75 and enchant<91:
+                        armorenchant='Blocking III'
+                        printP('Your armor got enchanted with: Blocking III\n-50% HPloss')
+                        print('')
+                        enchantcheckarmor()
+                        block3a=1
+                        continue
+                    if enchant>90 and enchant<98:
+                        armorenchant='Blocking II'
+                        printB('Your armor got enchanted with: Blocking II\n-30% HPloss')
+                        print('')
+                        enchantcheckarmor()
+                        block2a=1
+                        continue
+                    else:
+                        armorenchant='Blocking I'
+                        printG('Your armor got enchanted with: Blocking I\n-15% HPloss')
+                        print('')
+                        enchantcheckarmor()
+                        block1a=1
+                        continue
                 else:
-                    xpgain=30
-                    xp=xp-xpgain
-                    print('- 30 XP (',xp,')')
-                if enchant>0 and enchant<16:
-                    enchant='Resistance I'
-                    print('Your armor got enchanted with:',enchant,'\n+15% MaxHP')
                     print('')
-                    maxhp=maxhp*1.15
-                    continue
-                if enchant>15 and enchant<23:
-                    enchant='Resistance II'
-                    print('Your armor got enchanted with:',enchant,'\n+30% MaxHP')
+                    print('You need to equip the armor to enchant it!')
                     print('')
-                    maxhp=maxhp*1.3
-                    continue
-                if enchant>22 and enchant<26:
-                    enchant='Resistance III'
-                    print('Your armor got enchanted with:',enchant,'\n+50% MaxHP')
-                    print('')
-                    maxhp=maxhp*1.5
-                    continue
-                if enchant>25 and enchant<41:
-                    enchant='Curse I'
-                    print('Your armor got enchanted with:',enchant,'\n-15% MaxHP')
-                    print('')
-                    maxhp=maxhp*0.85
-                    continue
-                if enchant>40 and enchant<48:
-                    enchant='Curse II'
-                    print('Your armor got enchanted with:',enchant,'\n-30% MaxHP')
-                    print('')
-                    maxhp=maxhp*0.7
-                    continue
-                if enchant>47 and enchant<51:
-                    enchant='Curse III'
-                    print('Your armor got enchanted with:',enchant,'\n-50% MaxHP')
-                    print('')
-                    maxhpx=maxhp*0.5
-                    continue
-                if enchant>75 and enchant<91:
-                    enchant='Blocking III'
-                    print('Your armor got enchanted with:',enchant,'\n-50% HPloss')
-                    print('')
-                    block3a=1
-                    continue
-                if enchant>90 and enchant<98:
-                    enchant='Blocking II'
-                    print('Your armor got enchanted with:',enchant,'\n-30% HPloss')
-                    print('')
-                    block2a=1
-                    continue
-                else:
-                    enchant='Blocking I'
-                    print('Your armor got enchanted with:',enchant,'\n-15% HPloss')
-                    print('')
-                    block1a=1
                     continue
             else:
                 continue
