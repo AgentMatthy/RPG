@@ -177,7 +177,7 @@ def fight():
                         turncount=turncount+1
                         fireauracrit=fireauracrit-1
                         if turncount>3 and healing==1:
-                            print('type heal to heal')
+                            printB('type heal to heal')
                             heal=input('')
                             if heal=='heal':
                                 hp=hp+(0.2*maxhp)
@@ -188,7 +188,7 @@ def fight():
                                 print('')
                                 turncount=turncount-4
                         if turncount>3 and tearingdive==1:
-                            print('type tearing dive to active the skill')
+                            printB('type tearing dive to active the skill')
                             dive=input('')
                             if dive=='tearing dive':
                                 tearingdiveskill=1
@@ -211,8 +211,6 @@ def fight():
                             enemycrit=random.randint(1,400)
                         else:
                             enemycrit=random.randint(1,100)
-                        if sabotage==1:
-                            enemycrit=100  
                         if block1a==1:
                             hploss=hploss*0.85
                         if block2a==1:
@@ -227,8 +225,6 @@ def fight():
                             hploss=hploss*0.5
                         if resistanceuse>0:
                             hploss=hploss*0.5
-                        if enemycrit<21:
-                            hploss=hploss*1.5
                         else:
                             hploss=hploss
                         if equippedweapon=='Wooden dagger':
@@ -332,7 +328,7 @@ def fight():
                         print('Stamina:',staminatype,'')
                         print('Block:',blocktype,'')
                         print('')
-                        print('Potions:')
+                        printB('Potions:')
                         print('')
                         if healthpotionamount>0:
                             print('(1) Health potion:',healthpotionamount,'')
@@ -351,18 +347,18 @@ def fight():
                                 else:
                                     print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
                             else:
-                                print('You do not have a health potion :c')
+                                printR('You do not have a health potion :c')
                         if use=='2':
                             print('')
                             if staminapotionamount>0:
                                 staminapotionamount=staminapotionamount-1
-                                print('Stamina and block replenished')
+                                printG('Stamina and block replenished')
                                 stamina=100
                                 block=100
                             else:
-                                print('You do not have a stamina potion :c')
+                                printR('You do not have a stamina potion :c')
                                 used=0
-                        print('1=Defend, 2=Attack')
+                        printB('1=Defend, 2=Attack')
                         movement=input('')
                         if movement=='1':
                             blockloss=random.randint(10,40)
@@ -405,21 +401,21 @@ def fight():
                             if protection<6:
                                 hploss=0
                                 print('')
-                                print('SHIELD ACTIVE')
+                                printG('SHIELD ACTIVE')
                             else:
                                 hploss=hploss
                         if shield==2:
                             if protection<11:
                                 hploss=0
                                 print('')
-                                print('SHIELD ACTIVE')
+                                printG('SHIELD ACTIVE')
                             else:
                                 hploss=hploss
                         if shield==3:
                             if protection<16:
                                 hploss=0
                                 print('')
-                                print('SHIELD ACTIVE')
+                                printG('SHIELD ACTIVE')
                             else:
                                 hploss=hploss
                         if tearingdiveskill==1:
@@ -436,11 +432,11 @@ def fight():
                             critcount=critcount+1
                             if stunning==1 and enemyhploss==0:
                                 print('')
-                                print('ENEMY STUNNED')
+                                printY('ENEMY STUNNED')
                                 stun=3
                             if fireaura==1:
                                 print('')
-                                print('FIRE AURA triggered for 3 turns')
+                                printR('FIRE AURA triggered for 3 turns')
                                 fireauracrit=3
                         if armorresistance==1:
                             hploss=hploss-1
@@ -473,7 +469,7 @@ def fight():
                                 treasury=treasury
                         if blockchance==1 or hploss==0:
                             print('')
-                            print('HIT BLOCKED')
+                            printG('HIT BLOCKED')
                             print('')
                             hploss=0
                         else:
@@ -484,7 +480,7 @@ def fight():
                             else:
                                 enemyhploss=0
                                 print('')
-                                print('ENEMY BLOCKED HIT')
+                                printR('ENEMY BLOCKED HIT')
                                 print('')
                         else:
                             enemyhploss=enemyhploss
@@ -493,6 +489,10 @@ def fight():
                         hp=hp-hploss
                         enemyhp=enemyhp-enemyhploss
                         tearingdiveskill=0
+                        if sabotage==1:
+                            enemycrit=100
+                        if enemycrit<21:
+                            hploss=hploss*1.5  
                         print('')
                         if crit<21 and enemyhploss>0:
                             print('Enemy HP: -',round(enemyhploss,2),' Critical hit! (',round(enemyhp,2),'/',enemymaxhp,')')
@@ -816,6 +816,9 @@ def profile():
                 print('')
             if skillpoint>0:
                 print('Skill points:',skillpoint,'')
+            print('')
+            print('Enemies killed:',enemieskilled)
+            print('Character value:',value)
             print('')
 
 def weapon_equip():
@@ -1504,6 +1507,10 @@ equippedarmor=''
 
 skillpoint=3
 
+enemieskilled=0
+value=0
+valuegain=0
+
 #-----------------------Potions-----------------------#
 
 revivepotionamount=0
@@ -1761,6 +1768,8 @@ time.sleep(1)
 
 while True:
 
+    value=15
+
     weaponenchant=''
     armorenchant=''
 
@@ -1826,9 +1835,11 @@ while True:
         if fastlearner==1:
             skillpoint=skillpoint+2
             print('+ 2 Skill point (',skillpoint,')')
+            valuegain=valuegain+10
         else:
             skillpoint=skillpoint+1
             print('+ Skill point (',skillpoint,')')
+            valuegain=valuegain+5
         print('')
         point=100
     else:
@@ -1837,12 +1848,16 @@ while True:
     power=1
     if equippedweapon=='Wooden dagger':
         power=1.3
+        value=value+5
     if equippedweapon=='Wooden sword':
         power=1.5
+        value=value+7
     if equippedweapon=='Copper sword':
         power=1.7
+        value=value+9
     if equippedweapon=='Maxwell sword':
         power=2
+        value=value+11
     if type=='Healer':
         power=power*0.8
     if sharp1==1:
@@ -1869,6 +1884,32 @@ while True:
             print('')
             print('Resistance potion active')
             print('')
+
+    if equippedarmor=='Leather armor':
+        value=value+6
+    if equippedarmor=='Copper armor':
+        value=value+8
+    if equippedarmor=='Maxwell armor':
+        value=value+10
+
+    if loot<200:
+        value=value+(healthpotionamount*3)
+        value=value+(revivepotionamount*10)
+        value=value+(resistancepotionamount*6)
+        value=value+(strengthpotionamount*6)
+        value=value+(staminapotionamount*3)
+        value=value+(leatherarmoramount*6)
+        value=value+(copperswordamount*8)
+        value=value+(catarmoramount*10)
+        value=value+(woodendaggeramount*5)
+        value=value+(woodenswordamount*7)
+        value=value+(copperswordamount*9)
+        value=value+(catswordamount*11)
+        value=value+(magneticstone*2)
+        value=value+(enchantmentscroll*15)
+        value=value+(xp*0.5)
+        value=value+treasury
+        value=value+valuegain
 
     printB('\nOptions:')
     print(' 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
@@ -1932,6 +1973,7 @@ while True:
                     print('')
                     continue
                 if battle=='2':
+                    enemieskilled=enemieskilled+1
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             printG('Fight finished, you won')
@@ -2011,6 +2053,7 @@ while True:
                     print('')
                     continue
                 if battle=='2':
+                    enemieskilled=enemieskilled+1
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             printG('Fight finished, you won')
@@ -2179,6 +2222,7 @@ while True:
                     print('')
                     continue
                 if battle=='2':
+                    enemieskilled=enemieskilled+1
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2319,6 +2363,7 @@ while True:
                     print('')
                     continue
                 if battle=='2':
+                    enemieskilled=enemieskilled+1
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2397,6 +2442,7 @@ while True:
                     print('')
                     continue
                 if battle=='2':
+                    enemieskilled=enemieskilled+1
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2475,6 +2521,7 @@ while True:
                     print('')
                     continue
                 if battle=='2':
+                    enemieskilled=enemieskilled+1
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2613,12 +2660,12 @@ while True:
             print('')
             print('LVL 1 (',xp,'xp )')
             profile()
-            continue
         if 50<xp or xp<100:
             print('')
             print('LVL 2 (',xp,'xp )')
             profile()
-            continue
+        time.sleep(5)
+        continue
 
     if choice=='3':
         print('')
