@@ -697,6 +697,9 @@ def profile():
             global business
             global fireaura
             global perfecthealth
+            global value
+            global enemieskilled
+            global score
             print('Class:',type,'')
             print('Treasury:',treasury,'')
             print('HP:',round(hp,2),'/',maxhp, equippedarmor,'-',armorenchant,'')
@@ -819,6 +822,7 @@ def profile():
             print('')
             print('Enemies killed:',enemieskilled)
             print('Character value:',value)
+            print('Score:',score)
             print('')
 
 def weapon_equip():
@@ -1266,6 +1270,7 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     global enemyhp
     global battle
     global xp
+    global enemyname2
     print('')
     enemymaxhp=emaxhp
     if xp<lowxp:
@@ -1274,6 +1279,7 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
         enemylvl=random.randint(c,d)
     enemymaxhp=((enemylvl/10)*enemymaxhp)+enemymaxhp
     enemyhp=enemymaxhp
+    enemyname2=enemyname
     print('LVL',enemylvl,enemyname,'encounter:')
     print('Enemy HP:',enemyhp,'')
     battle=input('1=Run, 2=Fight')
@@ -1478,6 +1484,43 @@ def catswordequip():
                 equippedweapon='Maxwell sword'
                 power_modifier()
 
+def deathmessage():
+                            global score
+                            global value
+                            global enemieskilled
+                            global name
+                            global enemyname2
+                            printR('You do not have a revive potion, the game is over :c')
+                            print('')
+                            print(name,'slained by',enemyname2)
+                            print('')
+                            if score>3499:
+                                print('Score:',score,'-', end='')
+                                printY('Legendary!!!')
+                            if score>2499 and score<3500:
+                                print('Score:',score,'-', end='')
+                                printP('Epic!!')
+                            if score>1499 and score<2500:
+                                print('Score:',score,'-', end='')
+                                printB('Good!')
+                            else:
+                                print('Score:',score,'-', end='')
+                                print(' Bad')
+                            if value>249:
+                                print('Value:',value,'-', end='')
+                                printY('Legendary!!!')
+                            if value>174 and value<250:
+                                print('Value:',value,'-', end='')
+                                printP('Epic!!')
+                            if value>99 and value<175:
+                                print('Value:',value,'-', end='')
+                                printB('Good!')
+                            else:
+                                print('Value:',value,'-', end='')
+                                print(' Bad')
+                            print('Enemies killed:',enemieskilled)
+                            print('')
+
 #-----------------------Print-----------------------#
 
 def printR(skk): print("\033[91m {}\033[00m" .format(skk))
@@ -1510,6 +1553,10 @@ skillpoint=3
 enemieskilled=0
 value=0
 valuegain=0
+score=0
+
+name=0
+
 
 #-----------------------Potions-----------------------#
 
@@ -1683,6 +1730,8 @@ isenchanted=''
 
 weaponvarmor=0
 
+enemyname2=0
+
 #-----------------------Skills-----------------------#
 
 focus=0
@@ -1715,6 +1764,19 @@ downfall=0
 finish=0
 finishchance=0
 perfecthealth=0
+
+#-----------------------Name-----------------------#
+
+while True:
+    print('')
+    printB('Type the name of your character!')
+    name=input('')
+    if name=='':
+        print('')
+        printR('Please choose something different')
+        continue
+    else:
+        break
 
 #-----------------------Classes-----------------------#
 
@@ -1966,14 +2028,15 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            printR('You do not have a revive potion, the game is over :c')
+                            deathmessage()
                             break
                     print('+',xpgain,'xp (',xp,')')
-                    print('-',hploss,'HP (',hp,'/',maxhp,')')
+                    print('-',round(hploss,3),'HP (',round(hp,3),'/',maxhp,')')
                     print('')
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    score=score+100
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             printG('Fight finished, you won')
@@ -1998,7 +2061,7 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                printR('You do not have a revive potion, the game is over :c')
+                                deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
                             printG('Fight finished, you won')
@@ -2046,14 +2109,15 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            printR('You do not have a revive potion, the game is over :c')
+                            deathmessage()
                             break
                     print('+',xpgain,'xp (',xp,')')
-                    print('-',hploss,'HP (',hp,'/',maxhp,')')
+                    print('-',round(hploss,3),'HP (',round(hp,3),'/',maxhp,')')
                     print('')
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    score=score+150
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             printG('Fight finished, you won')
@@ -2078,7 +2142,7 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                printR('You do not have a revive potion, the game is over :c')
+                                deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
                             printG('Fight finished, you won')
@@ -2215,14 +2279,15 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            print('You do not have a revive potion, the game is over :c')
+                            deathmessage()
                             break
                     print('+',xpgain,'xp (',xp,')')
-                    print('-',hploss,'HP (',hp,'/',maxhp,')')
+                    print('-',round(hploss,3),'HP (',round(hp,3),'/',maxhp,')')
                     print('')
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    score=score+400
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2247,7 +2312,7 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                print('You do not have a revive potion, the game is over :c')
+                                deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2356,14 +2421,15 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            print('You do not have a revive potion, the game is over :c')
+                            deathmessage()
                             break
                     print('+',xpgain,'xp (',xp,')')
-                    print('-',hploss,'HP (',hp,'/',maxhp,')')
+                    print('-',round(hploss,3),'HP (',round(hp,3),'/',maxhp,')')
                     print('')
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    score=score+200
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2388,7 +2454,7 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                print('You do not have a revive potion, the game is over :c')
+                                deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2435,14 +2501,15 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            print('You do not have a revive potion, the game is over :c')
+                            deathmessage()
                             break
                     print('+',xpgain,'xp (',xp,')')
-                    print('-',hploss,'HP (',hp,'/',maxhp,')')
+                    print('-',round(hploss,3),'HP (',round(hp,3),'/',maxhp,')')
                     print('')
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    score=score+300
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2467,7 +2534,7 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                print('You do not have a revive potion, the game is over :c')
+                                deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2514,14 +2581,15 @@ while True:
                             hp=maxhp
                             continue
                         else:
-                            print('You do not have a revive potion, the game is over :c')
+                            deathmessage()
                             break
                     print('+',xpgain,'xp (',xp,')')
-                    print('-',hploss,'HP (',hp,'/',maxhp,')')
+                    print('-',round(hploss,3),'HP (',round(hp,3),'/',maxhp,')')
                     print('')
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    score=score+500
                     while True:
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2546,7 +2614,7 @@ while True:
                                 hp=maxhp
                                 continue
                             else:
-                                print('You do not have a revive potion, the game is over :c')
+                                deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
                             print('Fight finished, you won')
@@ -2608,7 +2676,36 @@ while True:
                                         print('')
                                         hp=maxhp
                                     else:
-                                        print('You do not have a revive potion, the game is over :c')
+                                        printR('You do not have a revive potion, the game is over :c')
+                                        print('')
+                                        print(name,'slained by Muftosz')
+                                        print('')
+                                        if score>6999:
+                                            print('Score:',score,'-', end='')
+                                            printY('Legendary!!!')
+                                        if score>4999 and score<7000:
+                                            print('Score:',score,'-', end='')
+                                            printP('Epic!!')
+                                        if score>1999 and score<5000:
+                                            print('Score:',score,'-', end='')
+                                            printB('Good!')
+                                        else:
+                                            print('Score:',score,'-', end='')
+                                            print('Bad')
+                                        if value>149:
+                                            print('Value:',value,'-', end='')
+                                            printY('Legendary!!!')
+                                        if score>99 and score<150:
+                                            print('Value:',value,'-', end='')
+                                            printP('Epic!!')
+                                        if score>50 and score<100:
+                                            print('Value:',value,'-', end='')
+                                            printB('Good!')
+                                        else:
+                                            print('Value:',value,'-', end='')
+                                            print('Bad')
+                                        print('Enemies killed:',enemieskilled)
+                                        print('')
                                         break
                             else:
                                 print('')
@@ -2640,7 +2737,36 @@ while True:
                                         print('')
                                         hp=maxhp
                                     else:
-                                        print('You do not have a revive potion, the game is over :c')
+                                        printR('You do not have a revive potion, the game is over :c')
+                                        print('')
+                                        print(name,'slained by Muftosz')
+                                        print('')
+                                        if score>6999:
+                                            print('Score:',score,'-', end='')
+                                            printY('Legendary!!!')
+                                        if score>4999 and score<7000:
+                                            print('Score:',score,'-', end='')
+                                            printP('Epic!!')
+                                        if score>1999 and score<5000:
+                                            print('Score:',score,'-', end='')
+                                            printB('Good!')
+                                        else:
+                                            print('Score:',score,'-', end='')
+                                            print('Bad')
+                                        if value>149:
+                                            print('Value:',value,'-', end='')
+                                            printY('Legendary!!!')
+                                        if score>99 and score<150:
+                                            print('Value:',value,'-', end='')
+                                            printP('Epic!!')
+                                        if score>50 and score<100:
+                                            print('Value:',value,'-', end='')
+                                            printB('Good!')
+                                        else:
+                                            print('Value:',value,'-', end='')
+                                            print('Bad')
+                                        print('Enemies killed:',enemieskilled)
+                                        print('')
                                         break
                             else:
                                 print('')
@@ -2648,6 +2774,33 @@ while True:
                 if hp<0 or hp==0:
                     break 
                 print('You defeated MUFTOSZ, you spent some of your time to do this so shame on you')
+                print('')
+                if score>3499:
+                    print('Score:',score,'-', end='')
+                    printY('Legendary!!!')
+                if score>2499 and score<3500:
+                    print('Score:',score,'-', end='')
+                    printP('Epic!!')
+                if score>1499 and score<2500:
+                    print('Score:',score,'-', end='')
+                    printB('Good!')
+                else:
+                    print('Score:',score,'-', end='')
+                    print(' Bad')
+                if value>249:
+                    print('Value:',value,'-', end='')
+                    printY('Legendary!!!')
+                if value>174 and value<250:
+                    print('Value:',value,'-', end='')
+                    printP('Epic!!')
+                if value>99 and value<175:
+                    print('Value:',value,'-', end='')
+                    printB('Good!')
+                else:
+                    print('Value:',value,'-', end='')
+                    print(' Bad')
+                print('Enemies killed:',enemieskilled)
+                print('')
                 break               
             else:
                 continue
@@ -2658,10 +2811,12 @@ while True:
     if choice=='2':
         if xp<50:
             print('')
+            print('  ',name,'  ')
             print('LVL 1 (',xp,'xp )')
             profile()
-        if 50<xp or xp<100:
+        if 50<xp and xp<150:
             print('')
+            print('  ',name,'  ')
             print('LVL 2 (',xp,'xp )')
             profile()
         time.sleep(5)
