@@ -1659,9 +1659,9 @@ def questreward(rewardtype,questquality,rewardamount,reward):
             rewt='Resistance potion'
             rewa=random.randint(1,2)
             if rewa==1:
-                rewa='1 × Resistance potion'
+                rew='1 × Resistance potion'
             if rewa==2:
-                rewa='2 × Resistance potion'
+                rew='2 × Resistance potion'
         if rewt==4:
             rewt='Stamina potion'
             rewa=random.randint(1,2)
@@ -1829,6 +1829,7 @@ def quest(quest,number,questtype,lvlofenchant):
     global lvlofenchant1
     global lvlofenchant2
     global lvlofenchant3
+    global lvl
     if quest==1:
         num=random.randint(3,10)
         if num>5:
@@ -1888,11 +1889,11 @@ def quest(quest,number,questtype,lvlofenchant):
             num=random.randint(1,2)
             if num==1:
                 num=1
-                lvlofenchant=2
+                lvl=2
                 quality='High'
             if num==2:
                 num=1
-                lvlofenchant=3
+                lvl=3
                 quality='High'
     if quest==10:
             num=random.randint(1,3)
@@ -2147,7 +2148,15 @@ def questcompletion(reward,rewardamount,rewardtype,inprogress,questquality,lvlof
     doing12='No'
     doing13='No'
     if inprogress1=='Yes':
+        quest1=random.randint(1,13)
+        while True:
+            if quest1==quest2 or quest1==quest3:
+                quest1=random.randint(1,13)
+                continue
+            else:
+                break
         quest(quest1,number1,questtype1,lvlofenchant1)
+        lvlofenchant1=lvl
         number1=num
         questtype1=qt
         questquality1=quality
@@ -2156,7 +2165,15 @@ def questcompletion(reward,rewardamount,rewardtype,inprogress,questquality,lvlof
         rewardamount1=rewa
         reward1=rew
     if inprogress2=='Yes':
+        quest2=random.randint(1,13)
+        while True:
+            if quest1==quest2 or quest2==quest3:
+                quest2=random.randint(1,13)
+                continue
+            else:
+                break
         quest(quest2,number2,questtype2,lvlofenchant2)
+        lvlofenchant2=lvl
         number2=num
         questtype2=qt
         questquality2=quality
@@ -2165,7 +2182,15 @@ def questcompletion(reward,rewardamount,rewardtype,inprogress,questquality,lvlof
         rewardamount2=rewa
         reward2=rew
     if inprogress3=='Yes':
+        quest3=random.randint(1,13)
+        while True:
+            if quest3==quest2 or quest1==quest3:
+                quest3=random.randint(1,13)
+                continue
+            else:
+                break
         quest(quest3,number3,questtype3,lvlofenchant3)
+        lvlofenchant3=lvl
         number3=num
         questtype3=qt
         questquality3=quality
@@ -2177,12 +2202,6 @@ def questcompletion(reward,rewardamount,rewardtype,inprogress,questquality,lvlof
     inprogress2=='No'
     inprogress3=='No'
     progress=0
-    while True:
-        if quest1==quest2 or quest1==quest3:
-            quest1=random.randint(1,13)
-            continue
-        else:
-            break
     time.sleep(3)
 
 #-----------------------Print-----------------------#
@@ -2454,11 +2473,13 @@ questquality1=''
 questquality2=''
 questquality3=''
 quality=''
-lvlofenchant1=5
-lvlofenchant2=5
-lvlofenchant3=5
+lvlofenchant1=2
+lvlofenchant2=2
+lvlofenchant3=2
+lvl=0
 
 quest(quest1,number1,questtype1,lvlofenchant1)
+lvlofenchant1=lvl
 number1=num
 questtype1=qt
 questquality1=quality
@@ -2468,6 +2489,7 @@ rewardamount1=rewa
 reward1=rew
 
 quest(quest2,number2,questtype2,lvlofenchant2)
+lvlofenchant2=lvl
 number2=num
 questtype2=qt
 questquality2=quality
@@ -2477,6 +2499,7 @@ rewardamount2=rewa
 reward2=rew
 
 quest(quest3,number3,questtype3,lvlofenchant3)
+lvlofenchant3=lvl
 number3=num
 questtype3=qt
 questquality3=quality
@@ -4749,8 +4772,10 @@ while True:
         if purchase=='6':
             if treasury>5.99:
                 print('')
-                print('Purchase succesfull')
+                printG('Purchase succesfull')
                 print('- 5 gold (',treasury-5,')')
+                if doing4=='Yes':
+                    progress=progress+1
                 treasury=treasury-5
                 item=random.randint(1,7)
                 if item==1:
@@ -4803,15 +4828,18 @@ while True:
                     print('+ Stamina potion (',staminapotionamount,') ')
             else:
                 print('')
-                print('Purchase insuccesfull')
+                printR('Purchase insuccesfull')
                 print('Not enough gold for purchase')
+            time.sleep(2)
             continue
 
         if purchase=='7':
             if treasury>11.99:
                 print('')
-                print('Purchase succesfull')
+                printG('Purchase succesfull')
                 print('- 12 gold (',treasury-12,')')
+                if doing4=='Yes':
+                    progress=progress+1
                 treasury=treasury-12
                 item=random.randint(1,3)
                 if item==1:
@@ -4830,21 +4858,22 @@ while True:
                     copperswordamount=copperswordamount+1
                     print('+ Copper sword (',copperswordamount,') ')
                     if inprogress1=='Yes':
-                        if doing11=='Yes' and questtype1=='Copper armor':
+                        if doing11=='Yes' and questtype1=='Copper sword':
                             progress=progress+1
                     if inprogress2=='Yes':
-                        if doing11=='Yes' and questtype2=='Copper armor':
+                        if doing11=='Yes' and questtype2=='Copper sword':
                             progress=progress+1
                     if inprogress3=='Yes':
-                        if doing11=='Yes' and questtype3=='Copper armor':
+                        if doing11=='Yes' and questtype3=='Copper sword':
                             progress=progress+1
                 if item==3:
                     revivepotionamount=revivepotionamount+1
                     print('+ Revive potion (',revivepotionamount,') ')
             else:
                 print('')
-                print('Purchase insuccesfull')
+                printR('Purchase insuccesfull')
                 print('Not enough gold for purchase')
+            time.sleep(2)
             continue
 
         if purchase=='8':
@@ -5620,11 +5649,17 @@ while True:
         if inprogress1=='Yes' and progress==number1 or progress>number1:
             questcompletion(reward1,rewardamount1,rewardtype1,inprogress1,questquality1,lvlofenchant1)
             inprogress1='No'
+            inprogress2='No'
+            inprogress3='No'
         if inprogress2=='Yes' and progress==number2 or progress>number2:
             questcompletion(reward2,rewardamount2,rewardtype2,inprogress2,questquality2,lvlofenchant2)
+            inprogress1='No'
             inprogress2='No'
+            inprogress3='No'
         if inprogress3=='Yes' and progress==number3 or progress>number3:
             questcompletion(reward3,rewardamount3,rewardtype3,inprogress3,questquality3,lvlofenchant3)
+            inprogress1='No'
+            inprogress2='No'
             inprogress3='No'
         print('')
         questprint(quest1,inprogress1,reward1,1,number1,questtype1,lvlofenchant1)
