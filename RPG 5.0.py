@@ -174,6 +174,10 @@ def fight():
                         global staminapotionamount
                         global strengthpotionamount
                         global resistancepotionamount
+                        global doing12
+                        global doing13
+                        global progress
+                        global potions
                         turncount=turncount+1
                         fireauracrit=fireauracrit-1
                         if turncount>3 and healing==1:
@@ -328,36 +332,38 @@ def fight():
                         print('Stamina:',staminatype,'')
                         print('Block:',blocktype,'')
                         print('')
-                        printB('Potions:')
-                        print('')
-                        if healthpotionamount>0:
-                            print('(1) Health potion:',healthpotionamount,'')
-                        if staminapotionamount>0:
-                            print('(2) Stamina potion:',staminapotionamount,'')
-                        print('')
-                        use=input('What do you want to do?')
-                        if use=='1':
+                        potions=healthpotionamount+staminapotionamount
+                        if potions>0:
+                            printB('Potions:')
                             print('')
                             if healthpotionamount>0:
-                                healthpotionamount=healthpotionamount-1
-                                hp=hp+(0.3*maxhp)
-                                if hp>maxhp:
-                                    hp=hp-(hp-maxhp)
-                                    print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
-                                else:
-                                    print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
-                            else:
-                                printR('You do not have a health potion :c')
-                        if use=='2':
-                            print('')
+                                print('(1) Health potion:',healthpotionamount,'')
                             if staminapotionamount>0:
-                                staminapotionamount=staminapotionamount-1
-                                printG('Stamina and block replenished')
-                                stamina=100
-                                block=100
-                            else:
-                                printR('You do not have a stamina potion :c')
-                                used=0
+                                print('(2) Stamina potion:',staminapotionamount,'')
+                            print('')
+                            use=input('What do you want to do?')
+                            if use=='1':
+                                print('')
+                                if healthpotionamount>0:
+                                    healthpotionamount=healthpotionamount-1
+                                    hp=hp+(0.3*maxhp)
+                                    if hp>maxhp:
+                                        hp=hp-(hp-maxhp)
+                                        print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
+                                    else:
+                                        print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
+                                else:
+                                    printR('You do not have a health potion :c')
+                            if use=='2':
+                                print('')
+                                if staminapotionamount>0:
+                                    staminapotionamount=staminapotionamount-1
+                                    printG('Stamina and block replenished')
+                                    stamina=100
+                                    block=100
+                                else:
+                                    printR('You do not have a stamina potion :c')
+                                    used=0
                         printB('1=Defend, 2=Attack')
                         movement=input('')
                         if movement=='1':
@@ -471,6 +477,8 @@ def fight():
                             print('')
                             printG('HIT BLOCKED')
                             print('')
+                            if doing13=='Yes':
+                                progress=progress+1
                             hploss=0
                         else:
                             hploss=hploss
@@ -496,6 +504,8 @@ def fight():
                         print('')
                         if crit<21 and enemyhploss>0:
                             print('Enemy HP: -',round(enemyhploss,2),' Critical hit! (',round(enemyhp,2),'/',enemymaxhp,')')
+                            if doing12=='Yes':
+                                progress=progress+1
                         else:
                             print('Enemy HP: -',round(enemyhploss,2),'(',round(enemyhp,2),'/',enemymaxhp,')')
                         if enemycrit<21 and hploss>0:
@@ -547,9 +557,29 @@ def wolf_loot():
                         global resistancepotionamount
                         global strengthpotionamount
                         global staminapotionamount
+                        global inprogress1
+                        global inprogress2
+                        global inprogress3
+                        global questtype1
+                        global questtype2
+                        global questtype3
+                        global doing11
+                        global roomkey
+                        global silverkey
+                        global progress
+                        loot=random.randint(1,100)
                         if 0<loot and loot<20:
                             woodendaggeramount=woodendaggeramount+1
                             print('+ Wooden dagger (',woodendaggeramount,')')
+                            if inprogress1=='Yes':
+                                if doing11=='Yes' and questtype1=='Wooden dagger':
+                                    progress=progress+1
+                            if inprogress2=='Yes':
+                                if doing11=='Yes' and questtype2=='Wooden dagger':
+                                    progress=progress+1
+                            if inprogress3=='Yes':
+                                if doing11=='Yes' and questtype3=='Wooden dagger':
+                                    progress=progress+1
                         if loot==20:
                             revivepotionamount=revivepotionamount+1
                             print('+ Revive potion (',revivepotionamount,')')
@@ -569,6 +599,12 @@ def wolf_loot():
                         if loot>49 and loot<53:
                             staminapotionamount=staminapotionamount+1
                             print('+ Stamina potion (',staminapotionamount,')')
+                        if loot>52 and loot<58:
+                            roomkey=roomkey+1
+                            print('+ Room key (',roomkey,')')
+                        if loot>57 and loot<64:
+                            silverkey=silverkey+1
+                            print('+ Silver key (',silverkey,')')
                         print('')
 
 def bear_loot():
@@ -580,9 +616,28 @@ def bear_loot():
                         global resistancepotionamount
                         global strengthpotionamount
                         global staminapotionamount
+                        global inprogress1
+                        global inprogress2
+                        global inprogress3
+                        global questtype1
+                        global questtype2
+                        global questtype3
+                        global doing11
+                        global roomkey
+                        global silverkey
+                        loot=random.randint(1,100)
                         if 0<loot and loot<20:
                             leatherarmoramount=leatherarmoramount+1
                             print('+ Leather armor (',leatherarmoramount,')')
+                            if inprogress1=='Yes':
+                                if doing11=='Yes' and questtype1=='Leather armor':
+                                    progress=progress+1
+                            if inprogress2=='Yes':
+                                if doing11=='Yes' and questtype2=='Leather armor':
+                                    progress=progress+1
+                            if inprogress3=='Yes':
+                                if doing11=='Yes' and questtype3=='Leather armor':
+                                    progress=progress+1
                         if loot==20:
                             revivepotionamount=revivepotionamount+1
                             print('+ Revive potion (',revivepotionamount,')')
@@ -602,6 +657,12 @@ def bear_loot():
                         if loot>49 and loot<53:
                             staminapotionamount=staminapotionamount+1
                             print('+ Stamina potion (',staminapotionamount,')')
+                        if loot>52 and loot<58:
+                            roomkey=roomkey+1
+                            print('+ Room key (',roomkey,')')
+                        if loot>57 and loot<64:
+                            silverkey=silverkey+1
+                            print('+ Silver key (',silverkey,')')
                         print('')
 
 def rare_loot():
@@ -618,6 +679,17 @@ def rare_loot():
                         global leatherarmoramount
                         global copperarmoramount
                         global staminapotionamount
+                        global inprogress1
+                        global inprogress2
+                        global inprogress3
+                        global questtype1
+                        global questtype2
+                        global questtype3
+                        global doing11
+                        global roomkey
+                        global silverkey
+                        global goldenkey
+                        loot=random.randint(1,100)
                         if 0<loot and loot<20:
                             prize=random.randint(1,8)
                             if prize==1:
@@ -633,15 +705,51 @@ def rare_loot():
                             if prize==3:
                                 leatherarmoramount=leatherarmoramount+1
                                 print('+ 1 Leather armor (',leatherarmoramount,')')
+                                if inprogress1=='Yes':
+                                    if doing11=='Yes' and questtype1=='Leather armor':
+                                        progress=progress+1
+                                if inprogress2=='Yes':
+                                    if doing11=='Yes' and questtype2=='Leather armor':
+                                        progress=progress+1
+                                if inprogress3=='Yes':
+                                    if doing11=='Yes' and questtype3=='Leather armor':
+                                        progress=progress+1
                             if prize==4:
                                 woodendaggeramount=woodendaggeramount+1
                                 print('+ 1 Wooden dagger (',woodendaggeramount,')')
+                                if inprogress1=='Yes':
+                                    if doing11=='Yes' and questtype1=='Wooden dagger':
+                                        progress=progress+1
+                                if inprogress2=='Yes':
+                                    if doing11=='Yes' and questtype2=='Wooden dagger':
+                                        progress=progress+1
+                                if inprogress3=='Yes':
+                                    if doing11=='Yes' and questtype3=='Wooden dagger':
+                                        progress=progress+1
                             if prize==5:
                                 copperarmoramount=copperarmoramount+1
                                 print('+ 1 Copper armor (',copperarmoramount,')')
+                                if inprogress1=='Yes':
+                                    if doing11=='Yes' and questtype1=='Copper armor':
+                                        progress=progress+1
+                                if inprogress2=='Yes':
+                                    if doing11=='Yes' and questtype2=='Copper armor':
+                                        progress=progress+1
+                                if inprogress3=='Yes':
+                                    if doing11=='Yes' and questtype3=='Copper armor':
+                                        progress=progress+1
                             if prize==6:
                                 copperswordamount=copperswordamount+1
                                 print('+ 1 Copper sword (',copperswordamount,')')
+                                if inprogress1=='Yes':
+                                    if doing11=='Yes' and questtype1=='Copper sword':
+                                        progress=progress+1
+                                if inprogress2=='Yes':
+                                    if doing11=='Yes' and questtype2=='Copper sword':
+                                        progress=progress+1
+                                if inprogress3=='Yes':
+                                    if doing11=='Yes' and questtype3=='Copper sword':
+                                        progress=progress+1                               
                             if prize==7:
                                 revivepotionamount=revivepotionamount+1
                                 print('+ 1 Revive potion (',revivepotionamount,')')
@@ -667,6 +775,15 @@ def rare_loot():
                         if loot>49 and loot<53:
                             staminapotionamount=staminapotionamount+1
                             print('+ Stamina potion (',staminapotionamount,')')
+                        if loot>52 and loot<58:
+                            roomkey=roomkey+1
+                            print('+ Room key (',roomkey,')')
+                        if loot>57 and loot<64:
+                            silverkey=silverkey+1
+                            print('+ Silver key (',silverkey,')')
+                        if loot>63 and loot<67:
+                            goldenkey=goldenkey+1
+                            print('+ Golden key (',goldenkey,')')
                         print('')
 
 def gold_box():
@@ -1230,6 +1347,8 @@ def power_modifier():
 def buy(price,item,itemid):
             global treasury
             global x
+            global doing4
+            global progress
             if treasury>price:
                 price=price+0.01
                 print('')
@@ -1240,6 +1359,8 @@ def buy(price,item,itemid):
                 x=item
                 x=x+1
                 print('')
+                if doing4=='Yes':
+                    progress=progress+1
             else:
                 print('')
                 printR('Purchase insuccesfull')
@@ -1249,6 +1370,8 @@ def buy(price,item,itemid):
 def sell(price,item,itemid):
             global treasury
             global x
+            global doing3
+            global progress
             if item>0:
                 print('')
                 printG('Sell succesfull')
@@ -1258,6 +1381,8 @@ def sell(price,item,itemid):
                 x=item
                 x=x-1
                 print('')
+                if doing3=='Yes':
+                    progress=progress+1
             else:
                 print('')
                 printR('Sell insuccesfull')
@@ -1271,6 +1396,7 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     global battle
     global xp
     global enemyname2
+    global indungeon
     print('')
     enemymaxhp=emaxhp
     if xp<lowxp:
@@ -1282,7 +1408,10 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     enemyname2=enemyname
     print('LVL',enemylvl,enemyname,'encounter:')
     print('Enemy HP:',enemyhp,'')
-    battle=input('1=Run, 2=Fight')
+    if indungeon=='Yes':
+        print('')
+    else:
+        battle=input('1=Run, 2=Fight')
 
 def skilllearn(learnedlevel,skillname,learnedlevelname,skillpointcost):
     global skillpoint
@@ -1312,12 +1441,17 @@ def skilllearn(learnedlevel,skillname,learnedlevelname,skillpointcost):
     global finish
     global finishchance
 
+    global doing10
+    global progress
+
     if skillpoint>skillpointcost-1:
         print('')
         print('',skillname,learnedlevelname,'skill learned')
         print('')
         l=learnedlevel
         skillpoint=skillpoint-skillpointcost
+        if doing10=='Yes':
+            progress=progress+1
     else:
         print('')
         print('Not enough skill points :c')
@@ -1490,9 +1624,10 @@ def deathmessage():
                             global enemieskilled
                             global name
                             global enemyname2
+                            enemieskilled=enemieskilled-1
                             printR('You do not have a revive potion, the game is over :c')
                             print('')
-                            print(name,'slained by',enemyname2)
+                            print(name,'was slained by',enemyname2)
                             print('')
                             if score>3499:
                                 print('Score:',score,'-', end='')
@@ -1503,7 +1638,7 @@ def deathmessage():
                             if score>1499 and score<2500:
                                 print('Score:',score,'-', end='')
                                 printB('Good!')
-                            else:
+                            if score<1500:
                                 print('Score:',score,'-', end='')
                                 print(' Bad')
                             if value>249:
@@ -1515,11 +1650,1917 @@ def deathmessage():
                             if value>99 and value<175:
                                 print('Value:',value,'-', end='')
                                 printB('Good!')
-                            else:
+                            if value<100:
                                 print('Value:',value,'-', end='')
                                 print(' Bad')
                             print('Enemies killed:',enemieskilled)
                             print('')
+
+def questreward(rewardtype,questquality,rewardamount,reward):
+    global rewardtype1
+    global rewardtype2
+    global rewardtype3
+    global questquality1
+    global questquality2
+    global questquality3
+    global rewardamount1
+    global rewardamount2
+    global rewardamount3
+    global reward1
+    global reward2
+    global reward3
+    global rewt
+    global quality
+    global rewa
+    global rew
+    if questquality=='Low':
+        rewt=random.randint(1,9)
+        if rewt==1:
+            rewt='Health potion'
+            rewa=random.randint(1,3)
+            if rewa==1:
+                rew='1 × Health potion'
+            if rewa==2:
+                rew='2 × Health potion'
+            if rewa==3:
+                rew='3 × Health potion'
+        if rewt==2:
+            rewt='Strength potion'
+            rewa=random.randint(1,2)
+            if rewa==1:
+                rew='1 × Strength potion'
+            if rewa==2:
+                rew='2 × Strength potion'
+        if rewt==3:
+            rewt='Resistance potion'
+            rewa=random.randint(1,2)
+            if rewa==1:
+                rew='1 × Resistance potion'
+            if rewa==2:
+                rew='2 × Resistance potion'
+        if rewt==4:
+            rewt='Stamina potion'
+            rewa=random.randint(1,2)
+            if rewa==1:
+                rew='1 × Stamina potion'
+            if rewa==2:
+                rew='2 × Stamina potion'
+        if rewt==5:
+            rewt='Leather armor'
+            rewa=1
+            if rewa==1:
+                rew='1 × Leather armor'
+        if rewt==6:
+            rewt='Wooden dagger'
+            rewa=1
+            if rewa==1:
+                rew='1 × Wooden dagger'
+        if rewt==7:
+            rewt='Wooden sword'
+            rewa=1
+            if rewa==1:
+                rew='1 × Wooden sword'
+        if rewt==8:
+            rewt='Score'
+            rewa=random.randint(1,2)
+            if rewa==1:
+                rew='250 × Score'
+                rewa=250
+            if rewa==2:
+                rew='500 × Score'
+                rewa=500
+        if rewt==9:
+            rewt='Gold'
+            rewa=random.randint(3,10)
+            if rewa==3:
+                rew='3 × Gold'
+            if rewa==4:
+                rew='4 × Gold'
+            if rewa==5:
+                rew='5 × Gold'
+            if rewa==6:
+                rew='6 × Gold'
+            if rewa==7:
+                rew='7 × Gold'
+            if rewa==8:
+                rew='8 × Gold'
+            if rewa==9:
+                rew='9 × Gold'
+            if rewa==10:
+                rew='10 × Gold'
+    if questquality=='High':
+        rewt=random.randint(1,9)
+        if rewt==1:
+            rewt='Health potion'
+            rewa=random.randint(4,6)
+            if rewa==4:
+                rew='4 × Health potion'
+            if rewa==5:
+                rew='5 × Health potion'
+            if rewa==6:
+                rew='6 × Health potion'
+        if rewt==2:
+            rewt='Strength potion'
+            rewa=random.randint(3,4)
+            if rewa==3:
+                rew='3 × Strength potion'
+            if rewa==4:
+                rew='4 × Strength potion'
+        if rewt==3:
+            rewt='Resistance potion'
+            rewa=random.randint(3,4)
+            if rewa==3:
+                rew='3 × Resistance potion'
+            if rewa==4:
+                rew='4 × Resistance potion'
+        if rewt==4:
+            rewt='Stamina potion'
+            rewa=random.randint(3,4)
+            if rewa==3:
+                rew='3 × Stamina potion'
+            if rewa==4:
+                rew='4 × Stamina potion'
+        if rewt==5:
+            rewt='Copper armor'
+            rewa=1
+            if rewa==1:
+                rew='1 × Copper armor'
+        if rewt==6:
+            rewt='Copper sword'
+            rewa=1
+            if rewa==1:
+                rew='1 × Copper sword'
+        if rewt==7:
+            rewt='Enchantment scroll'
+            rewa=1
+            if rewa==1:
+                rew='1 × Enchantment scroll'
+        if rewt==8:
+            rewt='Score'
+            rewa=random.randint(1,2)
+            if rewa==1:
+                rew='750 × Score'
+                rewa=750
+            if rewa==2:
+                rew='1000 × Score'
+                rewa=1000
+        if rewt==9:
+            rewt='Gold'
+            rewa=random.randint(10,20)
+            if rewa==10:
+                rew='10 × Gold'
+            if rewa==11:
+                rew='11 × Gold'
+            if rewa==12:
+                rew='12 × Gold'
+            if rewa==13:
+                rew='13 × Gold'
+            if rewa==14:
+                rew='14 × Gold'
+            if rewa==15:
+                rew='15 × Gold'
+            if rewa==16:
+                rew='16 × Gold'
+            if rewa==17:
+                rew='17 × Gold'
+            if rewa==18:
+                rew='18 × Gold'
+            if rewa==19:
+                rew='19 × Gold'
+            if rewa==20:
+                rew='20 × Gold'
+
+def quest(quest,number,questtype,lvlofenchant):
+    global progress
+    global number1
+    global number2
+    global number3
+    global questtype1
+    global questtype2
+    global questtype3
+    global inprogress1
+    global inprogress2
+    global inprogress3
+    global quest1
+    global quest2
+    global quest3
+    global rewardamount1
+    global rewardamount2
+    global rewardamount3
+    global rewardtype1
+    global rewardtype2
+    global rewardtype3
+    global questquality1
+    global questquality2
+    global questquality3
+    global reward1
+    global reward2
+    global reward3
+    global rewt
+    global quality
+    global rewa
+    global rew
+    global num
+    global qt
+    global lvlofenchant1
+    global lvlofenchant2
+    global lvlofenchant3
+    global lvl
+    if quest==1:
+        num=random.randint(3,10)
+        if num>5:
+            quality='High'
+        else:
+            quality='Low'
+    if quest==2:
+        num=1
+        quality='Low'
+    if quest==3:
+        num=random.randint(1,3)
+        quality='Low'
+    if quest==4:
+        num=random.randint(1,5)
+        quality='Low'
+    if quest==5:
+        num=random.randint(3,10)
+        quality='Low'
+    if quest==6:
+        num=random.randint(1,3)
+        qt=random.randint(1,4)
+        if qt==1:
+            quality='Low'
+            qt='Wolf'
+        if qt==2:
+            quality='Low'
+            qt='Bear'
+        if qt==3:
+            quality='High'
+            qt='Bandit'
+        if qt==4:
+            quality='High'
+            qt='Slime'
+    if quest==7:
+            num=random.randint(1,3)
+            if num==1:
+                num=50
+                quality='Low'
+            if num==2:
+                num=100
+                quality='High'
+            if num==3:
+                num=150
+                quality='High'
+    if quest==8:
+            num=random.randint(1,3)
+            if num==1:
+                num=1000
+                quality='Low'
+            if num==2:
+                num=1500
+                quality='High'
+            if num==3:
+                num=2000
+                quality='High'
+    if quest==9:
+            num=random.randint(1,2)
+            if num==1:
+                num=1
+                lvl=2
+                quality='High'
+            if num==2:
+                num=1
+                lvl=3
+                quality='High'
+    if quest==10:
+            num=random.randint(1,3)
+            if num==1:
+                quality='Low'
+            if num==2:
+                quality='Low'
+            if num==3:
+                quality='High'
+    if quest==11:
+        num=1
+        qt=random.randint(1,5)
+        if qt==1:
+            quality='Low'
+            qt='Leather armor'
+        if qt==2:
+            quality='Low'
+            qt='Wooden dagger'
+        if qt==3:
+            quality='High'
+            qt='Copper armor'
+        if qt==4:
+            quality='High'
+            qt='Copper sword'
+        if qt==5:
+            quality='Low'
+            qt='Wooden sword'
+    if quest==12:
+        num=random.randint(5,15)
+        if num>9:
+            quality='High'
+        else:
+            quality='Low'
+    if quest==13:
+        num=random.randint(5,15)
+        quality='Low'
+
+def questprint(quest,inprogress,reward,questnumber,number,questtype,lvlofenchant):
+    global quest1
+    global quest2
+    global quest3
+    global inprogress1
+    global inprogress2
+    global inprogress3
+    global reward1
+    global reward2
+    global reward3
+    global number1
+    global number2
+    global number3
+    global questtype1
+    global questtype2
+    global questtype3
+    global lvlofenchant1
+    global lvlofenchant2
+    global lvlofenchant3
+    print('')
+    print('(',questnumber,') Quest')
+    if quest==1:
+        print('Kill',number,'× enemies')
+    if quest==2:
+        print('Enchant an equipment')
+    if quest==3:
+        print('Sell',number,'× items')
+    if quest==4:
+       print('Buy',number,'× items')
+    if quest==5:
+       print('Gamble',number,'× times')
+    if quest==6:
+       print('Kill',number,'×',questtype)
+    if quest==7:
+       print('Reach',number,'value')
+    if quest==8:
+       print('Reach',number,'score')
+    if quest==9:
+       print('Get a level',lvlofenchant,'enchantment or higher')
+    if quest==10:
+       print('Use skillpoints',number,'× times')
+    if quest==11:
+       print('Get a',questtype)
+    if quest==12:
+       print('Deal',number,'× critical hits')
+    if quest==13:
+       print('Block',number,'× times')
+    print('Reward:',reward)
+    if inprogress=='Yes':
+        print('Progress:',progress,'/',number)
+    print('')
+
+def questselect(quest):
+    global quest1
+    global quest2
+    global quest3
+    global doing1
+    global doing2
+    global doing3
+    global doing4
+    global doing5
+    global doing6
+    global doing7
+    global doing8
+    global doing9
+    global doing10
+    global doing11
+    global doing12
+    global doing13
+    if quest==1:
+        doing1='Yes'
+    if quest==3:
+        doing3='Yes'
+    if quest==4:
+        doing4='Yes'
+    if quest==5:
+        doing5='Yes'
+    if quest==6:
+        doing6='Yes'
+    if quest==7:
+        doing7='Yes'
+    if quest==8:
+        doing8='Yes'
+    if quest==9:
+        doing9='Yes'
+    if quest==2:
+        doing2='Yes'
+    if quest==10:
+        doing10='Yes'
+    if quest==11:
+        doing11='Yes'
+    if quest==12:
+        doing12='Yes'
+    if quest==13:
+        doing13='Yes'
+
+def questcompletion(reward,rewardamount,rewardtype,inprogress,questquality,lvlofenchant):
+    global quest1
+    global quest2
+    global quest3
+    global doing1
+    global doing2
+    global doing3
+    global doing4
+    global doing5
+    global doing6
+    global doing7
+    global doing8
+    global doing9
+    global doing10
+    global doing11
+    global doing12
+    global doing13
+    global inprogress1
+    global inprogress2
+    global inprogress3
+    global reward1
+    global reward2
+    global reward3
+    global number1
+    global number2
+    global number3
+    global questtype1
+    global questtype2
+    global questtype3
+    global leatherarmoramount
+    global copperarmoramount
+    global staminapotionamount
+    global strengthpotionamount
+    global resistancepotionamount
+    global healthpotionamount
+    global revivepotionamount
+    global woodendaggeramount
+    global woodenswordamount
+    global copperswordamount
+    global enchantmentscroll
+    global score
+    global value
+    global progress
+    global treasury
+    global rewardamount1
+    global rewardamount2
+    global rewardamount3
+    global questquality1
+    global questquality2
+    global questquality3
+    global reward1
+    global reward2
+    global reward3
+    global rewardtype1
+    global rewardtype2
+    global rewardtype3
+    global inprogress1
+    global inprogress2
+    global inprogress3
+    global lvlofenchant1
+    global lvlofenchant2
+    global lvlofenchant3
+    print('')
+    printG('Quest completed')
+    time.sleep(2)
+    print('Reward:', end='')
+    printY(reward)
+    print('')
+    if questquality=='Low':
+                if rewardtype=='Health potion':
+                    healthpotionamount=healthpotionamount+rewardamount
+                if rewardtype=='Strength potion':
+                    strengthpotionamount=strengthpotionamount+rewardamount
+                if rewardtype=='Resistance potion':
+                    resistancepotionamount=resistancepotionamount+rewardamount
+                if rewardtype=='Stamina potion':
+                    staminapotionamount=staminapotionamount+rewardamount
+                if rewardtype=='Leather armor':
+                    leatherarmoramount=leatherarmoramount+rewardamount
+                if rewardtype=='Wooden dagger':
+                    woodendaggeramount=woodendaggeramount+rewardamount
+                if rewardtype=='Wooden sword':
+                    woodenswordamount=woodenswordamount+rewardamount
+                if rewardtype=='Score':
+                    score=score+rewardamount
+                if rewardtype=='Gold':
+                    treasury=treasury+rewardamount
+    if questquality=='High':
+                if rewardtype=='Health potion':
+                    healthpotionamount=healthpotionamount+rewardamount
+                if rewardtype=='Strength potion':
+                    strengthpotionamount=strengthpotionamount+rewardamount
+                if rewardtype=='Resistance potion':
+                    resistancepotionamount=resistancepotionamount+rewardamount
+                if rewardtype=='Stamina potion':
+                    staminapotionamount=staminapotionamount+rewardamount
+                if rewardtype=='Copper armor':
+                    copperarmoramount=copperarmoramount+rewardamount
+                if rewardtype=='Copper sword':
+                    copperswordamount=copperswordamount+rewardamount
+                if rewardtype=='Enchantment':
+                    enchantmentscroll=enchantmentscroll+rewardamount
+                if rewardtype=='Score':
+                    score=score+rewardamount
+                if rewardtype=='Gold':
+                    treasury=treasury+rewardamount
+    lvlofenchant=5
+    doing1='No'
+    doing2='No'
+    doing3='No'
+    doing4='No'
+    doing5='No'
+    doing6='No'
+    doing7='No'
+    doing8='No'
+    doing9='No'
+    doing10='No'
+    doing11='No'
+    doing12='No'
+    doing13='No'
+    if inprogress1=='Yes':
+        quest1=random.randint(1,13)
+        while True:
+            if quest1==quest2 or quest1==quest3:
+                quest1=random.randint(1,13)
+                continue
+            else:
+                break
+        quest(quest1,number1,questtype1,lvlofenchant1)
+        lvlofenchant1=lvl
+        number1=num
+        questtype1=qt
+        questquality1=quality
+        questreward(rewardtype1,questquality1,rewardamount1,reward1)
+        rewardtype1=rewt
+        rewardamount1=rewa
+        reward1=rew
+    if inprogress2=='Yes':
+        quest2=random.randint(1,13)
+        while True:
+            if quest1==quest2 or quest2==quest3:
+                quest2=random.randint(1,13)
+                continue
+            else:
+                break
+        quest(quest2,number2,questtype2,lvlofenchant2)
+        lvlofenchant2=lvl
+        number2=num
+        questtype2=qt
+        questquality2=quality
+        questreward(rewardtype2,questquality2,rewardamount2,reward2)
+        rewardtype2=rewt
+        rewardamount2=rewa
+        reward2=rew
+    if inprogress3=='Yes':
+        quest3=random.randint(1,13)
+        while True:
+            if quest3==quest2 or quest1==quest3:
+                quest3=random.randint(1,13)
+                continue
+            else:
+                break
+        quest(quest3,number3,questtype3,lvlofenchant3)
+        lvlofenchant3=lvl
+        number3=num
+        questtype3=qt
+        questquality3=quality
+        questreward(rewardtype3,questquality3,rewardamount3,reward3)
+        rewardtype3=rewt
+        rewardamount3=rewa
+        reward3=rew
+    inprogress1=='No'
+    inprogress2=='No'
+    inprogress3=='No'
+    progress=0
+    time.sleep(3)
+
+def dungeonrooms(room,roomlock,roomcleared,roomenemycount,roomenemytype1,roomenemytype2,roomenemytype3,roomchest,roomsilverchest,roomgoldenchest):
+    global rooms
+    global room1
+    global room2
+    global room3
+    global room4
+    global room5
+    global room6
+    global room1lock
+    global room2lock
+    global room3lock
+    global room4lock
+    global room5lock
+    global room6lock
+    global room1cleared
+    global room2cleared
+    global room3cleared
+    global room4cleared
+    global room5cleared
+    global room6cleared
+    global room1enemycount
+    global room2enemycount
+    global room3enemycount
+    global room4enemycount
+    global room5enemycount
+    global room6enemycount
+    global room1enemytype1
+    global room1enemytype2
+    global room1enemytype3
+    global room2enemytype1
+    global room2enemytype2
+    global room2enemytype3
+    global room3enemytype1
+    global room3enemytype2
+    global room3enemytype3
+    global room1chest
+    global room2chest
+    global room3chest
+    global room4chest
+    global room5chest
+    global room6chest
+    global room1silverchest
+    global room2silverchest
+    global room3silverchest
+    global room4silverchest
+    global room5silverchest
+    global room6silverchest
+    global room1goldenchest
+    global room2goldenchest
+    global room3goldenchest
+    global room4goldenchest
+    global room5goldenchest
+    global room6goldenchest
+    global xp
+    global rc
+    global rsc
+    global rgc
+    global ret1
+    global ret2
+    global ret3
+    global rec
+    global rl
+    rl=random.randint(1,4)
+    if rl==1:
+        rl='Locked'
+    else:
+        rl=''
+    rec=random.randint(1,3)
+    if rec>0:
+        if xp>49:
+            ret1=random.randint(1,4)
+            if ret1==1:
+                ret1='Wolf'
+            if ret1==2:
+                ret1='Bear'
+            if ret1==3:
+                ret1='Bandit'
+            if ret1==1:
+                ret1='Slime'
+        else:
+            ret1=random.randint(1,2)
+            if ret1==1:
+                ret1='Wolf'
+            if ret1==2:
+                ret1='Bear'
+    if rec>1:
+        if xp>49:
+            ret2=random.randint(1,4)
+            if ret2==1:
+                ret2='Wolf'
+            if ret2==2:
+                ret2='Bear'
+            if ret2==3:
+                ret2='Bandit'
+            if ret2==1:
+                ret2='Slime'
+        else:
+            ret2=random.randint(1,2)
+            if ret2==1:
+                ret2='Wolf'
+            if ret2==2:
+                ret2='Bear'
+    if rec>2:
+        if xp>49:
+            ret3=random.randint(1,4)
+            if ret3==1:
+                ret3='Wolf'
+            if ret3==2:
+                ret3='Bear'
+            if ret3==3:
+                ret3='Bandit'
+            if ret3==1:
+                ret3='Slime'
+        else:
+            ret3=random.randint(1,2)
+            if ret3==1:
+                ret3='Wolf'
+            if ret3==2:
+                ret3='Bear'
+    rc=random.randint(1,2)
+    if rc==1:
+        rc=random.randint(1,2)
+        if rc==1:
+            rsc==1
+        else:
+            rgc==1
+
+def enterroom(room,roomlock,roomcleared,roomenemycount,roomenemytype1,roomenemytype2,roomenemytype3,roomchest,roomsilverchest,roomgoldenchest):
+    global rooms
+    global room1
+    global room2
+    global room3
+    global room4
+    global room5
+    global room6
+    global room1lock
+    global room2lock
+    global room3lock
+    global room4lock
+    global room5lock
+    global room6lock
+    global room1cleared
+    global room2cleared
+    global room3cleared
+    global room4cleared
+    global room5cleared
+    global room6cleared
+    global room1enemycount
+    global room2enemycount
+    global room3enemycount
+    global room4enemycount
+    global room5enemycount
+    global room6enemycount
+    global room1enemytype1
+    global room1enemytype2
+    global room1enemytype3
+    global room2enemytype1
+    global room2enemytype2
+    global room2enemytype3
+    global room3enemytype1
+    global room3enemytype2
+    global room3enemytype3
+    global room1chest
+    global room2chest
+    global room3chest
+    global room4chest
+    global room5chest
+    global room6chest
+    global room1silverchest
+    global room2silverchest
+    global room3silverchest
+    global room4silverchest
+    global room5silverchest
+    global room6silverchest
+    global room1goldenchest
+    global room2goldenchest
+    global room3goldenchest
+    global room4goldenchest
+    global room5goldenchest
+    global room6goldenchest
+    global goldgain
+    global xpgain
+    global treasury
+    global xp
+    global enemieskilled
+    global progress
+    global doing1
+    global doing6
+    global inprogress1
+    global inprogress2
+    global inprogress3
+    global questtype1
+    global questtype2
+    global questtype3
+    global score
+    global enemyhp
+    global hp
+    global hploss
+    global laststand
+    global laststandskill
+    global revivepotionamount
+    global maxhp
+    global silverkey
+    global goldenkey
+    global rc
+    global roomkey
+    global no
+    global rl
+    global roomtype
+    global item
+    global amount
+    global enchantmentscroll
+    global xp
+    global copperarmoramount
+    global copperswordamount
+    global resistance1copperarmor
+    global resistance2copperarmor
+    global resistance3copperarmor
+    global curse1copperarmor
+    global curse2copperarmor
+    global curse3copperarmor
+    global blocking1copperarmor
+    global blocking2copperarmor
+    global blocking3copperarmor
+    global curse1coppersword
+    global curse2coppersword
+    global curse3coppersword
+    global blocking1coppersword
+    global blocking2coppersword
+    global blocking3coppersword
+    global sharpness1coppersword
+    global sharpness2coppersword
+    global sharpness3coppersword
+    global looting1coppersword
+    global looting2coppersword
+    global looting3coppersword
+    global chestchoice
+    global enchant
+    global rcl
+    no=0
+    print('')
+    if roomcleared=='Cleared':
+        printR('You already cleared this room')
+        no=1
+    else:
+        printG('Entering the room...')
+    time.sleep(2)
+    print('')
+    if roomlock=='Locked' and no==0:
+        if roomkey>0:
+            roomkey=roomkey-1
+            printG('Room unlocked!')
+            print('')
+            rl='Unlocked'
+            rcl='Cleared'
+            no=1
+            roomtype=random.randint(1,4)
+            if roomtype==1:
+                printB('This room is filled with books and scrolls')
+                print('')
+                item=random.randint(1,2)
+                if item==1:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        enchantmentscroll=enchantmentscroll+1
+                        print('+ Enchantment scroll(',enchantmentscroll,')')
+                    else:
+                        enchantmentscroll=enchantmentscroll+2
+                        print('+ 2 Enchantment scroll(',enchantmentscroll,')')
+                else:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        amount=15
+                        xp=xp+15
+                        print('+ 15 XP (',xp,')')
+                    else:
+                        amount=30
+                        xp=xp+30
+                        print('+ 30 XP (',xp,')') 
+            if roomtype==2:
+                printB('There is two chests in this room and one key, the first one seems to contain a weapon and the other contains an armor, type the number of the chest to open it!')
+                chestchoice=input('')
+                enchant=random.randint(1,100)
+                if chestchoice=='1':
+                    if enchant>0 and enchant<16:
+                        sharpness1coppersword=sharpness1coppersword+1
+                        print('+ Sharpness I Copper sword (',sharpness1coppersword,')')
+                    if enchant>15 and enchant<23:
+                        sharpness2coppersword=sharpness2coppersword+1
+                        print('+ Sharpness II Copper sword (',sharpness2coppersword,')')
+                    if enchant>22 and enchant<26:
+                        sharpness3coppersword=sharpness3coppersword+1
+                        print('+ Sharpness III Copper sword (',sharpness3coppersword,')')
+                    if enchant>25 and enchant<41:
+                        curse1coppersword=curse1coppersword+1
+                        print('+ Curse I Copper sword (',curse1coppersword,')')
+                    if enchant>40 and enchant<48:
+                        curse2coppersword=curse2coppersword+1
+                        print('+ Curse II Copper sword (',curse2coppersword,')')
+                    if enchant>47 and enchant<51:
+                        curse3coppersword=curse3coppersword+1
+                        print('+ Curse III Copper sword (',curse3coppersword,')')
+                    if enchant>50 and enchant<66:
+                        looting1coppersword=looting1coppersword+1
+                        print('+ Looting I Copper sword (',looting1coppersword,')')
+                    if enchant>65 and enchant<73:
+                        looting2coppersword=looting2coppersword+1
+                        print('+ Looting II Copper sword (',looting2coppersword,')')
+                    if enchant>72 and enchant<76:
+                        looting3coppersword=looting3coppersword+1
+                        print('+ Looting III Copper sword (',looting3coppersword,')')
+                    if enchant>75 and enchant<91:
+                        blocking1coppersword=blocking1coppersword+1
+                        print('+ Blocking I Copper sword (',blocking1coppersword,')')
+                    if enchant>90 and enchant<98:
+                        blocking2coppersword=blocking2coppersword+1
+                        print('+ Blocking II Copper sword (',blocking2coppersword,')')
+                    if enchant>97:
+                        blocking3coppersword=blocking3coppersword+1
+                        print('+ Blocking III Copper sword (',blocking3coppersword,')')
+                else:
+                    if enchant>0 and enchant<16:
+                        resistance1copperarmor=resistance1copperarmor+1
+                        print('+ Resistance I Copper armor (',resistance1copperarmor,')')
+                    if enchant>15 and enchant<23:
+                        resistance2copperarmor=resistance2copperarmor+1
+                        print('+ Resistance II Copper armor (',resistance2copperarmor,')')
+                    if enchant>22 and enchant<26:
+                        resistance3copperarmor=resistance3copperarmor+1
+                        print('+ Resistance III Copper armor (',resistance3copperarmor,')')
+                    if enchant>25 and enchant<41:
+                        curse1copperarmor=curse1copperarmor+1
+                        print('+ Curse I Copper armor (',curse1copperarmor,')')
+                    if enchant>40 and enchant<48:
+                        curse2copperarmor=curse2copperarmor+1
+                        print('+ Curse II Copper armor (',curse2copperarmor,')')
+                    if enchant>47 and enchant<51:
+                        curse3copperarmor=curse3copperarmor+1
+                        print('+ Curse III Copper armor (',curse3copperarmor,')')
+                    if enchant>75 and enchant<91:
+                        blocking1copperarmor=blocking1copperarmor+1
+                        print('+ Blocking I Copper armor (',blocking1copperarmor,')')
+                    if enchant>90 and enchant<98:
+                        blocking2copperarmor=blocking2copperarmor+1
+                        print('+ Blocking II Copper armor (',blocking2copperarmor,')')
+                    if enchant>97:
+                        blocking3copperarmor=blocking3copperarmor+1
+                        print('+ Blocking III Copper armor (',blocking3copperarmor,')')
+            if roomtype==3:
+                printGRAY('There is an unlocked silver chest in this room!')
+                print('')
+                silverreward()
+                silverreward()
+                silverreward()
+            if roomtype==4:
+                printY('There is an unlocked golden chest in this room!')
+                print('')
+                goldenreward()
+                goldenreward()
+                goldenreward()
+        else:
+            printR('This room is locked and you do not have a key!')
+            print('')
+            no=1
+            rl='Locked'
+            rcl=''
+    if no==1:
+        treasury=treasury
+    else:
+        if roomenemycount>0:
+            if roomenemytype1=='Wolf':
+                        if xp>49:                    
+                            enemyencounter('Wolf',3,3,75,10,15,15,20) 
+                            score=score+200 
+                        else:
+                            enemyencounter('Wolf',3,3,25,1,5,5,10)
+                            score=score+100
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Wolf':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Wolf':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Wolf':
+                                progress=progress+1
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,2)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,8)
+                            goldgain=random.randint(0,5)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            wolf_loot()
+            if roomenemytype1=='Bear':
+                        if xp>49:
+                            enemyencounter('Bear',5,5,75,10,15,15,20)  
+                            score=score+300
+                        else:
+                            enemyencounter('Bear',5,5,25,1,5,5,10)  
+                            score=score+150
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Bear':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Bear':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Bear':
+                                progress=progress+1
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,2)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,10)
+                            goldgain=random.randint(0,6)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            bear_loot()
+            if roomenemytype1=='Bandit':
+                        enemyencounter('Bandit',7,7,75,1,5,5,10)
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Bandit':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Bandit':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Bandit':
+                                progress=progress+1
+                        score=score+400
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,5)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,12)
+                            goldgain=random.randint(0,8)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            rare_loot()
+            if roomenemytype1=='Slime':
+                        enemyencounter('Slime',10,10,75,1,5,5,10)
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Slime':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Slime':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Slime':
+                                progress=progress+1
+                        score=score+500
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,6)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,15)
+                            goldgain=random.randint(0,10)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            rare_loot()
+        print('')
+        if roomenemycount>1 and hp>0:
+            if roomenemytype2=='Wolf':
+                        if xp>49:                    
+                            enemyencounter('Wolf',3,3,75,10,15,15,20) 
+                            score=score+200 
+                        else:
+                            enemyencounter('Wolf',3,3,25,1,5,5,10)
+                            score=score+100
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Wolf':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Wolf':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Wolf':
+                                progress=progress+1
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,2)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,8)
+                            goldgain=random.randint(0,5)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            wolf_loot()
+            if roomenemytype2=='Bear':
+                        if xp>49:
+                            enemyencounter('Bear',5,5,75,10,15,15,20)  
+                            score=score+300
+                        else:
+                            enemyencounter('Bear',5,5,25,1,5,5,10)  
+                            score=score+150
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Bear':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Bear':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Bear':
+                                progress=progress+1
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,2)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,10)
+                            goldgain=random.randint(0,6)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            bear_loot()
+            if roomenemytype2=='Bandit':
+                        enemyencounter('Bandit',7,7,75,1,5,5,10)
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Bandit':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Bandit':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Bandit':
+                                progress=progress+1
+                        score=score+400
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,5)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,12)
+                            goldgain=random.randint(0,8)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            rare_loot()
+            if roomenemytype2=='Slime':
+                        enemyencounter('Slime',10,10,75,1,5,5,10)
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Slime':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Slime':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Slime':
+                                progress=progress+1
+                        score=score+500
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,6)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,15)
+                            goldgain=random.randint(0,10)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            rare_loot()
+        print('')
+        if roomenemycount>2 and hp>0:
+            if roomenemytype3=='Wolf':
+                        if xp>49:                    
+                            enemyencounter('Wolf',3,3,75,10,15,15,20) 
+                            score=score+200 
+                        else:
+                            enemyencounter('Wolf',3,3,25,1,5,5,10)
+                            score=score+100
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Wolf':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Wolf':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Wolf':
+                                progress=progress+1
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,2)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,8)
+                            goldgain=random.randint(0,5)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            wolf_loot()
+            if roomenemytype3=='Bear':
+                    if xp>49:
+                        enemyencounter('Bear',5,5,75,10,15,15,20)  
+                        score=score+300
+                    else:
+                        enemyencounter('Bear',5,5,25,1,5,5,10)  
+                        score=score+150
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Bear':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Bear':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Bear':
+                                progress=progress+1
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,2)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,10)
+                            goldgain=random.randint(0,6)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            bear_loot()
+            if roomenemytype3=='Bandit':
+                        enemyencounter('Bandit',7,7,75,1,5,5,10)
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Bandit':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Bandit':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Bandit':
+                                progress=progress+1
+                        score=score+400
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,5)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,12)
+                            goldgain=random.randint(0,8)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            rare_loot()
+            if roomenemytype3=='Slime':
+                        enemyencounter('Slime',10,10,75,1,5,5,10)
+                        enemieskilled=enemieskilled+1
+                        if doing1=='Yes':
+                            progress=progress+1
+                        if inprogress1=='Yes':
+                            if doing6=='Yes' and questtype1=='Slime':
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if doing6=='Yes' and questtype2=='Slime':
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if doing6=='Yes' and questtype3=='Slime':
+                                progress=progress+1
+                        score=score+500
+                        while True:
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            hploss=random.randint(0,6)
+                            fight()
+                            if hp<0 or hp==0:
+                                print('')
+                                printR('You died')
+                                if laststand==1:
+                                    if laststandskill=='In use':
+                                        laststand=laststand
+                                    else:
+                                        hp=maxhp*0.2
+                                        print('Last stand skill in use, HP:',round(hp,3),'')
+                                        laststandskill='In use'
+                                        continue
+                                if revivepotionamount>0:
+                                    revivepotionamount=revivepotionamount-1
+                                    print('Revive potion used (',revivepotionamount,'remaining)')
+                                    hp=maxhp
+                                    continue
+                                else:
+                                    deathmessage()
+                                    break
+                            if enemyhp<0 or enemyhp==0:
+                                printG('Fight finished, you won')
+                                print('')
+                                break
+                            else:
+                                time.sleep(3)
+                                continue
+                        if hp<0 or hp==0:
+                            treasury=treasury
+                        else:
+                            xpgain=random.randint(1,15)
+                            goldgain=random.randint(0,10)
+                            win()
+                            xp=xp+xpgain
+                            treasury=treasury+goldgain
+                            advplus(xp, xpgain, treasury, goldgain, hploss, hp, maxhp)
+                            rare_loot()
+        print('')
+        if roomsilverchest==1:
+            printGRAY('You found a silver chest in this room')
+            if silverkey>0:
+                printG('Chest opened!')
+                silverkey=silverkey-1
+                print('')
+                silverreward()
+                silverreward()
+                silverreward
+                print('')
+            else:
+                printR('You do not have a key to open it!')
+        if roomgoldenchest==1:
+            printGRAY('You found a golden chest in this room')
+            if silverkey>0:
+                printG('Chest opened!')
+                goldenkey=goldenkey-1
+                print('')
+                goldenreward()
+                goldenreward()
+                goldenreward
+                print('')
+            else:
+                printR('You do not have a key to open it!')
+        rcl='Cleared'
+
+def silverreward():
+                global healthpotionamount
+                global staminapotionamount
+                global resistancepotionamount
+                global strengthpotionamount
+                global woodendaggeramount
+                global woodenswordamount
+                global leatherarmoramount
+                global roomkey
+                global silverkey
+                global item
+                global inprogress1
+                global inprogress2
+                global inprogress3
+                global doing11
+                global progress
+                global questtype1
+                global questtype2
+                global questtype3
+                global amount
+                item=random.randint(1,9)
+                if item==1:
+                    woodendaggeramount=woodendaggeramount+1
+                    print('+ Wooden dagger (',woodendaggeramount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Wooden dagger':
+                            progress=progress+1
+                if item==2:
+                    woodenswordamount=woodenswordamount+1
+                    print('+ Wooden sword (',woodenswordamount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Wooden sword':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Wooden sword':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Wooden sword':
+                            progress=progress+1
+                if item==3:
+                    leatherarmoramount=leatherarmoramount+1
+                    print('+ Leather armor (',leatherarmoramount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Leather armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Leather armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Leather armor':
+                            progress=progress+1
+                if item==4:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        healthpotionamount=healthpotionamount+1
+                        print('+ Health potion (',healthpotionamount,') ')
+                    else:
+                        healthpotionamount=healthpotionamount+2
+                        print('+ 2 Health potion (',healthpotionamount,') ')
+                if item==5:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        resistancepotionamount=resistancepotionamount+1
+                        print('+ Resistance potion (',resistancepotionamount,') ')
+                    else:
+                        resistancepotionamount=resistancepotionamount+2
+                        print('+ 2 Resistance potion (',resistancepotionamount,') ')
+                if item==6:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        strengthpotionamount=strengthpotionamount+1
+                        print('+ Strength potion (',strengthpotionamount,') ')
+                    else:
+                        strengthpotionamount=strengthpotionamount+2
+                        print('+ 2 Strength potion (',strengthpotionamount,') ')
+                if item==7:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        staminapotionamount=staminapotionamount+1
+                        print('+ Stamina potion (',staminapotionamount,') ')
+                    else:
+                        staminapotionamount=staminapotionamount+2
+                        print('+ 2 Stamina potion (',staminapotionamount,') ')
+                if item==8:
+                    roomkey=roomkey+1
+                    print('+ Room key (',roomkey,')')
+                if item==9:
+                    silverkey=silverkey+1
+                    print('+ Silver key (',silverkey,')')
+
+def goldenreward():
+                global healthpotionamount
+                global staminapotionamount
+                global resistancepotionamount
+                global strengthpotionamount
+                global woodendaggeramount
+                global woodenswordamount
+                global leatherarmoramount
+                global roomkey
+                global silverkey
+                global goldenkey
+                global item
+                global inprogress1
+                global inprogress2
+                global inprogress3
+                global doing11
+                global progress
+                global questtype1
+                global questtype2
+                global questtype3
+                global copperswordamount
+                global copperarmoramount
+                global enchantmentscroll
+                global revivepotionamount
+                global amount
+                item=random.randint(1,10)
+                if item==1:
+                    copperarmoramount=copperarmoramount+1
+                    print('+ Copper armor (',copperarmoramount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Copper armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Copper armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Copper armor':
+                            progress=progress+1
+                if item==2:
+                    copperswordamount=copperswordamount+1
+                    print('+ Copper sword (',copperswordamount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Copper sword':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Copper sword':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Copper sword':
+                            progress=progress+1
+                if item==3:
+                    revivepotionamount=revivepotionamount+1
+                    print('+ Revive potion (',revivepotionamount,') ')
+                if item==10:
+                    goldenkey=goldenkey+1
+                    print('+ Golden key (',goldenkey,')')
+                if item==4:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        healthpotionamount=healthpotionamount+2
+                        print('+ 2 Health potion (',healthpotionamount,') ')
+                    else:
+                        healthpotionamount=healthpotionamount+3
+                        print('+ 3 Health potion (',healthpotionamount,') ')
+                if item==5:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        resistancepotionamount=resistancepotionamount+2
+                        print('+ 2 Resistance potion (',resistancepotionamount,') ')
+                    else:
+                        resistancepotionamount=resistancepotionamount+3
+                        print('+ 3 Resistance potion (',resistancepotionamount,') ')
+                if item==6:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        strengthpotionamount=strengthpotionamount+2
+                        print('+ 2 Strength potion (',strengthpotionamount,') ')
+                    else:
+                        strengthpotionamount=strengthpotionamount+3
+                        print('+ 3 Strength potion (',strengthpotionamount,') ')
+                if item==7:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        staminapotionamount=staminapotionamount+2
+                        print('+ 2 Stamina potion (',staminapotionamount,') ')
+                    else:
+                        staminapotionamount=staminapotionamount+3
+                        print('+ 3 Stamina potion (',staminapotionamount,') ')
+                if item==8:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        roomkey=roomkey+1
+                        print('+ Room key (',roomkey,')')
+                    else:
+                        roomkey=roomkey+2
+                        print('+ 2 Room key (',roomkey,')')
+                if item==9:
+                    amount=random.randint(1,2)
+                    if amount==1:
+                        silverkey=silverkey+1
+                        print('+ Silver key (',silverkey,')')
+                    else:
+                        roomkey=roomkey+2
+                        print('+ 2 Silver key (',silverkey,')')
 
 #-----------------------Print-----------------------#
 
@@ -1556,7 +3597,6 @@ valuegain=0
 score=0
 
 name=0
-
 
 #-----------------------Potions-----------------------#
 
@@ -1732,6 +3772,220 @@ weaponvarmor=0
 
 enemyname2=0
 
+enchantlevel=0
+
+potions=0
+
+#-----------------------Quests-----------------------#
+
+questz1=''
+questz2=''
+questz3=''
+
+quest1=0
+quest2=0
+quest3=0
+
+quest1=random.randint(1,13)
+quest2=random.randint(1,13)
+quest3=random.randint(1,13)
+
+while True:
+    if quest1==quest2 or quest1==quest3:
+        quest1=random.randint(1,13)
+    if quest2==quest1 or quest2==quest3:
+        quest2=random.randint(1,13)
+    if quest3==quest2 or quest3==quest1:
+        quest3=random.randint(1,13)
+    if quest1==quest2 or quest1==quest3 or quest2==quest3:
+        continue
+    else:
+        break
+
+progress=0
+startedquestnumber=0
+number1=0
+number2=0
+number3=0
+num=0
+questtype1=0
+questtype2=0
+questtype3=0
+qt=0
+reward1=''
+reward2=''
+reward3=''
+rew=''
+rewardtype1=''
+rewardtype2=''
+rewardtype3=''
+rewt=''
+inprogress1='No'
+inprogress2='No'
+inprogress3='No'
+rewardamount1=0
+rewardamount2=0
+rewardamount3=0
+rewa=0
+questquality1=''
+questquality2=''
+questquality3=''
+quality=''
+lvlofenchant1=2
+lvlofenchant2=2
+lvlofenchant3=2
+lvl=0
+
+quest(quest1,number1,questtype1,lvlofenchant1)
+lvlofenchant1=lvl
+number1=num
+questtype1=qt
+questquality1=quality
+questreward(rewardtype1,questquality1,rewardamount1,reward1)
+rewardtype1=rewt
+rewardamount1=rewa
+reward1=rew
+
+quest(quest2,number2,questtype2,lvlofenchant2)
+lvlofenchant2=lvl
+number2=num
+questtype2=qt
+questquality2=quality
+questreward(rewardtype2,questquality2,rewardamount2,reward2)
+rewardtype2=rewt
+rewardamount2=rewa
+reward2=rew
+
+quest(quest3,number3,questtype3,lvlofenchant3)
+lvlofenchant3=lvl
+number3=num
+questtype3=qt
+questquality3=quality
+questreward(rewardtype3,questquality3,rewardamount3,reward3)
+rewardtype3=rewt
+rewardamount3=rewa
+reward3=rew
+
+questchoice=''
+
+doing1=0
+doing2=0
+doing3=0
+doing4=0
+doing5=0
+doing6=0
+doing7=0
+doing8=0
+doing9=0
+doing10=0
+doing11=0
+doing12=0
+doing13=0
+
+#-----------------------Dungeons-----------------------#
+
+dungeon=0
+enter=0
+
+rooms=0
+
+room1=0
+room2=0
+room3=0
+room4=0
+room5=0
+room6=0
+
+room1cleared=''
+room2cleared=''
+room3cleared=''
+room4cleared=''
+room5cleared=''
+room6cleared=''
+
+rcl=''
+
+room1lock=''
+room2lock=''
+room3lock=''
+room4lock=''
+room5lock=''
+room6lock=''
+
+rl=''
+
+room1enemycount=0
+room2enemycount=0
+room3enemycount=0
+room4enemycount=0
+room5enemycount=0
+room6enemycount=0
+
+rec=0
+
+room1enemytype1=0
+room1enemytype2=0
+room1enemytype3=0
+room2enemytype1=0
+room2enemytype2=0
+room2enemytype3=0
+room3enemytype1=0
+room3enemytype2=0
+room3enemytype3=0
+room4enemytype1=0
+room4enemytype2=0
+room4enemytype3=0
+room5enemytype1=0
+room5enemytype2=0
+room5enemytype3=0
+room6enemytype1=0
+room6enemytype2=0
+room6enemytype3=0
+
+ret1=0
+ret2=0
+ret3=0
+
+room1chest=0
+room2chest=0
+room3chest=0
+room4chest=0
+room5chest=0
+room6chest=0
+
+rc=0
+
+room1silverchest=0
+room2silverchest=0
+room3silverchest=0
+room4silverchest=0
+room5silverchest=0
+room6silverchest=0
+
+rsc=0
+
+room1goldenchest=0
+room2goldenchest=0
+room3goldenchest=0
+room4goldenchest=0
+room5goldenchest=0
+room6goldenchest=0
+
+rgc=0
+
+indungeon='No'
+died=0
+
+silverkey=0
+goldenkey=0
+roomkey=0
+
+no=0
+
+roomtype=''
+amount=0
+chestchoice=''
+
 #-----------------------Skills-----------------------#
 
 focus=0
@@ -1829,6 +4083,108 @@ time.sleep(1)
 #-----------------------Game-----------------------#
 
 while True:
+
+    dungeon=0
+    enter=0
+
+    rooms=0
+
+    room1=0
+    room2=0
+    room3=0
+    room4=0
+    room5=0
+    room6=0
+
+    room1cleared=''
+    room2cleared=''
+    room3cleared=''
+    room4cleared=''
+    room5cleared=''
+    room6cleared=''
+
+    room1lock=''
+    room2lock=''
+    room3lock=''
+    room4lock=''
+    room5lock=''
+    room6lock=''
+
+    room1enemycount=0
+    room2enemycount=0
+    room3enemycount=0
+    room4enemycount=0
+    room5enemycount=0
+    room6enemycount=0
+
+    room1enemytype1=0
+    room1enemytype2=0
+    room1enemytype3=0
+    room2enemytype1=0
+    room2enemytype2=0
+    room2enemytype3=0
+    room3enemytype1=0
+    room3enemytype2=0
+    room3enemytype3=0
+    room4enemytype1=0
+    room4enemytype2=0
+    room4enemytype3=0
+    room5enemytype1=0
+    room5enemytype2=0
+    room5enemytype3=0
+    room6enemytype1=0
+    room6enemytype2=0
+    room6enemytype3=0
+
+    room1chest=0
+    room2chest=0
+    room3chest=0
+    room4chest=0
+    room5chest=0
+    room6chest=0
+
+    room1silverchest=0
+    room2silverchest=0
+    room3silverchest=0
+    room4silverchest=0
+    room5silverchest=0
+    room6silverchest=0
+
+    room1goldenchest=0
+    room2goldenchest=0
+    room3goldenchest=0
+    room4goldenchest=0
+    room5goldenchest=0
+    room6goldenchest=0
+
+    indungeon='No'
+    died=0
+
+    if inprogress1=='Yes':
+        if doing7=='Yes':
+            if value==number1 or value>number1:
+                progress=1
+    if inprogress2=='Yes':
+        if doing7=='Yes':
+            if value==number2 or value>number2:
+                progress=1
+    if inprogress3=='Yes':
+        if doing7=='Yes':
+            if value==number3 or value>number3:
+                progress=1
+
+    if inprogress1=='Yes':
+        if doing8=='Yes':
+            if score==number1 or score>number1:
+                progress=1
+    if inprogress2=='Yes':
+        if doing8=='Yes':
+            if score==number2 or score>number2:
+                progress=1
+    if inprogress3=='Yes':
+        if doing8=='Yes':
+            if score==number3 or score>number3:
+                progress=1
 
     value=15
 
@@ -1973,8 +4329,27 @@ while True:
         value=value+treasury
         value=value+valuegain
 
+    if doing7=='Yes':
+        progress=value
+    if doing8=='Yes':
+        progress=score
+
+    if inprogress1=='Yes':
+        if progress==number1 or progress>number1:
+            printG('Quest completed!')
+            print('')
+    if inprogress2=='Yes':
+        if progress==number2 or progress>number2:
+            printG('Quest completed!')
+            print('')
+    if inprogress3=='Yes':
+        if progress==number3 or progress>number3:
+            printG('Quest completed!')
+            print('')
+
+
     printB('\nOptions:')
-    print(' 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n')
+    print(' 1 - Adventure \n 2 - Profile \n 3 - Inventory \n 4 - Shop \n 5 - Help \n 6 - Item list \n 7 - Gamble \n 8 - Enchanting \n 9 - Skills \n 10 - Quests \n')
     choice=input('')
 
     if choice=='1':
@@ -1986,6 +4361,158 @@ while True:
         resistanceuse=resistanceuse-1
         point=random.randint(1,100)
         laststandskill='Not used'
+
+        dungeon=random.randint(1,5)
+        if dungeon==1:
+            print('')
+            print('You found an ancient dungeon, do you wish to enter? 1 = Yes; 2 = No')
+            enter=input('')
+            if enter=='1':
+                printG('You have entered the dungeon!')
+                rooms=random.randint(2,6)
+                if rooms>0:
+                    dungeonrooms(room1,room1lock,room1cleared,room1enemycount,room1enemytype1,room1enemytype2,room1enemytype3,room1chest,room1silverchest,room1goldenchest)
+                    room1lock=rl
+                    room1enemycount=rec
+                    room1enemytype1=ret1
+                    room1enemytype2=ret2
+                    room1enemytype3=ret3
+                    room1chest=rc
+                    room1silverchest=rsc
+                    room1goldenchest=rgc
+                if rooms>1:
+                    dungeonrooms(room2,room2lock,room2cleared,room2enemycount,room2enemytype1,room2enemytype2,room2enemytype3,room2chest,room2silverchest,room2goldenchest)
+                    room2lock=rl
+                    room2enemycount=rec
+                    room2enemytype1=ret1
+                    room2enemytype2=ret2
+                    room2enemytype3=ret3
+                    room2chest=rc
+                    room2silverchest=rsc
+                    room2goldenchest=rgc
+                if rooms>2:
+                    dungeonrooms(room3,room3lock,room3cleared,room3enemycount,room3enemytype1,room3enemytype2,room3enemytype3,room3chest,room3silverchest,room3goldenchest)
+                    room3lock=rl
+                    room3enemycount=rec
+                    room3enemytype1=ret1
+                    room3enemytype2=ret2
+                    room3enemytype3=ret3
+                    room3chest=rc
+                    room3silverchest=rsc
+                    room3goldenchest=rgc
+                if rooms>3:
+                    dungeonrooms(room4,room4lock,room4cleared,room4enemycount,room4enemytype1,room4enemytype2,room4enemytype3,room4chest,room4silverchest,room4goldenchest)
+                    room4lock=rl
+                    room4enemycount=rec
+                    room4enemytype1=ret1
+                    room4enemytype2=ret2
+                    room4enemytype3=ret3
+                    room4chest=rc
+                    room4silverchest=rsc
+                    room4goldenchest=rgc
+                if rooms>4:
+                    dungeonrooms(room5,room5lock,room5cleared,room5enemycount,room5enemytype1,room5enemytype2,room5enemytype3,room5chest,room5silverchest,room5goldenchest)
+                    room5lock=rl
+                    room5enemycount=rec
+                    room5enemytype1=ret1
+                    room5enemytype2=ret2
+                    room5enemytype3=ret3
+                    room5chest=rc
+                    room5silverchest=rsc
+                    room5goldenchest=rgc
+                if rooms>5:
+                    dungeonrooms(room6,room6lock,room6cleared,room6enemycount,room6enemytype1,room6enemytype2,room6enemytype3,room6chest,room6silverchest,room6goldenchest)
+                    room6lock=rl
+                    room6enemycount=rec
+                    room6enemytype1=ret1
+                    room6enemytype2=ret2
+                    room6enemytype3=ret3
+                    room6chest=rc
+                    room6silverchest=rsc
+                    room6goldenchest=rgc
+                indungeon='Yes'
+                while True:
+                    print('')
+                    if hp==0 or hp<0:
+                        break
+                    if rooms>0:
+                        print('Room 1',room1lock,room1cleared)
+                    if rooms>1:
+                        print('Room 2',room2lock,room2cleared)
+                    if rooms>2:
+                        print('Room 3',room3lock,room3cleared)
+                    if rooms>3:
+                        print('Room 4',room4lock,room4cleared)
+                    if rooms>4:
+                        print('Room 5',room5lock,room5cleared)
+                    if rooms>5:
+                        print('Room 6',room6lock,room6cleared)
+                    print('')
+                    printB('Type the number of the room to enter it or type leave to leave the dungeon')
+                    roomchoice=input('')
+                    if roomchoice=='leave':
+                        break
+                    if roomchoice=='1':
+                        if rooms>0:
+                            enterroom(room1,room1lock,room1cleared,room1enemycount,room1enemytype1,room1enemytype2,room1enemytype3,room1chest,room1silverchest,room1goldenchest)
+                            room1cleared=rcl
+                            room1lock=rl
+                            continue
+                        else:
+                            print('Room 1 does not exist')
+                            continue
+                    if roomchoice=='2':
+                        if rooms>1:
+                            enterroom(room2,room2lock,room2cleared,room2enemycount,room2enemytype1,room2enemytype2,room2enemytype3,room2chest,room2silverchest,room2goldenchest)
+                            room2cleared=rcl
+                            room2lock=rl
+                            continue
+                        else:
+                            print('Room 2 does not exist')
+                            continue
+                    if roomchoice=='3':
+                        if rooms>2:
+                            enterroom(room3,room3lock,room3cleared,room3enemycount,room3enemytype1,room3enemytype2,room3enemytype3,room3chest,room3silverchest,room3goldenchest)
+                            room3cleared=rcl
+                            room3lock=rl
+                            continue
+                        else:
+                            print('Room 3 does not exist')
+                            continue
+                    if roomchoice=='4':
+                        if rooms>3:
+                            enterroom(room4,room4lock,room4cleared,room4enemycount,room4enemytype1,room4enemytype2,room4enemytype3,room4chest,room4silverchest,room4goldenchest)
+                            room4cleared=rcl
+                            room4lock=rl
+                            continue
+                        else:
+                            print('Room 4 does not exist')
+                            continue
+                    if roomchoice=='5':
+                        if rooms>4:
+                            enterroom(room5,room5lock,room5cleared,room5enemycount,room5enemytype1,room5enemytype2,room5enemytype3,room5chest,room5silverchest,room5goldenchest)
+                            room5cleared=rcl
+                            room5lock=rl
+                            continue
+                        else:
+                            print('Room 5 does not exist')
+                            continue
+                    if roomchoice=='6':
+                        if rooms>5:
+                            enterroom(room6,room6lock,room6cleared,room6enemycount,room6enemytype1,room6enemytype2,room6enemytype3,room6chest,room6silverchest,room6goldenchest)
+                            room6cleared=rcl
+                            room6lock=rl
+                            continue
+                        else:
+                            print('Room 6 does not exist')
+                            continue
+                if hp==0 or hp<0:
+                    break
+                else:
+                    print('')
+                    continue
+            else:
+                print('')
 
         if event<3:
             print('')
@@ -2036,6 +4563,17 @@ while True:
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    if doing1=='Yes':
+                        progress=progress+1
+                    if inprogress1=='Yes':
+                        if doing6=='Yes' and questtype1=='Wolf':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing6=='Yes' and questtype2=='Wolf':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing6=='Yes' and questtype3=='Wolf':
+                            progress=progress+1
                     score=score+100
                     while True:
                         if enemyhp<0 or enemyhp==0:
@@ -2117,6 +4655,17 @@ while True:
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    if doing1=='Yes':
+                        progress=progress+1
+                    if inprogress1=='Yes':
+                        if doing6=='Yes' and questtype1=='Bear':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing6=='Yes' and questtype2=='Bear':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing6=='Yes' and questtype3=='Bear':
+                            progress=progress+1
                     score=score+150
                     while True:
                         if enemyhp<0 or enemyhp==0:
@@ -2186,10 +4735,28 @@ while True:
                     leatherarmoramount=leatherarmoramount+1
                     print('Item box:')
                     print('+ 1 Leather armor (',leatherarmoramount,')')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Leather armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Leather armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Leather armor':
+                            progress=progress+1
                 if prize==4:
                     woodendaggeramount=woodendaggeramount+1
                     print('Item box:')
-                    print('+ 1 Leather armor (',leatherarmoramount,')')
+                    print('+ 1 Wooden dagger (',woodendaggeramount,')')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Wooden dagger':
+                            progress=progress+1
                 if prize==5:
                     resistancepotionamount=resistancepotionamount+1
                     print('Item box:')
@@ -2228,18 +4795,54 @@ while True:
                     leatherarmoramount=leatherarmoramount+1
                     print('Item box:')
                     print('+ 1 Leather armor (',leatherarmoramount,')')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Leather armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Leather armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Leather armor':
+                            progress=progress+1
                 if prize==4:
                     woodendaggeramount=woodendaggeramount+1
                     print('Item box:')
                     print('+ 1 Wooden dagger (',woodendaggeramount,')')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Wooden dagger':
+                            progress=progress+1
                 if prize==5:
                     copperarmoramount=copperarmoramount+1
                     print('Item box:')
                     print('+ 1 Copper armor (',copperarmoramount,')')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Copper armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Copper armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Copper armor':
+                            progress=progress+1
                 if prize==6:
                     copperswordamount=copperswordamount+1
                     print('Item box:')
                     print('+ 1 Copper sword (',copperswordamount,')')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Copper sword':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Copper sword':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Copper sword':
+                            progress=progress+1
                 if prize==7:
                     revivepotionamount=revivepotionamount+1
                     print('Item box:')
@@ -2264,7 +4867,7 @@ while True:
                     hp=hp-hploss
                     if hp<0 or hp==0:
                         print('')
-                        print('You died')
+                        printR('You died')
                         if laststand==1:
                             if laststandskill=='In use':
                                 laststand=laststand
@@ -2287,17 +4890,28 @@ while True:
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    if doing1=='Yes':
+                        progress=progress+1
+                    if inprogress1=='Yes':
+                        if doing6=='Yes' and questtype1=='Bandit':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing6=='Yes' and questtype2=='Bandit':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing6=='Yes' and questtype3=='Bandit':
+                            progress=progress+1
                     score=score+400
                     while True:
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         hploss=random.randint(0,5)
                         fight()
                         if hp<0 or hp==0:
                             print('')
-                            print('You died')
+                            printR('You died')
                             if laststand==1:
                                 if laststandskill=='In use':
                                     laststand=laststand
@@ -2315,7 +4929,7 @@ while True:
                                 deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         else:
@@ -2406,7 +5020,7 @@ while True:
                     hp=hp-hploss
                     if hp<0 or hp==0:
                         print('')
-                        print('You died')
+                        printR('You died')
                         if laststand==1:
                             if laststandskill=='In use':
                                 laststand=laststand
@@ -2429,17 +5043,28 @@ while True:
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    if doing1=='Yes':
+                        progress=progress+1
+                    if inprogress1=='Yes':
+                        if doing6=='Yes' and questtype1=='Wolf':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing6=='Yes' and questtype2=='Wolf':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing6=='Yes' and questtype3=='Wolf':
+                            progress=progress+1
                     score=score+200
                     while True:
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         hploss=random.randint(0,2)
                         fight()
                         if hp<0 or hp==0:
                             print('')
-                            print('You died')
+                            printR('You died')
                             if laststand==1:
                                 if laststandskill=='In use':
                                     laststand=laststand
@@ -2457,7 +5082,7 @@ while True:
                                 deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         else:
@@ -2486,7 +5111,7 @@ while True:
                     hp=hp-hploss
                     if hp<0 or hp==0:
                         print('')
-                        print('You died')
+                        printR('You died')
                         if laststand==1:
                             if laststandskill=='In use':
                                 laststand=laststand
@@ -2509,17 +5134,28 @@ while True:
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    if doing1=='Yes':
+                        progress=progress+1
+                    if inprogress1=='Yes':
+                        if doing6=='Yes' and questtype1=='Bear':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing6=='Yes' and questtype2=='Bear':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing6=='Yes' and questtype3=='Bear':
+                            progress=progress+1
                     score=score+300
                     while True:
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         hploss=random.randint(0,2)
                         fight()
                         if hp<0 or hp==0:
                             print('')
-                            print('You died')
+                            printR('You died')
                             if laststand==1:
                                 if laststandskill=='In use':
                                     laststand=laststand
@@ -2537,7 +5173,7 @@ while True:
                                 deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         else:
@@ -2566,7 +5202,7 @@ while True:
                     hp=hp-hploss
                     if hp<0 or hp==0:
                         print('')
-                        print('You died')
+                        printR('You died')
                         if laststand==1:
                             if laststandskill=='In use':
                                 laststand=laststand
@@ -2589,17 +5225,28 @@ while True:
                     continue
                 if battle=='2':
                     enemieskilled=enemieskilled+1
+                    if doing1=='Yes':
+                        progress=progress+1
+                    if inprogress1=='Yes':
+                        if doing6=='Yes' and questtype1=='Slime':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing6=='Yes' and questtype2=='Slime':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing6=='Yes' and questtype3=='Slime':
+                            progress=progress+1
                     score=score+500
                     while True:
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         hploss=random.randint(0,6)
                         fight()
                         if hp<0 or hp==0:
                             print('')
-                            print('You died')
+                            printR('You died')
                             if laststand==1:
                                 if laststandskill=='In use':
                                     laststand=laststand
@@ -2617,7 +5264,7 @@ while True:
                                 deathmessage()
                                 break
                         if enemyhp<0 or enemyhp==0:
-                            print('Fight finished, you won')
+                            printG('Fight finished, you won')
                             print('')
                             break
                         else:
@@ -2784,7 +5431,7 @@ while True:
                 if score>1499 and score<2500:
                     print('Score:',score,'-', end='')
                     printB('Good!')
-                else:
+                if score<1500:
                     print('Score:',score,'-', end='')
                     print(' Bad')
                 if value>249:
@@ -2796,7 +5443,7 @@ while True:
                 if value>99 and value<175:
                     print('Value:',value,'-', end='')
                     printB('Good!')
-                else:
+                if value<100:
                     print('Value:',value,'-', end='')
                     print(' Bad')
                 print('Enemies killed:',enemieskilled)
@@ -3026,6 +5673,12 @@ while True:
             print(enchantmentscroll,'× Enchantment scroll')
         if magneticstone>0:
             print('(13)',magneticstone,'× Magnetic stone')
+        if roomkey>0:
+            print(roomkey,'× Room key')
+        if silverkey>0:
+            print(silverkey,'× Silver key')
+        if goldenkey>0:
+            print(goldenkey,'× Goldenkey')
         else:
             treasury=treasury
         print('')
@@ -3291,14 +5944,14 @@ while True:
         if use=='6a2':
             print('')
             if resistance2copperarmor>0:
-                copperrarmorequip()
+                copperarmorequip()
                 maxhp=maxhp*1.3
                 res2=1
                 resistance2copperarmor=resistance2copperarmor-1
         if use=='6a3':
             print('')
             if resistance3copperarmor>0:
-                lcopperarmorequip()
+                copperarmorequip()
                 maxhp=maxhp*1.5
                 res3=1
                 resistance3copperarmor=resistance3copperarmor-1
@@ -3548,7 +6201,7 @@ while True:
         if use=='9b3':
             print('')
             if looting2catsword>0:
-                catwordequip()
+                catswordequip()
                 loot3=1
                 looting3catsword=looting3catsword-1
         if use=='9c1':
@@ -3611,87 +6264,92 @@ while True:
                 block=100
         
         if use=='13':
-            print('')
-            print('From which one do you want to remove the enchant? 1 = Equipped weapon, 2 = Equipped armor')
-            weaponvarmor=input()
-            isenchanted='No'
-            if weaponvarmor=='1':
-                if equippedweapon=='Wooden dagger' or equippedweapon=='Wooden sword' or equippedweapon=='Copper sword' or equippedweapon=='Maxwell sword':
-                    if sharp1==1:
-                        isenchanted='Yes'
-                    if sharp2==1:
-                        isenchanted='Yes'
-                    if sharp3==1:
-                        isenchanted='Yes'
-                    if block1w==1:
-                        isenchanted='Yes'
-                    if block2w==1:
-                        isenchanted='Yes'
-                    if block3w==1:
-                        isenchanted='Yes'
-                    if loot1==1:
-                        isenchanted='Yes'
-                    if loot2==1:
-                        isenchanted='Yes'
-                    if loot3==1:
-                        isenchanted='Yes'
-                    if curse1==1:
-                        isenchanted='Yes'
-                    if curse2==1:
-                        isenchanted='Yes'
-                    if curse3==1:
-                        isenchanted='Yes'
-                    if isenchanted=='Yes':
-                        enchantcheckweapon()
-                        printG('Enchant succesfully removed!')
-                        magneticstone=magneticstone-1
-                    else:
-                        printR('Your weapon is not enchanted!')
-                else:
-                    printR('You need to equip your weapon to remove the enchant!')
-            if weaponvarmor=='2':
-                if equippedarmor=='Leather armor' or equippedarmor=='Copper armor' or equippedarmor=='Maxwell armor':
-                    if block1a==1:
-                        blocking1leatherarmor=blocking1leatherarmor+1
-                        isenchanted='Yes'
-                    if block2a==1:
-                        blocking2leatherarmor=blocking2leatherarmor+1    
-                        isenchanted='Yes'
-                    if block3a==1:
-                        blocking3leatherarmor=blocking3leatherarmor+1
-                        isenchanted='Yes'
-                    if curse1a==1:
-                        curse1leatherarmor=curse1leatherarmor+1
-                        isenchanted='Yes'
-                    if curse2a==1:
-                        curse2leatherarmor=curse2leatherarmor+1
-                        isenchanted='Yes'
-                    if curse3a==1:
-                        curse3leatherarmor=curse3leatherarmor+1
-                        isenchanted='Yes'
-                    if res1==1:
-                        resistance1leatherarmor=resistance1leatherarmor+1
-                        isenchanted='Yes'
-                    if res2==1:
-                        resistance2leatherarmor=resistance2leatherarmor+1
-                        isenchanted='Yes'
-                    if res3==1:
-                        resistance3leatherarmor=resistance3leatherarmor+1
-                        isenchanted='Yes'
-                    if isenchanted=='Yes':
-                        enchantcheckarmor()
-                        printG('Enchant succesfully removed!')
-                        magneticstone=magneticstone-1
-                    else:
-                        printR('Your armor is not enchanted!')
-
-                else:
-                    printR('You need to equip your armor to remove the enchant!')
-            else:
+            if magneticstone>0:
                 print('')
-                continue             
+                print('From which one do you want to remove the enchant? 1 = Equipped weapon, 2 = Equipped armor')
+                weaponvarmor=input()
+                isenchanted='No'
+                if weaponvarmor=='1':
+                    if equippedweapon=='Wooden dagger' or equippedweapon=='Wooden sword' or equippedweapon=='Copper sword' or equippedweapon=='Maxwell sword':
+                        if sharp1==1:
+                            isenchanted='Yes'
+                        if sharp2==1:
+                            isenchanted='Yes'
+                        if sharp3==1:
+                            isenchanted='Yes'
+                        if block1w==1:
+                            isenchanted='Yes'
+                        if block2w==1:
+                            isenchanted='Yes'
+                        if block3w==1:
+                            isenchanted='Yes'
+                        if loot1==1:
+                            isenchanted='Yes'
+                        if loot2==1:
+                            isenchanted='Yes'
+                        if loot3==1:
+                            isenchanted='Yes'
+                        if curse1==1:
+                            isenchanted='Yes'
+                        if curse2==1:
+                            isenchanted='Yes'
+                        if curse3==1:
+                            isenchanted='Yes'
+                        if isenchanted=='Yes':
+                            enchantcheckweapon()
+                            printG('Enchant succesfully removed!')
+                            magneticstone=magneticstone-1
+                        else:
+                            printR('Your weapon is not enchanted!')
+                    else:
+                        printR('You need to equip your weapon to remove the enchant!')
+                if weaponvarmor=='2':
+                    if equippedarmor=='Leather armor' or equippedarmor=='Copper armor' or equippedarmor=='Maxwell armor':
+                        if block1a==1:
+                            blocking1leatherarmor=blocking1leatherarmor+1
+                            isenchanted='Yes'
+                        if block2a==1:
+                            blocking2leatherarmor=blocking2leatherarmor+1    
+                            isenchanted='Yes'
+                        if block3a==1:
+                            blocking3leatherarmor=blocking3leatherarmor+1
+                            isenchanted='Yes'
+                        if curse1a==1:
+                            curse1leatherarmor=curse1leatherarmor+1
+                            isenchanted='Yes'
+                        if curse2a==1:
+                            curse2leatherarmor=curse2leatherarmor+1
+                            isenchanted='Yes'
+                        if curse3a==1:
+                            curse3leatherarmor=curse3leatherarmor+1
+                            isenchanted='Yes'
+                        if res1==1:
+                            resistance1leatherarmor=resistance1leatherarmor+1
+                            isenchanted='Yes'
+                        if res2==1:
+                            resistance2leatherarmor=resistance2leatherarmor+1
+                            isenchanted='Yes'
+                        if res3==1:
+                            resistance3leatherarmor=resistance3leatherarmor+1
+                            isenchanted='Yes'
+                        if isenchanted=='Yes':
+                            enchantcheckarmor()
+                            printG('Enchant succesfully removed!')
+                            magneticstone=magneticstone-1
+                        else:
+                            printR('Your armor is not enchanted!')
+
+                    else:
+                        printR('You need to equip your armor to remove the enchant!')
+                else:
+                    print('')
+                    continue   
+            else:
+                print('')  
+                printR('You do not have a magnetic stone!')        
 
         print('')
+        time.sleep(3)
         continue
     
     if choice=='4':
@@ -3749,6 +6407,16 @@ while True:
             revivepotionamount=x
 
         if purchase=='3':
+            if treasury>5.99:
+                if inprogress1=='Yes':
+                    if doing11=='Yes' and questtype1=='Leather armor':
+                        progress=progress+1
+                if inprogress2=='Yes':
+                    if doing11=='Yes' and questtype2=='Leather armor':
+                        progress=progress+1
+                if inprogress3=='Yes':
+                    if doing11=='Yes' and questtype3=='Leather armor':
+                        progress=progress+1
             buy(5.99,leatherarmoramount,'Leather armor')
             leatherarmoramount=x
 
@@ -3760,6 +6428,16 @@ while True:
             leatherarmoramount=x
 
         if purchase=='4':
+            if treasury>4.99:
+                if inprogress1=='Yes':
+                    if doing11=='Yes' and questtype1=='Wooden dagger':
+                        progress=progress+1
+                if inprogress2=='Yes':
+                    if doing11=='Yes' and questtype2=='Wooden dagger':
+                        progress=progress+1
+                if inprogress3=='Yes':
+                    if doing11=='Yes' and questtype3=='Wooden dagger':
+                        progress=progress+1
             buy(4.99,woodendaggeramount,'Wooden dagger')
             woodendaggeramount=x
 
@@ -3771,6 +6449,16 @@ while True:
             woodendaggeramount=x
 
         if purchase=='5':
+            if treasury>6.99:
+                if inprogress1=='Yes':
+                    if doing11=='Yes' and questtype1=='Wooden sword':
+                        progress=progress+1
+                if inprogress2=='Yes':
+                    if doing11=='Yes' and questtype2=='Wooden sword':
+                        progress=progress+1
+                if inprogress3=='Yes':
+                    if doing11=='Yes' and questtype3=='Wooden sword':
+                        progress=progress+1
             buy(6.99,woodenswordamount,'Wooden sword')
             woodenswordamount=x
 
@@ -3784,22 +6472,51 @@ while True:
         if purchase=='6':
             if treasury>5.99:
                 print('')
-                print('Purchase succesfull')
+                printG('Purchase succesfull')
                 print('- 5 gold (',treasury-5,')')
+                if doing4=='Yes':
+                    progress=progress+1
                 treasury=treasury-5
-                item=random.randint(1,7)
+                item=random.randint(1,9)
                 if item==1:
                     woodendaggeramount=woodendaggeramount+1
                     print('+ Wooden dagger (',woodendaggeramount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Wooden dagger':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Wooden dagger':
+                            progress=progress+1
                 if item==2:
                     woodenswordamount=woodenswordamount+1
                     print('+ Wooden sword (',woodenswordamount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Wooden sword':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Wooden sword':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Wooden sword':
+                            progress=progress+1
                 if item==3:
                     leatherarmoramount=leatherarmoramount+1
                     print('+ Leather armor (',leatherarmoramount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Leather armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Leather armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Leather armor':
+                            progress=progress+1
                 if item==4:
                     healthpotionamount=healthpotionamount+1
-                    print('+ Leather armor (',healthpotionamount,') ')
+                    print('+ Health potion (',healthpotionamount,') ')
                 if item==5:
                     resistancepotionamount=resistancepotionamount+1
                     print('+ Resistance potion (',resistancepotionamount,') ')
@@ -3809,32 +6526,63 @@ while True:
                 if item==7:
                     staminapotionamount=staminapotionamount+1
                     print('+ Stamina potion (',staminapotionamount,') ')
+                if item==8:
+                    roomkey=roomkey+1
+                    print('+ Room key (',roomkey,')')
+                if item==9:
+                    silverkey=silverkey+1
+                    print('+ Silver key (',silverkey,')')
             else:
                 print('')
-                print('Purchase insuccesfull')
+                printR('Purchase insuccesfull')
                 print('Not enough gold for purchase')
+            time.sleep(2)
             continue
 
         if purchase=='7':
             if treasury>11.99:
                 print('')
-                print('Purchase succesfull')
+                printG('Purchase succesfull')
                 print('- 12 gold (',treasury-12,')')
+                if doing4=='Yes':
+                    progress=progress+1
                 treasury=treasury-12
-                item=random.randint(1,3)
+                item=random.randint(1,4)
                 if item==1:
                     copperarmoramount=copperarmoramount+1
                     print('+ Copper armor (',copperarmoramount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Copper armor':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Copper armor':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Copper armor':
+                            progress=progress+1
                 if item==2:
                     copperswordamount=copperswordamount+1
                     print('+ Copper sword (',copperswordamount,') ')
+                    if inprogress1=='Yes':
+                        if doing11=='Yes' and questtype1=='Copper sword':
+                            progress=progress+1
+                    if inprogress2=='Yes':
+                        if doing11=='Yes' and questtype2=='Copper sword':
+                            progress=progress+1
+                    if inprogress3=='Yes':
+                        if doing11=='Yes' and questtype3=='Copper sword':
+                            progress=progress+1
                 if item==3:
                     revivepotionamount=revivepotionamount+1
                     print('+ Revive potion (',revivepotionamount,') ')
+                if item==4:
+                    goldenkey=goldenkey+1
+                    print('+ Golden key (',goldenkey,')')
             else:
                 print('')
-                print('Purchase insuccesfull')
+                printR('Purchase insuccesfull')
                 print('Not enough gold for purchase')
+            time.sleep(2)
             continue
 
         if purchase=='8':
@@ -3901,6 +6649,7 @@ while True:
                 sell(1,magneticstone,'Magnetic stone')
             magneticstone=x
 
+        time.sleep(3)
         continue
     
     if choice=='5':
@@ -3937,6 +6686,10 @@ while True:
         print('')
         print('There are five classes in the game: Healer, Swordsman, Trader, Wizard and Warrior. Each class has its own advantages and disadvantages. Each class also has unique skills which you can learn in the skills menu (9) with skill points')
         print('')
+        printB('Quests:')
+        print('')
+        print('When you open the quests menu then 3 quests will appear. You can only choose one and when you already started one then you must finish it to start another one. Quests will give you additional rewards throughout your gameplay. To accept a quest just simply write the number of the quest.')
+        print('')
         printB('Gameplay:')
         print('')
         print('The goal of the game is to reach 100 xp and to survive, there are many rare events to help your journey')
@@ -3948,29 +6701,32 @@ while True:
         print('')
         printG('Potions:')
         print('')
-        print('Health potion - Common (+30% HP) - Source: Adventure loot, Common lootbox, Shop')
+        print('Health potion - Common (+30% HP) - Source: Adventure loot, Common lootbox, Shop, Quests')
         printB('Revive potion - Rare! (Allows to continue the game with full HP after dying) - Source: Adventure loot, Rare lootbox, Shop')
-        print('Resistance potion - Common (-50% HP loss for 3 adventures) - Source: Adventure loot, Common lootbox, Shop')
-        print('Strength potion - Common (+50% Strength for 3 adventures) - Source: Adventure loot, Common lootbox, Shop')
-        print('Stamina potion - Common (Replenishes stamina and block) - Source: Adventure loot, Common lootbox, Shop')
+        print('Resistance potion - Common (-50% HP loss for 3 adventures) - Source: Adventure loot, Common lootbox, Shop, Quests')
+        print('Strength potion - Common (+50% Strength for 3 adventures) - Source: Adventure loot, Common lootbox, Shop, Quests')
+        print('Stamina potion - Common (Replenishes stamina and block) - Source: Adventure loot, Common lootbox, Shop, Quests')
         print('')
         printG('Armors:')
         print('')
-        print('Leather armor - Common (20 HP - 1 Armor Resistance) - Source: Adventure loot, Common lootbox, Shop')
-        printB('Copper armor - Rare! (25 HP - 2 Armor Resistance) - Source: Adventure loot, Rare lootbox')
+        print('Leather armor - Common (20 HP - 1 Armor Resistance) - Source: Adventure loot, Common lootbox, Shop, Quests')
+        printB('Copper armor - Rare! (25 HP - 2 Armor Resistance) - Source: Adventure loot, Rare lootbox, Quests')
         printP('Maxwell armor - Epic!! (35 HP - 3 Armor Resistance) - Source: Maxwell event')
         print('')
         printG('Weapons:')
         print('')
-        print('Wooden dagger - Common (1.3 Power) - Source: Adventure loot, Common lootbox, Shop')
-        print('Wooden sword - Common (1.5 Power) - Source: Adventure loot, Common lootbox, Shop')
-        printB('Copper sword - Rare! (1.7 Power) - Source: Adventure loot, Rare lootbox')
+        print('Wooden dagger - Common (1.3 Power) - Source: Adventure loot, Common lootbox, Shop, Quests')
+        print('Wooden sword - Common (1.5 Power) - Source: Adventure loot, Common lootbox, Shop, Quests')
+        printB('Copper sword - Rare! (1.7 Power) - Source: Adventure loot, Rare lootbox, Quests')
         printP('Maxwell sword - Epic!! (2 Power) - Source: Maxwell event')
         print('')
         printG('Other:')
         print('')
-        printB('Enchantment scroll - Rare! (Used to enchant without XP loss) - Source: Strange Scientist event')
+        printB('Enchantment scroll - Rare! (Used to enchant without XP loss) - Source: Strange Scientist event, Quests')
         print('Magnetic stone -  Common (Used to remove an enchant from an item) - Source: Shop')
+        printB('Room key - Rare! (Used to open locked rooms in dungeons) - Source: Adventure loot, Common lootbox, Rare lootbox, Dungeon')
+        printB('Silver key - Rare! (Used to open silver chests in dungeons) - Source: Adventure loot, Common lootbox, Rare lootbox, Dungeon')
+        printP('Room key - Epic!! (Used to open golden chests in dungeons) - Source: Adventure loot, Rare lootbox, Dungeon')
 
     if choice=='7':
         odd=random.randint(1,2)
@@ -3981,8 +6737,17 @@ while True:
             print('')
             print('Eyo you do not even have that many gold')
             print('')
+            time.sleep(2)
             continue
         if bet<treasury or bet==treasury:
+            if bet==0:
+                print('')
+                print('Nah bro, why zero')
+                print('')
+                time.sleep(2)
+                continue
+            if doing5=='Yes':
+                progress=progress+1
             if odd==1:
                 print('')
                 print('Win - +50%')
@@ -3990,6 +6755,7 @@ while True:
                 treasury=goldgain+treasury
                 print('+',goldgain,'gold (',treasury,')')
                 print('')
+                time.sleep(2)
                 continue
             else:
                 print('')
@@ -3998,8 +6764,10 @@ while True:
                 treasury=treasury-goldgain
                 print('-',goldgain,'gold (',treasury,')')
                 print('')
+                time.sleep(2)
                 continue
         else:
+            time.sleep(2)
             continue
 
     if choice=='8':
@@ -4017,7 +6785,7 @@ while True:
                         power=power*1.15
                         enchantcheckweapon()
                         sharp1=1
-                        continue
+                        enchantlevel=1
                     if enchant>15 and enchant<23:
                         weaponenchant='Sharpness II'
                         printB('Your weapon got enchanted with: Sharpness II\n+30% Power')
@@ -4025,7 +6793,7 @@ while True:
                         power=power*1.3
                         enchantcheckweapon()
                         sharp2=1
-                        continue
+                        enchantlevel=2
                     if enchant>22 and enchant<26:
                         weaponenchant='Sharpness III'
                         printP('Your weapon got enchanted with: Sharpness III\n+50% Power')
@@ -4033,7 +6801,7 @@ while True:
                         power=power*1.5
                         enchantcheckweapon()
                         sharp3=1
-                        continue
+                        enchantlevel=3
                     if enchant>25 and enchant<41:
                         weaponenchant='Curse I'
                         printR('Your weapon got enchanted with: Curse I\n-15% Power')
@@ -4041,7 +6809,7 @@ while True:
                         power=power*0.85
                         enchantcheckweapon()
                         curse1=1
-                        continue
+                        enchantlevel=1
                     if enchant>40 and enchant<48:
                         weaponenchant='Curse II'
                         printR('Your weapon got enchanted with: Curse II\n-30% Power')
@@ -4049,7 +6817,7 @@ while True:
                         power=power*0.7
                         enchantcheckweapon()
                         curse2=1
-                        continue
+                        enchantlevel=2
                     if enchant>47 and enchant<51:
                         weaponenchant='Curse III'
                         printR('Your weapon got enchanted with: Curse III\n-50% Power')
@@ -4057,53 +6825,68 @@ while True:
                         power=power*0.5
                         enchantcheckweapon()
                         curse3=1
-                        continue
+                        enchantlevel=3
                     if enchant>50 and enchant<66:
                         weaponenchant='Looting I'
                         printG('Your weapon got enchanted with: Looting I\n+25% Goldgain')
                         print('')
                         enchantcheckweapon()
                         loot1=1
-                        continue
+                        enchantlevel=1
                     if enchant>65 and enchant<73:
                         weaponenchant='Looting II'
                         printB('Your weapon got enchanted with: Looting II\n+50% Goldgain')
                         print('')
                         enchantcheckweapon()
                         loot2=1
-                        continue
+                        enchantlevel=2
                     if enchant>72 and enchant<76:
                         weaponenchant='Looting III'
                         printP('Your weapon got enchanted with: Looting III\n+75% Goldgain')
                         print('')
                         enchantcheckweapon()
                         loot3=1
-                        continue
+                        enchantlevel=3
                     if enchant>75 and enchant<91:
                         weaponenchant='Blocking I'
                         printG('Your weapon got enchanted with: Blocking I\n-15% HPloss')
                         print('')
                         enchantcheckweapon()
                         block1w=1
-                        continue
+                        enchantlevel=1
                     if enchant>90 and enchant<98:
                         weaponenchant='Blocking II'
                         printB('Your weapon got enchanted with: Blocking II\n-30% HPloss')
                         print('')
                         enchantcheckweapon()
                         block2w=1
-                        continue
-                    else:
+                        enchantlevel=2
+                    if enchant>97:
                         weaponenchant='Blocking III'
                         printP('Your weapon got enchanted with: Blocking III\n-50% HPloss')
                         print('')
                         enchantcheckweapon()
                         block3w=1
-                        continue
+                        enchantlevel=3
+                    if doing2=='Yes':
+                        progress=progress+1
+                    if doing9=='Yes':
+                        if inprogress1=='Yes':
+                            if enchantlevel==lvlofenchant1 or enchantlevel>lvlofenchant1:
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if enchantlevel==lvlofenchant2 or enchantlevel>lvlofenchant2:
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if enchantlevel==lvlofenchant3 or enchantlevel>lvlofenchant3:
+                                progress=progress+1
+                    time.sleep(2)
+                    continue
                 else:
                     print('')
                     print('You need to equip the weapon to enchant it!')
                     print('')
+                    time.sleep(2)
                     continue
             if entype=='2':
                 if equippedarmor=='Leather armor' or equippedarmor=='Copper armor' or equippedarmor=='Maxwell armor':
@@ -4115,7 +6898,7 @@ while True:
                         enchantcheckarmor()
                         maxhp=maxhp*1.15
                         res=1
-                        continue
+                        enchantlevel=1
                     if enchant>15 and enchant<23:
                         armorenchant='Resistance II'
                         printB('Your armor got enchanted with: Resistance II\n+30% MaxHP')
@@ -4123,7 +6906,7 @@ while True:
                         enchantcheckarmor()
                         maxhp=maxhp*1.3
                         res2=1
-                        continue
+                        enchantlevel=2
                     if enchant>22 and enchant<26:
                         armorenchant='Resistance III'
                         printP('Your armor got enchanted with: Resistance III\n+50% MaxHP')
@@ -4131,7 +6914,7 @@ while True:
                         enchantcheckarmor()
                         maxhp=maxhp*1.5
                         res3=1
-                        continue
+                        enchantlevel=3
                     if enchant>25 and enchant<41:
                         armorenchant='Curse I'
                         printR('Your armor got enchanted with: Curse I\n-15% MaxHP')
@@ -4139,7 +6922,7 @@ while True:
                         enchantcheckarmor()
                         maxhp=maxhp*0.85
                         curse1=1
-                        continue
+                        enchantlevel=1
                     if enchant>40 and enchant<48:
                         armorenchant='Curse II'
                         printR('Your armor got enchanted with: Curse II\n-30% MaxHP')
@@ -4147,7 +6930,7 @@ while True:
                         enchantcheckarmor()
                         maxhp=maxhp*0.7
                         curse2a=1
-                        continue
+                        enchantlevel=2
                     if enchant>47 and enchant<51:
                         armorenchant='Curse III'
                         printR('Your armor got enchanted with: Curse III\n-50% MaxHP')
@@ -4155,39 +6938,55 @@ while True:
                         enchantcheckarmor()
                         maxhpx=maxhp*0.5
                         curse3=1
-                        continue
+                        enchantlevel=3
                     if enchant>75 and enchant<91:
                         armorenchant='Blocking III'
                         printP('Your armor got enchanted with: Blocking III\n-50% HPloss')
                         print('')
                         enchantcheckarmor()
                         block3a=1
-                        continue
+                        enchantlevel=3
                     if enchant>90 and enchant<98:
                         armorenchant='Blocking II'
                         printB('Your armor got enchanted with: Blocking II\n-30% HPloss')
                         print('')
                         enchantcheckarmor()
                         block2a=1
-                        continue
-                    else:
+                        enchantlevel=2
+                    if enchant>97:
                         armorenchant='Blocking I'
                         printG('Your armor got enchanted with: Blocking I\n-15% HPloss')
                         print('')
                         enchantcheckarmor()
                         block1a=1
-                        continue
+                        enchantlevel=1
+                    if doing2=='Yes':
+                        progress=progress+1
+                    if doing9=='Yes':
+                        if inprogress1=='Yes':
+                            if enchantlevel==number1 or enchantlevel>number1:
+                                progress=progress+1
+                        if inprogress2=='Yes':
+                            if enchantlevel==number2 or enchantlevel>number2:
+                                progress=progress+1
+                        if inprogress3=='Yes':
+                            if enchantlevel==number3 or enchantlevel>number3:
+                                progress=progress+1
+                    time.sleep(2)
+                    continue
                 else:
                     print('')
                     print('You need to equip the armor to enchant it!')
                     print('')
+                    time.sleep(2)
                     continue
             else:
                 continue
 
         else:
             print('')
-            print('You did not reach 30XP :c')
+            printR('You did not reach 30XP :c')
+            time.sleep(2)
             continue
 
     if choice=='9':
@@ -4556,6 +7355,46 @@ while True:
             else:
                 print('')
                 continue
+        continue
+
+    if choice=='10':
+        if inprogress1=='Yes' and progress==number1 or progress>number1:
+            questcompletion(reward1,rewardamount1,rewardtype1,inprogress1,questquality1,lvlofenchant1)
+            inprogress1='No'
+            inprogress2='No'
+            inprogress3='No'
+        if inprogress2=='Yes' and progress==number2 or progress>number2:
+            questcompletion(reward2,rewardamount2,rewardtype2,inprogress2,questquality2,lvlofenchant2)
+            inprogress1='No'
+            inprogress2='No'
+            inprogress3='No'
+        if inprogress3=='Yes' and progress==number3 or progress>number3:
+            questcompletion(reward3,rewardamount3,rewardtype3,inprogress3,questquality3,lvlofenchant3)
+            inprogress1='No'
+            inprogress2='No'
+            inprogress3='No'
+        print('')
+        questprint(quest1,inprogress1,reward1,1,number1,questtype1,lvlofenchant1)
+        questprint(quest2,inprogress2,reward2,2,number2,questtype2,lvlofenchant2)
+        questprint(quest3,inprogress3,reward3,3,number3,questtype3,lvlofenchant3)
+        if inprogress1=='Yes' or inprogress2=='Yes' or inprogress3=='Yes':
+            printB('You are already doing a quest')
+        else:
+            questchoice=input('')
+            if questchoice=='1':
+                printG('Quest 1 selected')
+                inprogress1='Yes'
+                questselect(quest1)
+            if questchoice=='2':
+                printG('Quest 2 selected')
+                inprogress2='Yes'
+                questselect(quest2)
+            if questchoice=='3':
+                printG('Quest 3 selected')
+                inprogress3='Yes'
+                questselect(quest3)
+        print('')
+        time.sleep(3)
         continue
 
     if choice=='cheat':
