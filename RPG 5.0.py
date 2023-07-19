@@ -1397,6 +1397,7 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     global xp
     global enemyname2
     global indungeon
+    global hp
     print('')
     enemymaxhp=emaxhp
     if xp<lowxp:
@@ -1408,6 +1409,7 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     enemyname2=enemyname
     print('LVL',enemylvl,enemyname,'encounter:')
     print('Enemy HP:',enemyhp,'')
+    print('HP:',hp,'')
     if indungeon=='Yes':
         print('')
     else:
