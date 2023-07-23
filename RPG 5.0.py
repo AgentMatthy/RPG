@@ -199,22 +199,20 @@ def fight():
                                 turncount=turncount-4
                         hploss=((enemylvl/10)*hploss)+hploss
                         enemyhploss=random.randint(0,2)
+                        enemycrit=random.randint(1,100)
+                        crit=random.randint(1,100)
                         if tearing==1:
                             crit=random.randint(1,80)
                         if tearing==2:
                             crit=random.randint(1,66)
                         if tearing==3:
-                            crit=random.randint(1,57)
-                        else:
-                            crit=random.randint(1,100)                     
+                            crit=random.randint(1,57)                   
                         if focus==1:
                             enemycrit=random.randint(1,134)
                         if focus==2:
                             enemycrit=random.randint(1,200)
                         if focus==3:
                             enemycrit=random.randint(1,400)
-                        else:
-                            enemycrit=random.randint(1,100)
                         if block1a==1:
                             hploss=hploss*0.85
                         if block2a==1:
@@ -427,14 +425,14 @@ def fight():
                         if tearingdiveskill==1:
                             crit=10
                         if crit<21:
+                            if downfall==0:
+                                enemyhploss=enemyhploss*1.5
                             if downfall==1:
                                 enemyhploss=enemyhploss*1.65
                             if downfall==2:
                                 enemyhploss=enemyhploss*1.8
                             if downfall==3:
                                 enemyhploss=enemyhploss*2
-                            else:
-                                enemyhploss=enemyhploss*1.5
                             critcount=critcount+1
                             if stunning==1 and enemyhploss==0:
                                 print('')
@@ -494,13 +492,13 @@ def fight():
                             enemyhploss=enemyhploss
                         if fireauracrit>0:
                             enemyhploss=enemyhploss+(enemymaxhp*0.1)
-                        hp=hp-hploss
-                        enemyhp=enemyhp-enemyhploss
-                        tearingdiveskill=0
                         if sabotage==1:
                             enemycrit=100
                         if enemycrit<21:
                             hploss=hploss*1.5  
+                        hp=hp-hploss
+                        enemyhp=enemyhp-enemyhploss
+                        tearingdiveskill=0
                         print('')
                         if crit<21 and enemyhploss>0:
                             print('Enemy HP: -',round(enemyhploss,2),' Critical hit! (',round(enemyhp,2),'/',enemymaxhp,')')
@@ -1409,7 +1407,7 @@ def enemyencounter(enemyname,emaxhp,ehp,lowxp,a,b,c,d):
     enemyname2=enemyname
     print('LVL',enemylvl,enemyname,'encounter:')
     print('Enemy HP:',enemyhp,'')
-    print('HP:',hp,'')
+    print('HP:',round(hp,3),'')
     if indungeon=='Yes':
         print('')
     else:
@@ -3362,6 +3360,7 @@ def enterroom(room,roomlock,roomcleared,roomenemycount,roomenemytype1,roomenemyt
             else:
                 printR('You do not have a key to open it!')
         rcl='Cleared'
+        rl=''
 
 def silverreward():
                 global healthpotionamount
@@ -3563,6 +3562,12 @@ def goldenreward():
                     else:
                         roomkey=roomkey+2
                         print('+ 2 Silver key (',silverkey,')')
+
+def minigame():
+    niglet=0
+
+def enemyminigame():
+    niglet=0
 
 #-----------------------Print-----------------------#
 
@@ -5294,21 +5299,218 @@ while True:
                 print('')
                 continue
             if boss=='yes':
-                for i in range(3):
-                    correct=random.randint(1,2)
+                print('')
+                printR('Muftosz has appeared!')
+                enemyhp=400
+                print('Enemy HP:',enemyhp,'')
+                while True:
+                    quandaledingle=0
+                    #----------------Skills----------------#
+                    if quandaledingle==0:
+                        turncount=turncount+1
+                        fireauracrit=fireauracrit-1
+                        if turncount>3 and healing==1:
+                            printB('type heal to heal')
+                            heal=input('')
+                            if heal=='heal':
+                                hp=hp+(0.2*maxhp)
+                                if hp>maxhp:
+                                    hp=maxhp
+                                print('')
+                                print('Healing: +',round((maxhp*0.2),3),'HP (',round(hp,3),'/',round(maxhp,3),')')
+                                print('')
+                                turncount=turncount-4
+                        if turncount>3 and tearingdive==1:
+                            printB('type tearing dive to active the skill')
+                            dive=input('')
+                            if dive=='tearing dive':
+                                tearingdiveskill=1
+                                turncount=turncount-4
+                        potions=healthpotionamount+staminapotionamount
+                        if potions>0:
+                            printB('Potions:')
+                            print('')
+                            if healthpotionamount>0:
+                                print('(1) Health potion:',healthpotionamount,'')
+                            print('')
+                            use=input('What do you want to do?')
+                            if use=='1':
+                                print('')
+                                if healthpotionamount>0:
+                                    healthpotionamount=healthpotionamount-1
+                                    hp=hp+(0.3*maxhp)
+                                    if hp>maxhp:
+                                        hp=hp-(hp-maxhp)
+                                        print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
+                                    else:
+                                        print('+',round(maxhp*0.3,3),'HP (',round(hp,3),'/',maxhp,')')
+                                else:
+                                    printR('You do not have a health potion :c')
                     print('')
-                    num=input('Choose a number: 1 or 2?')
-                    if correct==1:
-                        if num=='1':
-                            print('Correct!')
-                            print('')
-                            continue
-                        else:
-                            hploss=random.randint(5,15)
-                            print('Incorrect!')
-                            hp=hp-hploss
-                            print('-',hploss,'HP (',hp,'/',maxhp,')')
-                            if hp<0 or hp==0:
+                    printB('It is your turn to attack')
+                    minigame()
+                    time.sleep(2)
+                    print('')
+                    #----------------Damage modifiers----------------#
+                    if quandaledingle==0:
+                        if equippedweapon=='Wooden dagger':
+                            enemyhploss=enemyhploss*1.3
+                        if equippedweapon=='Wooden sword':
+                            enemyhploss=enemyhploss*1.5
+                        if equippedweapon=='Copper sword':
+                            enemyhploss=enemyhploss*1.7
+                        if equippedweapon=='Maxwell sword':
+                            enemyhploss=enemyhploss*2
+                        if strengthuse>0:
+                            enemyhploss=enemyhploss*1.5
+                        if type=='Healer':
+                            enemyhploss=enemyhploss*0.8
+                        if sharp1==1:
+                            enemyhploss=enemyhploss*1.15
+                        if sharp2==1:
+                            enemyhploss=enemyhploss*1.4
+                        if sharp3==1:
+                            enemyhploss=enemyhploss*1.5
+                        if curse1==1:
+                            enemyhploss=enemyhploss*0.85
+                        if curse2==1:
+                            enemyhploss=enemyhploss*0.7
+                        if curse3==1:
+                            enemyhploss=enemyhploss*0.5
+                        crit=random.randint(1,100)
+                        if tearing==1:
+                            crit=random.randint(1,80)
+                        if tearing==2:
+                            crit=random.randint(1,66)
+                        if tearing==3:
+                            crit=random.randint(1,57)  
+                        if vampire>0:
+                            vam=random.randint(1,100)
+                            if vampire==1:
+                                corrvam=16
+                            if vampire==2:
+                                corrvam=31
+                            if vampire==3:
+                                corrvam=51
+                            else:
+                                treasury=treasury
+                            if vam<corrvam:
+                                enemyhploss=enemyhploss+(enemymaxhp*0.1)
+                                hp=hp+(enemymaxhp*0.3)
+                                if maxhp<hp:
+                                    hp=maxhp
+                                else:
+                                    hp=hp
+                            else:
+                                treasury=treasury
+                        if finish==1:
+                            finishchance=random.randint(1,100)
+                            if finishchance<11:
+                                enemyhploss=enemyhploss*5
+                        if tearingdiveskill==1:
+                            crit=10
+                        if crit<21:
+                            printR('Critical hit!')
+                            if downfall==0:
+                                enemyhploss=enemyhploss*1.5
+                            if downfall==1:
+                                enemyhploss=enemyhploss*1.65
+                            if downfall==2:
+                                enemyhploss=enemyhploss*1.8
+                            if downfall==3:
+                                enemyhploss=enemyhploss*2
+                            critcount=critcount+1
+                            if stunning==1 and enemyhploss==0:
+                                print('')
+                                printY('ENEMY STUNNED')
+                                stun=3
+                            if fireaura==1:
+                                print('')
+                                printR('FIRE AURA triggered for 3 turns')
+                                fireauracrit=3
+                        if fireauracrit>0:
+                            enemyhploss=enemyhploss+(enemymaxhp*0.1)
+                        enemyhp=enemyhp-enemyhploss
+                        tearingdiveskill=0
+                    print('You dealt',enemyhploss,'damage.')
+                    print('(Muftosz HP: -',enemyhploss,'|',enemyhp,'/ 400)')
+                    print('')
+                    printB('Muftosz has attacked you')
+                    enemyminigame()
+                    time.sleep(3)
+                    print('')
+                    #----------------Defense modifiers----------------#
+                    if quandaledingle==0:
+                        if block1a==1:
+                            hploss=hploss*0.85
+                        if block2a==1:
+                            hploss=hploss*0.7
+                        if block3a==1:
+                            hploss=hploss*0.5
+                        if block1w==1:
+                            hploss=hploss*0.85
+                        if block2w==1:
+                            hploss=hploss*0.7
+                        if block3w==1:
+                            hploss=hploss*0.5
+                        if resistanceuse>0:
+                            hploss=hploss*0.5
+                        if weaken==1:
+                            hploss=hploss*0.93
+                        if weaken==2:
+                            hploss=hploss*0.86
+                        if weaken==3:
+                            hploss=hploss*0.8
+                        if armorresistance==1:
+                            hploss=hploss-1
+                        if armorresistance==2:
+                            hploss=hploss-2
+                        if armorresistance==3:
+                            hploss=hploss-3
+                        if hploss<0:
+                            hploss=0
+                        enemycrit=random.randint(1,100)
+                        if focus==1:
+                            enemycrit=random.randint(1,134)
+                        if focus==2:
+                            enemycrit=random.randint(1,200)
+                        if focus==3:
+                            enemycrit=random.randint(1,400)
+                        protection=random.randint(1,100)
+                        stun=stun-1
+                        if stun>0:
+                            hploss=0
+                        if shield==1:
+                            if protection<6:
+                                hploss=0
+                                print('')
+                                printG('SHIELD ACTIVE')
+                            else:
+                                hploss=hploss
+                        if shield==2:
+                            if protection<11:
+                                hploss=0
+                                print('')
+                                printG('SHIELD ACTIVE')
+                            else:
+                                hploss=hploss
+                        if shield==3:
+                            if protection<16:
+                                hploss=0
+                                print('')
+                                printG('SHIELD ACTIVE')
+                            else:
+                                hploss=hploss
+                        if sabotage==1:
+                            enemycrit=100
+                        if enemycrit<21:
+                            hploss=hploss*1.5
+                            printR('Critical hit!')
+                        hp=hp-hploss
+                    print('Muftosz dealt',hploss,'damage to you.')
+                    print('(Your HP: -',hploss,'|',hp,'/',maxhp,')') 
+                    #----------------Death----------------#
+                    if hp<0 or hp==0:
                                     print('')
                                     print('You died')
                                     if laststand==1:
@@ -5355,73 +5557,13 @@ while True:
                                             print('Bad')
                                         print('Enemies killed:',enemieskilled)
                                         print('')
-                                        break
-                            else:
-                                print('')
-                                continue
-                    if correct==2:
-                        if num=='2':
-                            print('Correct!')
-                            print('')
-                            continue
-                        else:
-                            hploss=random.randint(5,15)
-                            print('Incorrect!')
-                            hp=hp-hploss
-                            print('-',hploss,'HP (',hp,'/',maxhp,')')
-                            if hp<0 or hp==0:
-                                    print('')
-                                    print('You died')
-                                    if laststand==1:
-                                        if laststandskill=='In use':
-                                            laststand=laststand
-                                        else:
-                                            hp=maxhp*0.2
-                                            print('Last stand skill in use, HP:',hp,'')
-                                            laststandskill='In use'
-                                            continue
-                                    if revivepotionamount>0:
-                                        revivepotionamount=revivepotionamount-1
-                                        print('Revive potion used (',revivepotionamount,'remaining)')
-                                        print('')
-                                        hp=maxhp
-                                    else:
-                                        printR('You do not have a revive potion, the game is over :c')
-                                        print('')
-                                        print(name,'slained by Muftosz')
-                                        print('')
-                                        if score>6999:
-                                            print('Score:',score,'-', end='')
-                                            printY('Legendary!!!')
-                                        if score>4999 and score<7000:
-                                            print('Score:',score,'-', end='')
-                                            printP('Epic!!')
-                                        if score>1999 and score<5000:
-                                            print('Score:',score,'-', end='')
-                                            printB('Good!')
-                                        else:
-                                            print('Score:',score,'-', end='')
-                                            print('Bad')
-                                        if value>149:
-                                            print('Value:',value,'-', end='')
-                                            printY('Legendary!!!')
-                                        if score>99 and score<150:
-                                            print('Value:',value,'-', end='')
-                                            printP('Epic!!')
-                                        if score>50 and score<100:
-                                            print('Value:',value,'-', end='')
-                                            printB('Good!')
-                                        else:
-                                            print('Value:',value,'-', end='')
-                                            print('Bad')
-                                        print('Enemies killed:',enemieskilled)
-                                        print('')
-                                        break
-                            else:
-                                print('')
-                                continue
+                                        break                  
+                    if enemyhp<0 or enemyhp==0:
+                        break
+                    continue
                 if hp<0 or hp==0:
                     break 
+                print('')
                 print('You defeated MUFTOSZ, you spent some of your time to do this so shame on you')
                 print('')
                 if score>3499:
